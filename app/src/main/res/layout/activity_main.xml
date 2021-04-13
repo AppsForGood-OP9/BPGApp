@@ -11,9 +11,10 @@
         android:id="@+id/Prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="645dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/promptEntry"
+        android:textColor="@color/black"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,55 +22,67 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/BloodGlucoseButton"
-        android:layout_width="313dp"
-        android:layout_height="174dp"
-        android:layout_marginBottom="300dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/glucoseButton"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/BloodSymbolButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/BloodSymbolButton"
-        android:layout_width="161dp"
-        android:layout_height="174dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="300dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/blood_drop" />
-
-    <ImageButton
-        android:id="@+id/HeartSymbolButton"
-        android:layout_width="161dp"
-        android:layout_height="174dp"
-        android:layout_marginEnd="50dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/BloodSymbolButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Prompt"
-        app:srcCompat="@drawable/blood_pressure" />
-
-    <Button
-        android:id="@+id/BloodPressureButton"
-        android:layout_width="313dp"
-        android:layout_height="174dp"
-        android:backgroundTint="@color/pink"
-        android:text="@string/pressureButton"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/BloodGlucoseButton"
-        app:layout_constraintEnd_toStartOf="@+id/HeartSymbolButton"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Prompt" />
+        app:layout_constraintTop_toBottomOf="@id/Prompt">
+
+        <Button
+            android:id="@+id/BloodPressureButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:onClick="addBloodPressureEntry"
+            android:text="@string/pressureButton"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="36sp" />
+
+        <ImageButton
+            android:id="@+id/HeartSymbolButton"
+            android:layout_width="125dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/pressureButton"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/blood_pressure" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <Button
+            android:id="@+id/BloodGlucoseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            android:text="@string/glucoseButton"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="36sp" />
+
+        <ImageButton
+            android:id="@+id/BloodSymbolButton"
+            android:layout_width="125dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/glucoseButton"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+            app:srcCompat="@drawable/blood_drop" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/HomeButton"
@@ -77,10 +90,22 @@
         android:layout_height="100dp"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/round_bottom_buttons"
+        android:contentDescription="@string/logButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/home_button_foreground" />
+
+    <ImageButton
+        android:id="@+id/AddButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="@string/makeEntryButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/add_button_foreground" />
 
     <ImageButton
         android:id="@+id/BellButton"
@@ -88,20 +113,10 @@
         android:layout_height="100dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/round_bottom_buttons"
+        android:contentDescription="@string/reminderButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/bell_button_foreground" />
 
-    <ImageButton
-        android:id="@+id/AddButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/round_bottom_buttons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/BellButton"
-        app:layout_constraintStart_toEndOf="@+id/HomeButton"
-        app:srcCompat="@drawable/add_button_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

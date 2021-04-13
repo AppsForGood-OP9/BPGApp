@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">BP &amp; G App</string>
-    <string name="promptEntry">Make an entry</string>
+    <string name="bpText">Blood Pressure</string>
+    <string name="systolicText">Systolic</string>
+    <string name="diastolicText">Diastolic</string>
+    <string name="forwardSlash">/</string>
+    <string name="mmHgHintStr">mmHg</string>
+    <string name="dateStr">Date</string>
+    <string name="dateFillHintStr">MM/DD/YY</string>
+    <string name="calendarStr">Calendar</string>
+    <string name="timeStr">Time</string>
+    <string name="timeHintStr">HH:MM:SS</string>
+    <string name="notesHintStr">Notes</string>
+    <string name="pick_time">Set Time</string>
+    <string name="pick_date">Set Date</string>
+    <string name="promptEntry">Make an Entry</string>
     <string name="pressureButton">Blood Pressure</string>
     <string name="glucoseButton">Blood Glucose</string>
+    <string name="logButton">Log</string>
+    <string name="makeEntryButton">Make Entry</string>
+    <string name="reminderButton">Reminders</string>
 </resources>
