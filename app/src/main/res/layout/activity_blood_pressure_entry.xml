@@ -11,6 +11,7 @@
         android:id="@+id/bpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:background="@drawable/textview_border"
         android:text="@string/bpText"
         android:textColor="@color/black"
