@@ -19,4 +19,6 @@
     <string name="logButton">Log</string>
     <string name="makeEntryButton">Make Entry</string>
     <string name="reminderButton">Reminders</string>
+    <string name="dailyAlertsLabel">Daily Alerts</string>
+    <string name="addTimeButton">Add Time</string>
 </resources>
