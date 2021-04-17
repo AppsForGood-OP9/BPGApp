@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToReminders(View v)  {
-        Intent intent = new Intent(this, LogDisplay.class);
+        Intent intent = new Intent(this, reminders.class);
         startActivity(intent);
     }
 }

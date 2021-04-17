@@ -3,6 +3,7 @@ package com.example.bpgapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -54,4 +55,28 @@ public class glucoseEntry extends AppCompatActivity {
     //There are multiple variations of this, but this is the basic variant
     ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
 
+    public void addBloodPressureEntry(View v)  {
+        Intent intent = new Intent(this, bloodPressureEntry.class);
+        startActivity(intent);
+    }
+
+    public void addGlucoseEntry(View v)  {
+        Intent intent = new Intent(this, glucoseEntry.class);
+        startActivity(intent);
+    }
+
+    public void goToAddEntry(View v)  {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLog(View v)  {
+        Intent intent = new Intent(this, LogDisplay.class);
+        startActivity(intent);
+    }
+
+    public void goToReminders(View v)  {
+        Intent intent = new Intent(this, reminders.class);
+        startActivity(intent);
+    }
 }

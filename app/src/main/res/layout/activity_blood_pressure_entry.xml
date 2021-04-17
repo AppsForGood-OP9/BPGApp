@@ -198,7 +198,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="0dp"
         android:autofillHints=""
         android:hint="@string/notesHintStr"
         android:inputType="textPersonName"
@@ -207,7 +207,75 @@
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/AddButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/HomeButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/logButton"
+        android:onClick="goToLog"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:layout_constraintEnd_toEndOf="@+id/guideline30"
+        app:srcCompat="@drawable/home_button_foreground" />
+
+    <ImageButton
+        android:id="@+id/AddButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@string/makeEntryButton"
+        android:onClick="goToAddEntry"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:srcCompat="@drawable/add_button_foreground" />
+
+    <ImageButton
+        android:id="@+id/BellButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@string/reminderButton"
+        android:onClick="goToReminders"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline70"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:srcCompat="@drawable/bell_button_foreground" />
+
+    <TextView
+        android:id="@+id/percentZoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/StartingZoomSize"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Upscale" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline97"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

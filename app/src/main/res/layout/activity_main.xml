@@ -44,6 +44,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
     <Button
         android:id="@+id/BloodPressureButton"
         android:layout_width="wrap_content"
@@ -105,45 +112,37 @@
         android:id="@+id/HomeButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="36dp"
         android:contentDescription="@string/logButton"
         android:onClick="goToLog"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:layout_constraintEnd_toEndOf="@+id/guideline30"
         app:srcCompat="@drawable/home_button_foreground" />
 
     <ImageButton
         android:id="@+id/AddButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="0dp"
         android:contentDescription="@string/makeEntryButton"
         android:onClick="goToAddEntry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:srcCompat="@drawable/add_button_foreground" />
 
     <ImageButton
         android:id="@+id/BellButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="0dp"
         android:contentDescription="@string/reminderButton"
         android:onClick="goToReminders"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline70"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:srcCompat="@drawable/bell_button_foreground" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
 
     <TextView
         android:id="@+id/percentZoom"
@@ -154,6 +153,28 @@
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Upscale" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline97"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

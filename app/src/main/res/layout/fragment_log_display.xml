@@ -47,9 +47,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/AddButton"
         android:id="@+id/recycler_view"
         tools:listitem="@layout/list_row_main"
         android:layout_marginTop="8dp"
         />
-//The video has multiple items displayed on the design, but there is only one here
+
 </LinearLayout>

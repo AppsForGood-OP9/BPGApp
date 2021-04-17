@@ -3,6 +3,7 @@ package com.example.bpgapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -33,12 +34,12 @@ public class bloodPressureEntry extends AppCompatActivity {
         double systolicDouble=Double.parseDouble(systolicString);
         if (systolicDouble > 180)  {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very high", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.START, 10, 800);
+            toast.setGravity(Gravity.TOP|Gravity.START, 10, 700);
             toast.show();
         }
         else if (systolicDouble < 90)  {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very low", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.START, 10, 800);
+            toast.setGravity(Gravity.TOP|Gravity.START, 10, 700);
             toast.show();
         }
     }
@@ -49,13 +50,38 @@ public class bloodPressureEntry extends AppCompatActivity {
         double diastolicDouble = Double.parseDouble(diastolicString);
         if (diastolicDouble > 120) {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very high", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP | Gravity.START, 1150, 800);
+            toast.setGravity(Gravity.TOP | Gravity.START, 1150, 700);
             toast.show();
         }
         else if (diastolicDouble < 60)  {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very low", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.START, 10, 800);
+            toast.setGravity(Gravity.TOP|Gravity.START, 1150, 700);
             toast.show();
         }
+    }
+
+    public void addBloodPressureEntry(View v)  {
+        Intent intent = new Intent(this, bloodPressureEntry.class);
+        startActivity(intent);
+    }
+
+    public void addGlucoseEntry(View v)  {
+        Intent intent = new Intent(this, glucoseEntry.class);
+        startActivity(intent);
+    }
+
+    public void goToAddEntry(View v)  {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLog(View v)  {
+        Intent intent = new Intent(this, LogDisplay.class);
+        startActivity(intent);
+    }
+
+    public void goToReminders(View v)  {
+        Intent intent = new Intent(this, reminders.class);
+        startActivity(intent);
     }
 }
