@@ -11,8 +11,7 @@
         android:id="@+id/Prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="20dp"
         android:text="@string/promptEntry"
         android:textColor="@color/black"
         android:textSize="50sp"
@@ -23,10 +22,33 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
+        android:id="@+id/Upscale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ExpandTextButton"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Downscale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ExpandTextButton"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/Upscale"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/BloodPressureButton"
         android:layout_width="wrap_content"
         android:layout_height="125dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/pink"
         android:onClick="addBloodPressureEntry"
         android:text="@string/pressureButton"
@@ -56,7 +78,7 @@
         android:id="@+id/BloodGlucoseButton"
         android:layout_width="wrap_content"
         android:layout_height="125dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/blue"
         android:text="@string/glucoseButton"
         android:textAllCaps="false"
@@ -80,8 +102,8 @@
         android:id="@+id/HomeButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="36dp"
         android:contentDescription="@string/logButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,11 +113,11 @@
         android:id="@+id/AddButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="36dp"
         android:contentDescription="@string/makeEntryButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/add_button_foreground" />
 
@@ -103,12 +125,29 @@
         android:id="@+id/BellButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="36dp"
         android:contentDescription="@string/reminderButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/bell_button_foreground" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <TextView
+        android:id="@+id/percentZoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/StartingZoomSize"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Upscale" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

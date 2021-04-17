@@ -3,15 +3,62 @@ package com.example.bpgapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    TextView makeEntry;
+    TextView PercentZoom;
+    Button Large;
+    Button Small;
+    Button PressureButton;
+    Button GlucoseButton;
+    ImageButton heart;
+    ImageButton drop;
+    ImageButton home;
+    ImageButton plus;
+    ImageButton bell;
+    int zoom = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        makeEntry = (TextView) findViewById(R.id.Prompt);
+        PercentZoom = (TextView) findViewById(R.id.percentZoom);
+        Large = (Button) findViewById(R.id.Upscale);
+        Small = (Button) findViewById(R.id.Downscale);
+        PressureButton = (Button) findViewById(R.id.BloodPressureButton);
+        GlucoseButton = (Button) findViewById(R.id.BloodGlucoseButton);
+        heart = (ImageButton) findViewById(R.id.HeartSymbolButton);
+        drop = (ImageButton) findViewById(R.id.BloodSymbolButton);
+        home = (ImageButton) findViewById(R.id.HomeButton);
+        plus = (ImageButton) findViewById(R.id.AddButton);
+        bell = (ImageButton) findViewById(R.id.BellButton);
+        Large.setOnClickListener(new View.OnClickListener(){
+            @Override
+        public void onClick(View v){
+            makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
+            PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
+            GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
+            zoom +=50;
+            PercentZoom.setText(zoom+"%");
+        }
+    });
+        Small.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
+            PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
+            GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
+            zoom -=50;
+            PercentZoom.setText(zoom+"%");
+        }
+    });
     }
 
     public void addBloodPressureEntry(View v)  {
