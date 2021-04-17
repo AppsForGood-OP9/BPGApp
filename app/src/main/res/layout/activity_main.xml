@@ -80,10 +80,12 @@
         android:layout_height="125dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/blue"
+        android:onClick="addGlucoseEntry"
         android:text="@string/glucoseButton"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/BloodPressureButton"
         app:layout_constraintStart_toStartOf="@id/BloodPressureButton"
         app:layout_constraintTop_toBottomOf="@id/HeartSymbolButton" />
 
@@ -93,6 +95,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/glucoseButton"
+        android:onClick="addGlucoseEntry"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="@id/HeartSymbolButton"
         app:layout_constraintTop_toBottomOf="@id/BloodGlucoseButton"
@@ -105,6 +108,7 @@
         android:layout_marginStart="68dp"
         android:layout_marginBottom="36dp"
         android:contentDescription="@string/logButton"
+        android:onClick="goToLog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/home_button_foreground" />
@@ -115,6 +119,7 @@
         android:layout_height="100dp"
         android:layout_marginBottom="36dp"
         android:contentDescription="@string/makeEntryButton"
+        android:onClick="goToAddEntry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
@@ -128,6 +133,7 @@
         android:layout_marginEnd="68dp"
         android:layout_marginBottom="36dp"
         android:contentDescription="@string/reminderButton"
+        android:onClick="goToReminders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/bell_button_foreground" />

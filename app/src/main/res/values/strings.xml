@@ -1,10 +1,17 @@
 <resources>
+
+    <string name="ExpandTextButton">A</string>
+    <string name="StartingZoomSize">100%</string>
+    <string name="dailyAlertsLabel">Daily Alerts</string>
+    <string name="addTimeButton">Add Time</string>
+
     <string name="app_name">BP &amp; G App</string>
     <string name="bpText">Blood Pressure</string>
     <string name="systolicText">Systolic</string>
     <string name="diastolicText">Diastolic</string>
     <string name="forwardSlash">/</string>
     <string name="mmHgHintStr">mmHg</string>
+    <string name="mgDLHintStr">mg/dL</string>
     <string name="dateStr">Date</string>
     <string name="dateFillHintStr">MM/DD/YY</string>
     <string name="calendarStr">Calendar</string>
@@ -15,12 +22,15 @@
     <string name="pick_date">Set Date</string>
     <string name="promptEntry">Make an Entry</string>
     <string name="pressureButton">Blood Pressure</string>
-    <string name="glucoseButton">Blood Glucose</string>
+    <string name="glucoseButton">Glucose</string>
     <string name="logButton">Log</string>
     <string name="makeEntryButton">Make Entry</string>
     <string name="reminderButton">Reminders</string>
-    <string name="ExpandTextButton">A</string>
-    <string name="StartingZoomSize">100%</string>
-    <string name="dailyAlertsLabel">Daily Alerts</string>
-    <string name="addTimeButton">Add Time</string>
+    <string name="title_activity_log_display">LogDisplay</string>
+    <string name="tab_text_1">Blood Pressure</string>
+    <string name="tab_text_2">Glucose</string>
+    <string name="submit">Submit</string>
+    <string name="reset">Reset</string>
+    <string name="update">Update</string>
+    <string name="enter_text">Enter text</string>
 </resources>

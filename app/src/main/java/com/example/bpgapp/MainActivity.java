@@ -3,12 +3,13 @@ package com.example.bpgapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.graphics.Color;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
     TextView makeEntry;
@@ -41,28 +42,48 @@ public class MainActivity extends AppCompatActivity {
         bell = (ImageButton) findViewById(R.id.BellButton);
         Large.setOnClickListener(new View.OnClickListener(){
             @Override
-        public void onClick(View v){
-            makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
-            PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
-            GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
-            zoom +=50;
-            PercentZoom.setText(zoom+"%");
-        }
-    });
+            public void onClick(View v){
+                makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
+                zoom +=50;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
         Small.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
-            PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
-            GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
-            zoom -=50;
-            PercentZoom.setText(zoom+"%");
-        }
-    });
+            @Override
+            public void onClick(View v){
+                makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
+                zoom -=50;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
     }
 
     public void addBloodPressureEntry(View v)  {
         Intent intent = new Intent(this, bloodPressureEntry.class);
+        startActivity(intent);
+    }
+
+    public void addGlucoseEntry(View v)  {
+        Intent intent = new Intent(this, glucoseEntry.class);
+        startActivity(intent);
+    }
+
+    public void goToAddEntry(View v)  {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLog(View v)  {
+        Intent intent = new Intent(this, LogDisplay.class);
+        startActivity(intent);
+    }
+
+    public void goToReminders(View v)  {
+        Intent intent = new Intent(this, LogDisplay.class);
         startActivity(intent);
     }
 }

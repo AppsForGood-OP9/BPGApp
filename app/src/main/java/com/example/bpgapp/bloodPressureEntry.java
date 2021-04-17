@@ -33,7 +33,12 @@ public class bloodPressureEntry extends AppCompatActivity {
         double systolicDouble=Double.parseDouble(systolicString);
         if (systolicDouble > 180)  {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very high", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.START, 10, 1000);
+            toast.setGravity(Gravity.TOP|Gravity.START, 10, 800);
+            toast.show();
+        }
+        else if (systolicDouble < 90)  {
+            Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very low", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.START, 10, 800);
             toast.show();
         }
     }
@@ -44,7 +49,12 @@ public class bloodPressureEntry extends AppCompatActivity {
         double diastolicDouble = Double.parseDouble(diastolicString);
         if (diastolicDouble > 120) {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very high", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP | Gravity.START, 1150, 1000);
+            toast.setGravity(Gravity.TOP | Gravity.START, 1150, 800);
+            toast.show();
+        }
+        else if (diastolicDouble < 60)  {
+            Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very low", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.START, 10, 800);
             toast.show();
         }
     }
