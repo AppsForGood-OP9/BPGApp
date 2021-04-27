@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/bp_text_view"
-            android:textSize="14sp"/>
+            android:textSize="36sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
