@@ -48,12 +48,12 @@ public class glucoseEntry extends AppCompatActivity {
 
     //To be implemented later with Room API
     //Get the spinner from the xml
-    Spinner dropdown = findViewById(R.id.spinner1);
+    //Spinner dropdown = findViewById(R.id.spinner1);
     //Create a list of items for the spinner
-    String[] items = new String[]{"Before", "After"};
+   // String[] items = new String[]{"Before", "After"};
     //Create an adapter to describe how the items are displayed, adapters are used in several places in android
     //There are multiple variations of this, but this is the basic variant
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+    //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
 
     public void addBloodPressureEntry(View v)  {
         Intent intent = new Intent(this, bloodPressureEntry.class);

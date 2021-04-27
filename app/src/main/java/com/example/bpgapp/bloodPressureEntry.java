@@ -2,20 +2,91 @@ package com.example.bpgapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bpgapp.ui.main.SectionsPagerAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class bloodPressureEntry extends AppCompatActivity {
+    //Initialize variable
+    EditText systolicNum;
+    Button submit;
+    RecyclerView bpRecyclerView;
+
+    List<bpData> dataList = new ArrayList<>();
+    LinearLayoutManager linearLayoutManager;
+    bpRoomDB bpDatabase;
+    bpAdapter bpAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_entry);
+
+
+        //Assign variable
+        systolicNum = findViewById(R.id.systolicNum);
+        submit = findViewById(R.id.submit);
+        bpRecyclerView = findViewById(R.id.bp_recycler_view);
+
+        //Initialize database
+        bpDatabase = bpRoomDB.getInstance(this);
+        //Store database value in data list
+        dataList = bpDatabase.bpDao().getAll();
+
+        //Initialize linear layout manager
+        linearLayoutManager = new LinearLayoutManager(this);
+        //Set layout manager
+        bpRecyclerView.setLayoutManager(linearLayoutManager);
+        //Initialize adapter
+        bpAdapter = new bpAdapter(bloodPressureEntry.this, dataList);
+        //Set adapter
+        bpRecyclerView.setAdapter(bpAdapter);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get string from edit text
+                String sText = systolicNum.getText().toString().trim();
+                //Check condition
+                if (!sText.equals(""))  {
+                    Log.d("talia", "Entered if statement");
+                    //When text is not empty
+                    //Initialize main data
+                    bpData data = new bpData();
+                    //Set text on main data
+                    data.setBpText(sText);
+                    //Insert text in database
+                    bpDatabase.bpDao().insert(data);
+                    System.out.println("Systolic value stored: " + sText);
+                    Log.d("talia", "Systolic value stored in bloodPressureEntry: " + sText);
+                    //Clear edit text
+                    systolicNum.setText("");
+                    //Notify when data is inserted
+                    dataList.clear();
+                    dataList.addAll(bpDatabase.bpDao().getAll());
+                    bpAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
     }
 
     public void showTimePickerDialog(View v) {
@@ -31,6 +102,9 @@ public class bloodPressureEntry extends AppCompatActivity {
     public void systolicLevelCheck(View v)  {
         EditText systolicNum = findViewById(R.id.systolicNum);
         String systolicString= systolicNum.getText().toString();
+        if (systolicString.isEmpty())
+            return;
+        //Use on others if working
         double systolicDouble=Double.parseDouble(systolicString);
         if (systolicDouble > 180)  {
             Toast toast = Toast.makeText(getApplicationContext(), "Warning: Very high", Toast.LENGTH_LONG);

@@ -278,4 +278,23 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.97" />
 
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        app:layout_constraintStart_toStartOf="@+id/guideline70"
+        app:layout_constraintTop_toBottomOf="@id/timeImage"
+        android:layout_weight="1"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/submit"
+        android:id="@+id/bp_recycler_view"
+        tools:listitem="@layout/bp_list_row_main"
+        android:layout_marginTop="8dp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@
     <string name="bpText">Blood Pressure</string>
     <string name="systolicText">Systolic</string>
     <string name="diastolicText">Diastolic</string>
+    <string name="glucoseLevelText">Glucose Level</string>
     <string name="forwardSlash">/</string>
     <string name="mmHgHintStr">mmHg</string>
     <string name="mgDLHintStr">mg/dL</string>

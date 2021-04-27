@@ -35,4 +35,5 @@ public class MainData implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
+
 }
