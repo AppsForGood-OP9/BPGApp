@@ -121,6 +121,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
                // DateFormat.getDateInstance().format(c.getTime());
         date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
+        //Hello
     }
 
     public void showTimePickerDialog(View v) {
