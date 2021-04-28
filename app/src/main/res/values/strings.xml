@@ -34,4 +34,20 @@
     <string name="reset">Reset</string>
     <string name="update">Update</string>
     <string name="enter_text">Enter text</string>
+    <string name="dateset">date</string>
+
+    <string-array name="HourValsArray">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
 </resources>
