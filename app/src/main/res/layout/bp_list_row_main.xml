@@ -16,14 +16,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/bp_text_view"
-            android:textSize="14sp"/>
+            android:textSize="36sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bp_edit"
             android:layout_marginStart="8dp"
-            android:src="@drawable/add_button_background"
+            android:src="@drawable/ic_edit_button_foreground"
             android:contentDescription="@+id/bp_edit" />
 
         <ImageView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bp_delete"
             android:layout_marginStart="8dp"
-            android:src="@drawable/add_button_foreground"
+            android:src="@drawable/ic_delete_button_foreground"
             android:contentDescription="@+id/bp_delete" />
 
 
