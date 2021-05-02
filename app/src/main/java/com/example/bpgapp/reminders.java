@@ -28,7 +28,7 @@ public class reminders extends AppCompatActivity {
         TextView timeText = findViewById(R.id.timeText);
         //Notification Code
         notifyBtn = findViewById(R.id.getNotified);
-
+        //kjhkjhkjh
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Log.v("Yiming", "Enters the if statement");
             String ChannelID = "Example";
