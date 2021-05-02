@@ -124,7 +124,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/dateText"
+        android:id="@+id/DateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
@@ -154,8 +154,8 @@
         android:layout_marginTop="0dp"
         android:onClick="showDatePickerDialog"
         android:text="@string/pick_date"
-        app:layout_constraintStart_toStartOf="@id/dateText"
-        app:layout_constraintTop_toBottomOf="@+id/dateText" />
+        app:layout_constraintStart_toStartOf="@id/DateText"
+        app:layout_constraintTop_toBottomOf="@+id/DateText" />
 
     <TextView
         android:id="@+id/timeText"
@@ -166,7 +166,7 @@
         android:text="@string/timeStr"
         android:textColor="@color/black"
         android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="@id/dateText"
+        app:layout_constraintStart_toStartOf="@id/DateText"
         app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 
     <Button
@@ -177,7 +177,7 @@
         android:layout_marginTop="0dp"
         android:onClick="showTimePickerDialog"
         android:text="@string/pick_time"
-        app:layout_constraintStart_toStartOf="@id/dateText"
+        app:layout_constraintStart_toStartOf="@id/DateText"
         app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <ImageView

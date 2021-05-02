@@ -34,4 +34,5 @@
     <string name="reset">Reset</string>
     <string name="update">Update</string>
     <string name="enter_text">Enter text</string>
+    <string name="dateset">date</string>
 </resources>

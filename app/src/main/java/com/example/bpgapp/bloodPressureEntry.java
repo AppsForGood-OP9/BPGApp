@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bpgapp.ui.main.SectionsPagerAdapter;
@@ -20,25 +23,31 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class bloodPressureEntry extends AppCompatActivity {
+public class bloodPressureEntry extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     //Initialize variable
     EditText systolicNum;
     Button submit;
     RecyclerView bpRecyclerView;
-
+    TextView TimeText;
     List<bpData> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
     bpRoomDB bpDatabase;
     bpAdapter bpAdapter;
+    int dayofmon;
+    int mon;
+    int yea;
+    TextView date;
+    TextView UserTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_entry);
-
 
         //Assign variable
         systolicNum = findViewById(R.id.systolicNum);
@@ -58,6 +67,16 @@ public class bloodPressureEntry extends AppCompatActivity {
         bpAdapter = new bpAdapter(bloodPressureEntry.this, dataList);
         //Set adapter
         bpRecyclerView.setAdapter(bpAdapter);
+
+        Button dateChanger = (Button) findViewById(R.id.dateButton);
+        dateChanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                DialogFragment datePicker = new DatePickerFragment();
+               datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +106,22 @@ public class bloodPressureEntry extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        dayofmon = c.get(Calendar.DAY_OF_MONTH);
+        mon = c.get(Calendar.MONTH)+1;
+        yea =  c.get(Calendar.YEAR);
+        String currentDateString = mon+"/"+dayofmon+"/"+yea;
+               // DateFormat.getDateInstance().format(c.getTime());
+        date = (TextView) findViewById(R.id.DateText);
+        date.setText(currentDateString);
+        //Hello
     }
 
     public void showTimePickerDialog(View v) {
