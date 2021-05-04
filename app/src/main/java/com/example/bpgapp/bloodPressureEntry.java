@@ -2,8 +2,6 @@ package com.example.bpgapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.DatePickerDialog;
@@ -31,11 +29,11 @@ import java.util.List;
 public class bloodPressureEntry extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     //Initialize variable
     EditText systolicNum;
+    EditText diastolicNum;
+    EditText notes;
     Button submit;
-    RecyclerView bpRecyclerView;
     TextView TimeText;
     List<bpData> dataList = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager;
     bpRoomDB bpDatabase;
     bpAdapter bpAdapter;
     int dayofmon;
@@ -49,24 +47,22 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_entry);
 
+        getSupportActionBar().setTitle("Blood Pressure Entry");
+
         //Assign variable
         systolicNum = findViewById(R.id.systolicNum);
+        diastolicNum = findViewById(R.id.diastolicNum);
+        notes = findViewById(R.id.notesEdit);
         submit = findViewById(R.id.submit);
-        bpRecyclerView = findViewById(R.id.bp_recycler_view);
 
         //Initialize database
         bpDatabase = bpRoomDB.getInstance(this);
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
-        //Initialize linear layout manager
-        linearLayoutManager = new LinearLayoutManager(this);
-        //Set layout manager
-        bpRecyclerView.setLayoutManager(linearLayoutManager);
         //Initialize adapter
         bpAdapter = new bpAdapter(bloodPressureEntry.this, dataList);
         //Set adapter
-        bpRecyclerView.setAdapter(bpAdapter);
 
         Button dateChanger = (Button) findViewById(R.id.dateButton);
         dateChanger.setOnClickListener(new View.OnClickListener() {
@@ -83,20 +79,52 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
             public void onClick(View v) {
                 //Get string from edit text
                 String sText = systolicNum.getText().toString().trim();
+                String dText = diastolicNum.getText().toString().trim();
+                String nText = notes.getText().toString().trim();
+
                 //Check condition
-                if (!sText.equals(""))  {
-                    Log.d("talia", "Entered if statement");
+                if (!sText.equals("")) {
                     //When text is not empty
                     //Initialize main data
                     bpData data = new bpData();
                     //Set text on main data
-                    data.setBpText(sText);
+                    data.setSystolicText(sText);
                     //Insert text in database
                     bpDatabase.bpDao().insert(data);
-                    System.out.println("Systolic value stored: " + sText);
-                    Log.d("talia", "Systolic value stored in bloodPressureEntry: " + sText);
                     //Clear edit text
                     systolicNum.setText("");
+                    //Notify when data is inserted
+                    dataList.clear();
+                    dataList.addAll(bpDatabase.bpDao().getAll());
+                    bpAdapter.notifyDataSetChanged();
+                }
+
+                if (!dText.equals("")) {
+                    //When text is not empty
+                    //Initialize main data
+                    bpData data = new bpData();
+                    //Set text on main data
+                    data.setDiastolicText(dText);
+                    //Insert text in database
+                    bpDatabase.bpDao().insert(data);
+                    //Clear edit text
+                    diastolicNum.setText("");
+                    //Notify when data is inserted
+                    dataList.clear();
+                    dataList.addAll(bpDatabase.bpDao().getAll());
+                    bpAdapter.notifyDataSetChanged();
+                }
+
+                if (!nText.equals("")) {
+                    //When text is not empty
+                    //Initialize main data
+                    bpData data = new bpData();
+                    //Set text on main data
+                    data.setNotesText(nText);
+                    //Insert text in database
+                    bpDatabase.bpDao().insert(data);
+                    //Clear edit text
+                    notes.setText("");
                     //Notify when data is inserted
                     dataList.clear();
                     dataList.addAll(bpDatabase.bpDao().getAll());
@@ -105,6 +133,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
             }
         });
 
+        //Select star from table
 
     }
 
