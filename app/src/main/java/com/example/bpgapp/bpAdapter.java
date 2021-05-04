@@ -51,18 +51,21 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
         //Initialize database
         bpDatabase = bpRoomDB.getInstance(context);
         //Set text on text view
-        holder.textView.setText(data.getBpText());
+        holder.bpSystolicTextView.setText(data.getSystolicText());
+        holder.bpDiastolicTextView.setText(data.getDiastolicText());
+        holder.bpNotesTextView.setText(data.getNotesText());
 
         holder.bpEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("bp Edit on click method is here");
                 //Initialize main data
                 bpData d = bpDataList.get(holder.getAdapterPosition());
                 //Get ID
                 int sID = d.getID();
                 //Get text
-                String sText = d.getBpText();
+                String sText = d.getSystolicText();
+                String dText = d.getDiastolicText();
+                String nText = d.getNotesText();
 
                 //Create dialog
                 Dialog dialog = new Dialog(context);
@@ -78,17 +81,23 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
                 dialog.show();
 
                 //Initialize and assign variable
-                EditText editText = dialog.findViewById(R.id.bp_edit_text);
+                EditText editSystolicText = dialog.findViewById(R.id.bp_systolic_text_view);
+                EditText editDiastolicText = dialog.findViewById(R.id.bp_diastolic_text_view);
+                EditText editNotesText = dialog.findViewById(R.id.bp_notes_text_view);
                 Button bpUpdate = dialog.findViewById(R.id.bp_update);
 
                 //Schema is decision programmed into the DAO
 
+                //Hash map to lookup table
+                //Know lower bound and upper bound
+
                 //Set text on edit text
-                editText.setText(sText);
+                editSystolicText.setText(sText);
                 //Retrieve it right away
 
-                //System.out.println("Systolic value stored: " + sText);
-                Log.d("talia", "Systolic value stored in bpAdapter: " + sText);
+                editDiastolicText.setText(dText);
+
+                editNotesText.setText(nText);
 
                 bpUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -96,9 +105,13 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
                         //Dismiss dialog
                         dialog.dismiss();
                         //Get updated text from edit text
-                        String uText = editText.getText().toString().trim();
+                        String uText = editSystolicText.getText().toString().trim();
+                        String vText = editDiastolicText.getText().toString().trim();
+                        String wText = editNotesText.getText().toString().trim();
                         //Update text in database
-                        bpDatabase.bpDao().update(sID,uText);
+                        bpDatabase.bpDao().updateSystolic(sID,uText);
+                        bpDatabase.bpDao().updateDiastolic(sID,vText);
+                        bpDatabase.bpDao().updateNotes(sID, wText);
                         //Notify when data is updated
                         bpDataList.clear();
                         bpDataList.addAll(bpDatabase.bpDao().getAll());
@@ -132,14 +145,22 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Initialize variable
-        TextView textView;
+        TextView bpSystolicTextView;
+        TextView bpDiastolicTextView;
+        TextView bpNotesTextView;
         ImageView bpEdit, bpDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Assign variable
-            textView = itemView.findViewById(R.id.bp_text_view);
+            bpSystolicTextView = itemView.findViewById(R.id.bp_systolic_text_view);
+            bpDiastolicTextView = itemView.findViewById(R.id.bp_diastolic_text_view);
+            bpNotesTextView = itemView.findViewById(R.id.bp_notes_text_view);
             bpEdit = itemView.findViewById(R.id.bp_edit);
             bpDelete = itemView.findViewById(R.id.bp_delete);
         }
     }
 }
+
+//Make a data query
+//Will give you back a list object
+//In the screen where you want the retrieval
