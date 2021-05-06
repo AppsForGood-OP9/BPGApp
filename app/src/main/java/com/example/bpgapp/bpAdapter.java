@@ -51,6 +51,7 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
         //Initialize database
         bpDatabase = bpRoomDB.getInstance(context);
         //Set text on text view
+        //This is where the error was
         holder.bpSystolicTextView.setText(data.getSystolicText());
         holder.bpDiastolicTextView.setText(data.getDiastolicText());
         holder.bpNotesTextView.setText(data.getNotesText());
