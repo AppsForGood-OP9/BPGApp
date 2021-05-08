@@ -95,7 +95,7 @@
         android:onClick="goToLog"
         app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:layout_constraintEnd_toEndOf="@+id/guideline30"
-        app:srcCompat="@drawable/home_button_foreground" />
+        app:srcCompat="@drawable/ic_data_button_foreground" />
 
     <ImageButton
         android:id="@+id/AddButton"

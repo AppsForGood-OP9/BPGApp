@@ -4,60 +4,145 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.app.PendingIntent;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class reminders extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+public class reminders extends AppCompatActivity {
+    //Initialize variable
+    Button save;
+    RecyclerView RemindersRecyclerView;
+    TextView TimeText;
     int hours;
     Button notifyBtn;
+    private final String CHANNEL_ID = "Channel_ID";
+
+    List<RemindersData> RemindersDataList = new ArrayList();
+    LinearLayoutManager linearLayoutManager;
+    RemindersRoomDB RemindersDatabase;
+    RemindersAdapter RemindersAdapter;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
-        TextView timeText = findViewById(R.id.timeText);
-        //Notification Code
-        notifyBtn = findViewById(R.id.getNotified);
-        //kjhkjhkjh
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Log.v("Yiming", "Enters the if statement");
-            String ChannelID = "Example";
-            CharSequence name = "Trial Notification";
-            String description = "Trial Notification";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(ChannelID, name, importance);
-            //NotificationChannel channels = new NotificationChannel("Trial Notification", "Trial Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
 
-        notifyBtn.setOnClickListener(new View.OnClickListener(){
+        //Assign Variable
+        save = findViewById(R.id.save);
+        TimeText = findViewById(R.id.timeValue);
+        RemindersRecyclerView = findViewById(R.id.reminders_recycler_view);
+
+        //Initialize database
+        RemindersDatabase = RemindersRoomDB.getInstance(this);
+        //Store database value in data list
+        RemindersDataList = (List<RemindersData>) RemindersDatabase.RemindersDao().getAll();
+
+        //Initialize linear layout manager
+        linearLayoutManager = new LinearLayoutManager(this);
+        //Set layout manager
+        RemindersRecyclerView.setLayoutManager(linearLayoutManager);
+        //Initialize adapter
+        RemindersAdapter = new RemindersAdapter(reminders.this, RemindersDataList);
+        //Set adapter
+        RemindersRecyclerView.setAdapter(RemindersAdapter);
+
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                //Notification code goes here
-                NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(reminders.this);
-                nBuilder.setContentTitle("Reminder");
-                nBuilder.setContentText("Take your measurement");
-                nBuilder.setSmallIcon(R.drawable.bell_button_foreground);
-                nBuilder.setAutoCancel(true);
+            public void onClick(View v) {
+                //Get string from edit text
+                String tText = TimeText.getText().toString().trim();
 
-                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(reminders.this);
-                managerCompat.notify(1, nBuilder.build());
+                //Check condition
+                if (!TimeText.equals("")) {
+                    //When text is not empty
+                    //Initialize main data
+                    RemindersData RemindersData = new RemindersData();
+                    //Set text on main data
+                    RemindersData.setTimeText(TimeText.toString());
+                    //Insert text in database
+                    RemindersDatabase.RemindersDao().insert(RemindersData);
+                    //Clear edit text
+                    TimeText.setText("");
+                    //Notify when data is inserted
+                    RemindersDataList.clear();
+                    RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
+                    RemindersAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+        //Notification Code - Create the Notification Channel, then create the Notification on button click
+        createNotificationChannel();
+        notifyBtn = findViewById(R.id.getNotified);
+        notifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNotification();   // Making a separate method below for readability purposes
+                // Set the alarm to start at approximately 2:00 p.m.
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 11);
+                calendar.set(Calendar.MINUTE, 20);
+
+                // With setInexactRepeating(), you have to use one of the AlarmManager interval
+                // constants--in this case, AlarmManager.INTERVAL_DAY.
+                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY, alarmIntent);
             }
         });
     }
+        private void addNotification () {
+            Log.d("Reminders", "Calling Reminders.addNotification() method");
+            // Use this constructor with two input parameters for Android 26+ support, second parameter is Channel ID
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.bell_button_foreground)
+                    .setContentTitle("Reminders")
+                    .setContentText("Take your measurement")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setAutoCancel(true);
 
-    public void showTimePickerDialog(View v) {
+            // Add as notification
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(1, builder.build());
+        }
+        private void createNotificationChannel () {
+            // Create the NotificationChannel, but only on API 26+ because
+            // the NotificationChannel class is new and not in the support library
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                CharSequence name = "TEST CHANNEL NAME"; //getString(R.string.channel_name);
+                String description = "TEST CHANNEL DESCRIPTION";//getString(R.string.channel_description);
+                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+                channel.setDescription(description);
+                // Register the channel with the system; you can't change the importance
+                // or other notification behaviors after this
+                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+
+        public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
