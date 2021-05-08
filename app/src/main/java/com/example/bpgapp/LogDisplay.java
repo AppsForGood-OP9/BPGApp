@@ -30,21 +30,31 @@ public class LogDisplay extends AppCompatActivity {
     Button btAdd, btReset;
     RecyclerView recyclerView;
 
-    List<MainData> dataList = new ArrayList<>();
+    List<MainData> dataListOld = new ArrayList<>();
+    List<bpData> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
-    RoomDB database;
-    MainAdapter adapter;
+    bpRoomDB bpDatabase;
+    bpAdapter bpAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_display);
+
+        //getSupportActionBar().setTitle("Log");
+        //Not sure why the log does not have a title
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        //Initialize database
+        bpDatabase = bpRoomDB.getInstance(this);
+        //Store database value in data list
+        dataList = bpDatabase.bpDao().getAll();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,45 +68,49 @@ public class LogDisplay extends AppCompatActivity {
 
         //Assign variable
         editText = findViewById(R.id.edit_text);
-        btAdd = findViewById(R.id.bt_add);
-        btReset = findViewById(R.id.bt_reset);
-        recyclerView = findViewById(R.id.recycler_view);
+        //btAdd = findViewById(R.id.bt_add);
+        //btReset = findViewById(R.id.bt_reset);
+        recyclerView = findViewById(R.id.bp_recycler_view);
 
         //Initialize database
-        database = RoomDB.getInstance(this);
+        //I believe this is where the data is retrieved
+        bpDatabase = bpRoomDB.getInstance(this);
         //Store database value in data list
-        dataList = database.mainDao().getAll();
+        dataList = bpDatabase.bpDao().getAll();
 
         //Initialize linear layout manager
         linearLayoutManager = new LinearLayoutManager(this);
         //Set layout manager
         recyclerView.setLayoutManager(linearLayoutManager);
         //Initialize adapter
-        adapter = new MainAdapter(LogDisplay.this, dataList);
+        bpAdapter = new bpAdapter(LogDisplay.this, dataList);
         //Set adapter
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(bpAdapter);
 
-        btAdd.setOnClickListener(new View.OnClickListener() {
+        /*btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Get string from edit text
+                //Maybe make a query here?
                 String sText = editText.getText().toString().trim();
                 //Check condition
+                //Do we have to do this for each object?
                 if (!sText.equals(""))  {
                     //When text is not empty
                     //Initialize main data
-                    MainData data = new MainData();
+                    bpData data = new bpData();
                     //Set text on main data
-                    data.setText(sText);
+                    data.setSystolicText(sText);
                     //Insert text in database
-                    database.mainDao().insert(data);
+                    bpDatabase.bpDao().insert(data);
                     //Clear edit text
                     editText.setText("");
                     //Notify when data is inserted
                     dataList.clear();
-                    dataList.addAll(database.mainDao().getAll());
-                    adapter.notifyDataSetChanged();
+                    dataList.addAll(bpDatabase.bpDao().getAll());
+                    bpAdapter.notifyDataSetChanged();
                 }
+
             }
         });
 
@@ -104,15 +118,18 @@ public class LogDisplay extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Delete all data from database
-                database.mainDao().reset(dataList);
+                bpDatabase.bpDao().reset(dataList);
                 //Notify when all data deleted
                 dataList.clear();
-                dataList.addAll(database.mainDao().getAll());
-                adapter.notifyDataSetChanged();
+                dataList.addAll(bpDatabase.bpDao().getAll());
+                bpAdapter.notifyDataSetChanged();
             }
         });
 
+         */
+
     }
+
 
     public void addBloodPressureEntry(View v)  {
         Intent intent = new Intent(this, bloodPressureEntry.class);
@@ -130,7 +147,7 @@ public class LogDisplay extends AppCompatActivity {
     }
 
     public void goToLog(View v)  {
-        Intent intent = new Intent(this, LogDisplay.class);
+        Intent intent = new Intent(this, Table.class);
         startActivity(intent);
     }
 

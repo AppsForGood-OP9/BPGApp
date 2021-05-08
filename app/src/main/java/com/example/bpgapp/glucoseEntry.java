@@ -18,6 +18,7 @@ public class glucoseEntry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glucose_entry);
+        getSupportActionBar().setTitle("Glucose Entry");
     }
 
     public void glucoseLevelCheck(View v)  {
@@ -71,7 +72,7 @@ public class glucoseEntry extends AppCompatActivity {
     }
 
     public void goToLog(View v)  {
-        Intent intent = new Intent(this, LogDisplay.class);
+        Intent intent = new Intent(this, Table.class);
         startActivity(intent);
     }
 

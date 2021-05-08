@@ -8,6 +8,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BPGApp">
+        <activity android:name=".Table"></activity>
+        <activity android:name=".NavigationBar" />
+        <activity
+            android:name=".Navigation"
+            android:label="@string/title_activity_navigation" />
         <activity
             android:name=".LogDisplay"
             android:label="@string/title_activity_log_display"
@@ -21,7 +26,7 @@
         </activity>
         <activity android:name=".bloodPressureEntry" />
         <activity android:name=".reminders" />
-        <activity android:name=".glucoseEntry"/>
+        <activity android:name=".glucoseEntry" />
 
 
     </application>

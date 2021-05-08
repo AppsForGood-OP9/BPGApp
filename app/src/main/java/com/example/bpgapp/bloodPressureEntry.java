@@ -99,52 +99,26 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
                 String nText = notes.getText().toString().trim();
 
                 //Check condition
-                if (!sText.equals("")) {
+                if (!sText.equals("") || !dText.equals("") || !nText.equals("")) {
                     //When text is not empty
                     //Initialize main data
                     bpData data = new bpData();
                     //Set text on main data
                     data.setSystolicText(sText);
-                    //Insert text in database
-                    bpDatabase.bpDao().insert(data);
-                    //Clear edit text
-                    systolicNum.setText("");
-                    //Notify when data is inserted
-                    dataList.clear();
-                    dataList.addAll(bpDatabase.bpDao().getAll());
-                    bpAdapter.notifyDataSetChanged();
-                }
-
-                if (!dText.equals("")) {
-                    //When text is not empty
-                    //Initialize main data
-                    bpData data = new bpData();
-                    //Set text on main data
                     data.setDiastolicText(dText);
-                    //Insert text in database
-                    bpDatabase.bpDao().insert(data);
-                    //Clear edit text
-                    diastolicNum.setText("");
-                    //Notify when data is inserted
-                    dataList.clear();
-                    dataList.addAll(bpDatabase.bpDao().getAll());
-                    bpAdapter.notifyDataSetChanged();
-                }
-
-                if (!nText.equals("")) {
-                    //When text is not empty
-                    //Initialize main data
-                    bpData data = new bpData();
-                    //Set text on main data
                     data.setNotesText(nText);
                     //Insert text in database
                     bpDatabase.bpDao().insert(data);
                     //Clear edit text
+                    systolicNum.setText("");
+                    diastolicNum.setText("");
                     notes.setText("");
                     //Notify when data is inserted
                     dataList.clear();
                     dataList.addAll(bpDatabase.bpDao().getAll());
                     bpAdapter.notifyDataSetChanged();
+
+                    //We should display a Toast to notify the user as to whether or not the data was entered successfully
                 }
             }
         });
@@ -230,7 +204,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     }
 
     public void goToLog(View v)  {
-        Intent intent = new Intent(this, LogDisplay.class);
+        Intent intent = new Intent(this, Table.class);
         startActivity(intent);
     }
 

@@ -21,6 +21,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/Upscale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ExpandTextButton"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Downscale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ExpandTextButton"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/Upscale"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
@@ -49,9 +72,9 @@
         android:id="@+id/HeartSymbolButton"
         android:layout_width="125dp"
         android:layout_height="150dp"
-        android:backgroundTint="@color/pink"
         android:contentDescription="@string/pressureButton"
         android:onClick="addBloodPressureEntry"
+        android:backgroundTint="@color/pink"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -78,9 +101,9 @@
         android:id="@+id/BloodSymbolButton"
         android:layout_width="125dp"
         android:layout_height="150dp"
-        android:backgroundTint="@color/blue"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/glucoseButton"
+        android:backgroundTint="@color/blue"
         android:onClick="addGlucoseEntry"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="@id/HeartSymbolButton"
@@ -93,9 +116,10 @@
         android:layout_height="100dp"
         android:contentDescription="@string/logButton"
         android:onClick="goToLog"
+        app:srcCompat="@drawable/ic_data_button_foreground"
         app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:layout_constraintEnd_toEndOf="@+id/guideline30"
-        app:srcCompat="@drawable/ic_data_button_foreground" />
+         />
 
     <ImageButton
         android:id="@+id/AddButton"
@@ -111,7 +135,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:srcCompat="@drawable/add_button_foreground" />
 
-    <ImageButton
+   <ImageButton
         android:id="@+id/BellButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -130,8 +154,8 @@
         android:text="@string/StartingZoomSize"
         android:textColor="@android:color/black"
         android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline30"
@@ -154,6 +178,15 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.97" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu_final" />
     <ImageButton
         android:id="@+id/ZoomOutButton"
         android:layout_width="100dp"
@@ -178,5 +211,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_zoom_in_24" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:navGraph="@navigation/app_nav" />
+    </FrameLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

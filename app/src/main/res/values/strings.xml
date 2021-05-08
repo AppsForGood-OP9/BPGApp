@@ -40,4 +40,11 @@
     <string name="colon">:</string>
     <string name="am">AM</string>
     <string name="pm">PM</string>
+    <string name="title_activity_navigation">Title activity navigation</string>
+    <string name="first_fragment">First fragment</string>
+    <string name="second_fragment">Second fragment</string>
+    <string name="third_fragment">Third fragment</string>
+    <string name="title_home">Title home</string>
+    <string name="title_dashboard">Title dashboard</string>
+    <string name="title_notifications">Title notifications</string>
 </resources>

@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heartImage">
 
@@ -74,6 +75,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLayout">
 
@@ -83,14 +85,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="30dp"
             android:autofillHints=""
             android:hint="@string/mmHgHintStr"
             android:inputType="numberDecimal"
             android:onClick="systolicLevelCheck"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-            app:layout_constraintTop_toTopOf="@+id/horizontalLayout" />
+            app:layout_constraintTop_toTopOf="@+id/horizontalLayout"
+            android:layout_marginEnd="30dp"/>
 
         <TextView
             android:id="@+id/forwardSlash"
@@ -117,7 +119,7 @@
             android:onClick="diastolicLevelCheck"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-            app:layout_constraintTop_toTopOf="@+id/horizontalLayout" />
+            app:layout_constraintTop_toTopOf="@+id/horizontalLayout"  />
 
     </LinearLayout>
 
@@ -249,14 +251,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline70"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.88" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline97"
@@ -269,11 +271,11 @@
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="goToLog"
         android:text="@string/submit"
         app:layout_constraintStart_toStartOf="@+id/guideline70"
-        app:layout_constraintTop_toBottomOf="@id/timeImage"
-        android:layout_weight="1"
-        />
+        app:layout_constraintTop_toBottomOf="@id/timeImage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -338,6 +340,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/minuteEdit"
         app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

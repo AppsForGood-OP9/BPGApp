@@ -1,14 +1,20 @@
 package com.example.bpgapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.graphics.Color;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +35,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        // as soon as the application opens the first
+        // fragment should be shown to the user
+        // in this case it is algorithm fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment1, new FirstFragment()).commit();
+
+        getSupportActionBar().setTitle("Add Entry");
+
         makeEntry = (TextView) findViewById(R.id.Prompt);
         PercentZoom = (TextView) findViewById(R.id.percentZoom);
         Large = (ImageButton) findViewById(R.id.ZoomInButton);
@@ -61,7 +78,37 @@ public class MainActivity extends AppCompatActivity {
                 PercentZoom.setText(zoom+"%");
             }
         });
+
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            // By using switch we can easily get
+            // the selected fragment
+            // by using there id.
+            Fragment selectedFragment = null;
+            //Maybe do something here
+            switch (item.getItemId()) {
+                case R.id.firstFragment:
+                    selectedFragment = new FirstFragment();
+                    break;
+                case R.id.secondFragment:
+                    selectedFragment = new SecondFragment();
+                    break;
+                case R.id.thirdFragment:
+                    selectedFragment = new ThirdFragment();
+                    break;
+            }
+            // It will help to replace the
+            // one fragment to other.
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment1, selectedFragment)
+                    .commit();
+            return true;
+        }
+    };
 
     public void addBloodPressureEntry(View v)  {
         Intent intent = new Intent(this, bloodPressureEntry.class);
@@ -79,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToLog(View v)  {
-        Intent intent = new Intent(this, LogDisplay.class);
+        Intent intent = new Intent(this, Table.class);
         startActivity(intent);
     }
 

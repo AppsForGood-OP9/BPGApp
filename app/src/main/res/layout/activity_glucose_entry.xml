@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".glucoseEntry">
 
-
     <TextView
         android:id="@+id/gText"
         android:layout_width="wrap_content"
@@ -183,23 +182,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
-    <Spinner
-        android:id="@+id/spinner1"
+    <Button
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        app:layout_constraintTop_toTopOf="@+id/timeButton"
-        app:layout_constraintStart_toEndOf="@+id/timeButton"
-        android:spinnerMode="dropdown"/>
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        app:layout_constraintTop_toTopOf="@+id/spinner1"
-        app:layout_constraintStart_toEndOf="@+id/spinner1"
-        android:spinnerMode="dropdown"/>
+        android:layout_weight="1"
+        android:onClick="goToLog"
+        android:text="@string/submit"
+        app:layout_constraintStart_toStartOf="@+id/guideline70"
+        app:layout_constraintTop_toBottomOf="@id/timeButton" />
 
     <ImageButton
         android:id="@+id/HomeButton"

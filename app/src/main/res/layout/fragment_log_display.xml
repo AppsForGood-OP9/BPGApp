@@ -47,9 +47,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/AddButton"
-        android:id="@+id/recycler_view"
-        tools:listitem="@layout/list_row_main"
+        app:layout_constraintTop_toBottomOf="@+id/submit"
+        android:id="@+id/bp_recycler_view"
+        tools:listitem="@layout/bp_list_row_main"
         android:layout_marginTop="8dp"
         />
 
