@@ -21,29 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/Upscale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ExpandTextButton"
-        android:backgroundTint="@color/yellow"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/Downscale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ExpandTextButton"
-        android:backgroundTint="@color/yellow"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/Upscale"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
@@ -72,6 +49,7 @@
         android:id="@+id/HeartSymbolButton"
         android:layout_width="125dp"
         android:layout_height="150dp"
+        android:backgroundTint="@color/pink"
         android:contentDescription="@string/pressureButton"
         android:onClick="addBloodPressureEntry"
         android:scaleType="centerInside"
@@ -100,6 +78,7 @@
         android:id="@+id/BloodSymbolButton"
         android:layout_width="125dp"
         android:layout_height="150dp"
+        android:backgroundTint="@color/blue"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/glucoseButton"
         android:onClick="addGlucoseEntry"
@@ -152,7 +131,7 @@
         android:textColor="@android:color/black"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Upscale" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline30"
@@ -175,6 +154,29 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.97" />
 
+    <ImageButton
+        android:id="@+id/ZoomOutButton"
+        android:layout_width="100dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@color/yellow"
+        android:contentDescription="@string/glucoseButton"
+        android:scaleType="fitCenter"
+        android:tint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_zoom_out_24" />
 
+    <ImageButton
+        android:id="@+id/ZoomInButton"
+        android:layout_width="101dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/yellow"
+        android:contentDescription="@string/glucoseButton"
+        android:scaleType="fitCenter"
+        android:tint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_zoom_in_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

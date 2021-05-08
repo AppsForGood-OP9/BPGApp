@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import com.example.bpgapp.ui.main.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-
+import android.widget.Switch;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +42,8 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     int yea;
     TextView date;
     TextView UserTime;
-
+    TextView timeZone;
+    Switch timeZoneSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +61,23 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         bpDatabase = bpRoomDB.getInstance(this);
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
-
+        timeZone = (TextView) findViewById(R.id.ampmDisplay);
+        timeZoneSwitch = (Switch) findViewById(R.id.ampmSwitch);
         //Initialize adapter
         bpAdapter = new bpAdapter(bloodPressureEntry.this, dataList);
+
+
+        timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(timeZoneSwitch.isChecked()){
+                    timeZone.setText("PM");
+                }
+                else{
+                    timeZone.setText("AM");
+                }
+            }
+        });
         //Set adapter
 
         Button dateChanger = (Button) findViewById(R.id.dateButton);

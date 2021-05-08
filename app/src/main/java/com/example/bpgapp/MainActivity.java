@@ -14,10 +14,10 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     TextView makeEntry;
     TextView PercentZoom;
-    Button Large;
-    Button Small;
     Button PressureButton;
     Button GlucoseButton;
+    ImageButton Large;
+    ImageButton Small;
     ImageButton heart;
     ImageButton drop;
     ImageButton home;
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         makeEntry = (TextView) findViewById(R.id.Prompt);
         PercentZoom = (TextView) findViewById(R.id.percentZoom);
-        Large = (Button) findViewById(R.id.Upscale);
-        Small = (Button) findViewById(R.id.Downscale);
+        Large = (ImageButton) findViewById(R.id.ZoomInButton);
+        Small = (ImageButton) findViewById(R.id.ZoomOutButton);
         PressureButton = (Button) findViewById(R.id.BloodPressureButton);
         GlucoseButton = (Button) findViewById(R.id.BloodGlucoseButton);
         heart = (ImageButton) findViewById(R.id.HeartSymbolButton);
@@ -40,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
         home = (ImageButton) findViewById(R.id.HomeButton);
         plus = (ImageButton) findViewById(R.id.AddButton);
         bell = (ImageButton) findViewById(R.id.BellButton);
+
         Large.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
                 PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
                 GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
-                zoom +=50;
+                zoom +=25;
                 PercentZoom.setText(zoom+"%");
             }
         });
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
                 PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
                 GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
-                zoom -=50;
+                zoom -=25;
                 PercentZoom.setText(zoom+"%");
             }
         });

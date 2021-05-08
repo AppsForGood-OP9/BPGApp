@@ -35,4 +35,9 @@
     <string name="update">Update</string>
     <string name="enter_text">Enter text</string>
     <string name="dateset">date</string>
+    <string name="HourShort">Hr</string>
+    <string name="MinuteShort">Min</string>
+    <string name="colon">:</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
 </resources>
