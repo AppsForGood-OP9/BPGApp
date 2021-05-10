@@ -52,6 +52,8 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
         bpDatabase = bpRoomDB.getInstance(context);
         //Set text on text view
         //This is where the error was
+        holder.bpTimeTextView.setText(data.getTime());
+        holder.bpDateTextView.setText(data.getDate());
         holder.bpSystolicTextView.setText(data.getSystolicText());
         holder.bpDiastolicTextView.setText(data.getDiastolicText());
         holder.bpNotesTextView.setText(data.getNotesText());
@@ -124,6 +126,7 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
             }
         });*/
 
+        /*
         holder.bpDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +141,8 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
                 notifyItemRangeChanged(position, bpDataList.size());
             }
         });
+
+         */
     }
 
     @Override
@@ -147,19 +152,23 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Initialize variable
+        TextView bpDateTextView;
+        TextView bpTimeTextView;
         TextView bpSystolicTextView;
         TextView bpDiastolicTextView;
         TextView bpNotesTextView;
         //ImageView bpEdit;
-        ImageView bpDelete;
+        //ImageView bpDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Assign variable
+            bpDateTextView = itemView.findViewById(R.id.bp_date_text_view);
+            bpTimeTextView = itemView.findViewById(R.id.bp_time_text_view);
             bpSystolicTextView = itemView.findViewById(R.id.bp_systolic_text_view);
             bpDiastolicTextView = itemView.findViewById(R.id.bp_diastolic_text_view);
             bpNotesTextView = itemView.findViewById(R.id.bp_notes_text_view);
            // bpEdit = itemView.findViewById(R.id.bp_edit);
-            bpDelete = itemView.findViewById(R.id.bp_delete);
+           // bpDelete = itemView.findViewById(R.id.bp_delete);
         }
     }
 }

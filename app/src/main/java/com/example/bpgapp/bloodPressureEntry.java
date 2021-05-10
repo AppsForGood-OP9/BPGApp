@@ -44,6 +44,9 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     TextView UserTime;
     TextView timeZone;
     Switch timeZoneSwitch;
+    TextView hour;
+    TextView minute;
+    String currentDateString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,10 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         getSupportActionBar().setTitle("Blood Pressure Entry");
 
         //Assign variable
+        hour = findViewById(R.id.hourEdit);
+        minute = findViewById(R.id.minuteEdit);
+        date = findViewById(R.id.DateText);
+
         systolicNum = findViewById(R.id.systolicNum);
         diastolicNum = findViewById(R.id.diastolicNum);
         notes = findViewById(R.id.notesEdit);
@@ -104,12 +111,19 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
                     //Initialize main data
                     bpData data = new bpData();
                     //Set text on main data
+                    String timeText = hour.getText() + ":" + minute.getText() + " " + timeZone.getText();
+                    data.setTime(timeText);
+                    data.setDate(currentDateString);
                     data.setSystolicText(sText);
                     data.setDiastolicText(dText);
                     data.setNotesText(nText);
                     //Insert text in database
                     bpDatabase.bpDao().insert(data);
                     //Clear edit text
+                    hour.setText("");
+                    minute.setText("");
+                    //What should we do about the AM/PM here?
+                    date.setText("");
                     systolicNum.setText("");
                     diastolicNum.setText("");
                     notes.setText("");
@@ -136,7 +150,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         dayofmon = c.get(Calendar.DAY_OF_MONTH);
         mon = c.get(Calendar.MONTH)+1;
         yea =  c.get(Calendar.YEAR);
-        String currentDateString = mon+"/"+dayofmon+"/"+yea;
+        currentDateString = mon+"/"+dayofmon+"/"+yea;
                // DateFormat.getDateInstance().format(c.getTime());
         date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
