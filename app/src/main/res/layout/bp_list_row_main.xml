@@ -6,6 +6,7 @@
     android:layout_margin="4dp">
 
     <LinearLayout
+        android:id="@+id/bp_row_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -15,21 +16,34 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/bp_date_text_view"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/bp_time_text_view"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/bp_systolic_text_view"
-            android:textSize="36sp"/>
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/bp_diastolic_text_view"
-            android:textSize="36sp"/>
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/bp_notes_text_view"
-            android:textSize="36sp"/>
+            android:textSize="20sp"/>
 
+        <!--
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,16 +51,6 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_edit_button_foreground"
             android:contentDescription="@+id/bp_edit" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bp_delete"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_delete_button_foreground"
-            android:contentDescription="@+id/bp_delete" />
-
-
+-->
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
