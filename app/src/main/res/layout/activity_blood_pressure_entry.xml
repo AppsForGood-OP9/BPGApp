@@ -199,7 +199,7 @@
         app:layout_constraintBottom_toTopOf="@+id/AddButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
+<!--
     <ImageButton
         android:id="@+id/HomeButton"
         android:layout_width="100dp"
@@ -235,7 +235,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline70"
         app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:srcCompat="@drawable/bell_button_foreground" />
-
+-->
     <TextView
         android:id="@+id/percentZoom"
         android:layout_width="wrap_content"
@@ -277,6 +277,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline70"
         app:layout_constraintTop_toBottomOf="@id/timeImage" />
 
+    <!--
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -285,7 +286,7 @@
         tools:listitem="@layout/bp_list_row_main"
         android:layout_marginTop="8dp"
         />
-
+-->
     <EditText
         android:id="@+id/minuteEdit"
         android:layout_width="60dp"
@@ -340,6 +341,27 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/minuteEdit"
         app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:scrollbarSize="20dp"
+        app:itemIconSize="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="100dp"
+        app:menu="@menu/bottom_menu_final" />
+
+    <FrameLayout
+        android:id="@+id/container_bp_blank"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+    </FrameLayout>
 
 
 

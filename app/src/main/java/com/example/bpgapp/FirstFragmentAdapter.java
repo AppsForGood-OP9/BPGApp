@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
+public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdapter.ViewHolder> {
 
     Context context;
     private List<TableModel> table_list;
     private List<bpData> dataList;
     private bpRoomDB bpDatabase;
 
-    public TableAdapter(Context context, List<TableModel> table_list, List<bpData> dataList)  {
+    public FirstFragmentAdapter(Context context, List<TableModel> table_list, List<bpData> dataList)  {
         this.context = context;
         this.table_list = table_list;
         this.dataList = dataList;
@@ -30,7 +30,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false);
-        return new ViewHolder(view);
+        return new FirstFragmentAdapter.ViewHolder(view);
     }
 
     @Override
@@ -39,6 +39,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
         //Initialize database
         bpDatabase = bpRoomDB.getInstance(context);
 
+        /*
         if(table_list != null && table_list.size() > 0)  {
             TableModel model = table_list.get(position);
             holder.dateItem.setText(model.getDate());
@@ -66,7 +67,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
                 notifyItemRangeChanged(position, dataList.size());
             }
         });
-
+*/
     }
 
     @Override
@@ -74,11 +75,12 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
         return table_list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
-        ImageView bpDelete;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
+            ImageView bpDelete;
 
             dateItem = itemView.findViewById(R.id.dateItem);
             timeItem = itemView.findViewById(R.id.timeItem);
@@ -87,6 +89,5 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
             notesItem = itemView.findViewById(R.id.notesItem);
             bpDelete = itemView.findViewById(R.id.bp_delete);
         }
-
     }
 }

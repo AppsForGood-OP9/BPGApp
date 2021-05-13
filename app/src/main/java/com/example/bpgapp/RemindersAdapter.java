@@ -49,6 +49,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
         //Set text on text view
         holder.TimeText.setText(data.getTimeText());
 
+        /*
         holder.bpEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +104,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
                     }
                 });
             }
-        });
+        }); */
     }
         public int getItemCount() {
         return RemindersDataList.size();
@@ -111,14 +112,14 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{//Initialize variable
         TextView TimeText;
-        ImageView bpEdit, bpDelete;
+        //ImageView bpEdit;
+        ImageView bpDelete;
         //Initialize Variables
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Assign variable
             TimeText = itemView.findViewById(R.id.timeValue);
-            bpEdit = itemView.findViewById(R.id.bp_edit);
-            bpDelete = itemView.findViewById(R.id.bp_delete);
+            //bpEdit = itemView.findViewById(R.id.bp_edit);
         }
     }
     }

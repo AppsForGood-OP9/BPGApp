@@ -1,12 +1,15 @@
 package com.example.bpgapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,26 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        Log.d("TARICCO","SecondFragment - onCreateView() - inflate activity_main");
+        View view = inflater.inflate(R.layout.activity_main, container, false);
+        Button pressureButton = view.findViewById(R.id.BloodPressureButton);
+        //return inflater.inflate(R.layout.activity_main, container, false);
+
+        pressureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), bloodPressureEntry.class);
+                startActivity(intent);
+            }
+        });
+        Button glucoseButton = view.findViewById(R.id.BloodGlucoseButton);
+        glucoseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), glucoseEntry.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 }

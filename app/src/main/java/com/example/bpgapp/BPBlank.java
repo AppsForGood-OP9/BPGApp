@@ -3,21 +3,19 @@ package com.example.bpgapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.graphics.Color;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+public class BPBlank extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
     TextView makeEntry;
     TextView PercentZoom;
     Button PressureButton;
@@ -34,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_b_p_blank);
+        setContentView(R.layout.activity_blood_pressure_entry);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         // as soon as the application opens the first
         // fragment should be shown to the user
         // in this case it is algorithm fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.container_main_blank, new FirstFragment()).commit();
 
         getSupportActionBar().setTitle("Add Entry");
 
@@ -84,9 +82,13 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Log.v("talia","Nav item is selected");
+            setContentView(R.layout.activity_b_p_blank);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_bp_blank, new FirstFragment()).commit();
             // By using switch we can easily get
             // the selected fragment
             // by using there id.
+
             Fragment selectedFragment = null;
             //Maybe do something here
             switch (item.getItemId()) {
@@ -106,36 +108,11 @@ public class MainActivity extends AppCompatActivity {
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container_main_blank, selectedFragment)
+                    .replace(R.id.container_bp_blank, selectedFragment)
                     .commit();
 
             return true;
 
         }
     };
-
-    public void addBloodPressureEntry(View v)  {
-        Intent intent = new Intent(this, BPBlank.class);
-        startActivity(intent);
-    }
-
-    public void addGlucoseEntry(View v)  {
-        Intent intent = new Intent(this, glucoseEntry.class);
-        startActivity(intent);
-    }
-
-    public void goToAddEntry(View v)  {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void goToLog(View v)  {
-        Intent intent = new Intent(this, Table.class);
-        startActivity(intent);
-    }
-
-    public void goToReminders(View v)  {
-        Intent intent = new Intent(this, reminders.class);
-        startActivity(intent);
-    }
 }

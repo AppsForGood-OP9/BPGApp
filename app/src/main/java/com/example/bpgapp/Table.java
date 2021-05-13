@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class Table extends AppCompatActivity {
     String diastolicStr;
     String notesStr;
 
+    //ImageView bpDelete;
     TextView dateItem;
     TextView timeItem;
     TextView systolicItem;
@@ -49,6 +53,7 @@ public class Table extends AppCompatActivity {
         systolicItem = findViewById(R.id.systolicItem);
         diastolicItem = findViewById(R.id.diastolicItem);
         notesItem = findViewById(R.id.notesItem);
+        //bpDelete = findViewById(R.id.bp_delete);
 
         bpDatabase = bpRoomDB.getInstance(this);
         //Store database value in data list
@@ -80,7 +85,8 @@ public class Table extends AppCompatActivity {
     private void setTableRecyclerView() {
         table_recycler_view.setHasFixedSize(true);
         table_recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TableAdapter(this, getList());
+        //Changes here, might only need two arguments for TableAdapter
+        adapter = new TableAdapter(this, getList(), dataList);
         table_recycler_view.setAdapter(adapter);
     }
 
@@ -89,4 +95,16 @@ public class Table extends AppCompatActivity {
         table_list.add(new TableModel(dateStr,timeStr,systolicStr,diastolicStr,notesStr));
         return table_list;
     }
+
+    /*
+    public void deleteData()  {
+        bpData d = dataList.getAdapterPosition();
+        //Delete text from database
+        bpDatabase.bpDao().delete(d);
+        //Notify when data is deleted
+        int position = data.getAdapterPosition();
+        dataList.remove(position);
+    }
+    */
+
 }

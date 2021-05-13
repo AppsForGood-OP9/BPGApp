@@ -52,4 +52,7 @@ public interface bpDao {
     //Could loop over it because it's in the list
     //Print it just to make sure
     //Do select star from
+
+    @Query("DELETE FROM bp_table")
+    void deleteAll();
 }

@@ -1,7 +1,9 @@
 package com.example.bpgapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.DatePickerDialog;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bpgapp.ui.main.SectionsPagerAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -51,6 +55,11 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_entry);
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_bp_blank, new FirstFragment()).commit();
 
         getSupportActionBar().setTitle("Blood Pressure Entry");
 
@@ -96,7 +105,6 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
             }
         });
 
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +148,36 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         //Select star from table
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            // By using switch we can easily get
+            // the selected fragment
+            // by using there id.
+            Fragment selectedFragment = null;
+            //Maybe do something here
+            switch (item.getItemId()) {
+                case R.id.firstFragment:
+                    selectedFragment = new FirstFragment();
+                    break;
+                case R.id.secondFragment:
+                    selectedFragment = new SecondFragment();
+                    break;
+                case R.id.thirdFragment:
+                    selectedFragment = new ThirdFragment();
+                    break;
+            }
+            // It will help to replace the
+            // one fragment to other.
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container_bp_blank, selectedFragment)
+                    .commit();
+            return true;
+        }
+    };
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
@@ -213,7 +251,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     }
 
     public void goToAddEntry(View v)  {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivityBlank.class);
         startActivity(intent);
     }
 

@@ -21,29 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/Upscale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ExpandTextButton"
-        android:backgroundTint="@color/yellow"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/Downscale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ExpandTextButton"
-        android:backgroundTint="@color/yellow"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/Upscale"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
@@ -110,43 +87,6 @@
         app:layout_constraintTop_toBottomOf="@id/BloodGlucoseButton"
         app:srcCompat="@drawable/blood_drop" />
 
-    <ImageButton
-        android:id="@+id/HomeButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="@string/logButton"
-        android:onClick="goToLog"
-        app:srcCompat="@drawable/ic_data_button_foreground"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
-        app:layout_constraintEnd_toEndOf="@+id/guideline30"
-         />
-
-    <ImageButton
-        android:id="@+id/AddButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="0dp"
-        android:contentDescription="@string/makeEntryButton"
-        android:onClick="goToAddEntry"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
-        app:srcCompat="@drawable/add_button_foreground" />
-
-   <ImageButton
-        android:id="@+id/BellButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="0dp"
-        android:contentDescription="@string/reminderButton"
-        android:onClick="goToReminders"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline70"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
-        app:srcCompat="@drawable/bell_button_foreground" />
-
     <TextView
         android:id="@+id/percentZoom"
         android:layout_width="wrap_content"
@@ -178,15 +118,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.97" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu_final" />
+
     <ImageButton
         android:id="@+id/ZoomOutButton"
         android:layout_width="100dp"
@@ -211,26 +143,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_zoom_in_24" />
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-        <fragment
-            android:id="@+id/fragment1"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:navGraph="@navigation/app_nav" />
-    </FrameLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
