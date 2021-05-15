@@ -1,15 +1,32 @@
 package com.example.bpgapp;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +34,21 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class ThirdFragment extends Fragment {
+    Button save;
+    private RecyclerView RemindersRecyclerView;
+    TextView timeZone;
+    Switch timeZoneSwitch;
+    TextView hour;
+    TextView minute;
+    Button notifyBtn;
+    private final String CHANNEL_ID = "Channel_ID";
+
+    List<RemindersData> RemindersDataList = new ArrayList();
+    LinearLayoutManager linearLayoutManager;
+    RemindersRoomDB RemindersDatabase;
+    RemindersAdapter RemindersAdapter;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,11 +97,126 @@ public class ThirdFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d("TARICCO","ThirdFragment - onCreateView() - inflate activity_reminders");
         View view = inflater.inflate(R.layout.activity_reminders, container, false);
-        //Button pressureButton = view.findViewById(R.id.BloodPressureButton);
-        //return inflater.inflate(R.layout.activity_main, container, false);
+        //Assign Variable
+        save = view.findViewById(R.id.save);
+        hour = view.findViewById(R.id.hourEdit);
+        minute = view.findViewById(R.id.minuteEdit);
+        RemindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
+        setRemindersRecyclerView();
+        timeZone = (TextView) view.findViewById(R.id.ampmDisplay);
+        timeZoneSwitch = (Switch) view.findViewById(R.id.ampmSwitch);
+        //Initialize database
+        RemindersDatabase = RemindersRoomDB.getInstance(getContext());
+        //Store database value in data list
+        RemindersDataList = (List<RemindersData>) RemindersDatabase.RemindersDao().getAll();
 
-        //return inflater.inflate(R.layout.activity_reminders, container, false);
-        return view;
+        //Initialize linear layout manager
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        //Set layout manager
+        RemindersRecyclerView.setLayoutManager(linearLayoutManager);
+        //Initialize adapter
+        RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
+        //Set adapter
+        RemindersRecyclerView.setAdapter(RemindersAdapter);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Yiming", "Save has been pressed");
+                //Get string from edit text
+                String timeText = hour.getText() + ":" + minute.getText() + " " + timeZone.getText();
+
+                //Check condition
+                if (!timeText.equals("")) {
+                    Log.d("Yiming", "Enters if statement");
+                    //When text is not empty
+                    //Initialize main data
+                    RemindersData RemindersData = new RemindersData();
+                    //Set text on main data
+                    RemindersData.setTime(timeText);
+                    //Insert text in database
+                    RemindersDatabase.RemindersDao().insert(RemindersData);
+                    //Clear edit text
+                    hour.setText("");
+                    minute.setText("");
+                    //Notify when data is inserted
+                    RemindersDataList.clear();
+                    RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
+                    RemindersAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        //Notification Code - Create the Notification Channel, then create the Notification on button click
+        createNotificationChannel();
+        notifyBtn = view.findViewById(R.id.getNotified);
+        notifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNotification();   // Making a separate method below for readability purposes
+                // Set the alarm to start at approximately 2:00 p.m.
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 11);
+                calendar.set(Calendar.MINUTE, 20);
+                Context context = getContext();
+
+                // With setInexactRepeating(), you have to use one of the AlarmManager interval
+                // constants--in this case, AlarmManager.INTERVAL_DAY.
+
+                //This is statement is what Talia changed, not sure if it is right
+                AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY, alarmIntent);
+            }
+
+            private void addNotification() {
+                Log.d("Reminders", "Calling Reminders.addNotification() method");
+                // Use this constructor with two input parameters for Android 26+ support, second parameter is Channel ID
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                        .setSmallIcon(R.drawable.bell_button_foreground)
+                        .setContentTitle("Reminders")
+                        .setContentText("Take your measurement")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setAutoCancel(true);
+
+                // Add as notification
+                NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(1, builder.build());
+            }
+        });
+    return view;
     }
 
+    private void setRemindersRecyclerView() {
+        RemindersRecyclerView.setHasFixedSize(true);
+        RemindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Changes here, might only need two arguments for TableAdapter
+        RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
+        RemindersRecyclerView.setAdapter(RemindersAdapter);
+    }
+/*
+    private List<RemindersModel> getList()  {
+        List<RemindersModel> reminders_list = new ArrayList<>();
+        reminders_list.add(new RemindersModel(time));
+        return reminders_list;
+    }
+    */
+
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "TEST CHANNEL NAME"; //getString(R.string.channel_name);
+            String description = "TEST CHANNEL DESCRIPTION";//getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 }

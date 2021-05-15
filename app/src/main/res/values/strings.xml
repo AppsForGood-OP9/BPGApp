@@ -5,7 +5,7 @@
     <string name="dailyAlertsLabel">Daily Alerts</string>
     <string name="addTimeButton">Add Time</string>
 
-    <string name="app_name">BP &amp; G App</string>
+    <string name="app_name">BP &amp; G Tracker</string>
     <string name="bpText">Blood Pressure</string>
     <string name="systolicText">Systolic</string>
     <string name="diastolicText">Diastolic</string>
@@ -21,7 +21,7 @@
     <string name="notesHintStr">Notes</string>
     <string name="pick_time">Set Time</string>
     <string name="pick_date">Set Date</string>
-    <string name="promptEntry">Make an Entry</string>
+    <string name="promptEntry">Add an Entry</string>
     <string name="pressureButton">Blood Pressure</string>
     <string name="glucoseButton">Glucose</string>
     <string name="logButton">Log</string>
@@ -47,5 +47,5 @@
     <string name="title_home">Title home</string>
     <string name="title_dashboard">Title dashboard</string>
     <string name="title_notifications">Title notifications</string>
-    <string name="hello_blank_fragment">hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

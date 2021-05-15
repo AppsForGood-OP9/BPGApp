@@ -124,9 +124,13 @@ public class reminders extends AppCompatActivity {
                 calendar.setTimeInMillis(System.currentTimeMillis());
                 calendar.set(Calendar.HOUR_OF_DAY, 11);
                 calendar.set(Calendar.MINUTE, 20);
+                Context context = getApplication();
 
                 // With setInexactRepeating(), you have to use one of the AlarmManager interval
                 // constants--in this case, AlarmManager.INTERVAL_DAY.
+
+                //This is statement is what Talia changed, not sure if it is right
+                AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
                 alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY, alarmIntent);
             }

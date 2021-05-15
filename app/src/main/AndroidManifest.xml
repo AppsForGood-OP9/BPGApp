@@ -4,22 +4,23 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/bpg_icon_small"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/bpg_icon_small_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BPGApp">
         <activity android:name=".TableBP"></activity>
         <activity android:name=".TableG" />
         <activity android:name=".BPBlank" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".reminders" />
         <activity android:name=".Table" />
         <activity android:name=".NavigationBar" />
         <activity
             android:name=".LogDisplay"
             android:label="@string/title_activity_log_display"
             android:theme="@style/Theme.BPGApp.NoActionBar" />
-        <activity android:name=".reminders">
+        <activity android:name=".MainActivityBlank">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

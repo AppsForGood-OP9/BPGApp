@@ -7,6 +7,7 @@ import androidx.navigation.NavController;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.graphics.Color;
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void addBloodPressureEntry(View v)  {
+        Log.v("talia", "addBPEntry in Main Activity clicked");
         Intent intent = new Intent(this, BPBlank.class);
         startActivity(intent);
     }

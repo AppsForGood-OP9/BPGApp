@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.bpgapp.ui.BPFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,23 +69,46 @@ public class SecondFragment extends Fragment {
         Log.d("TARICCO","SecondFragment - onCreateView() - inflate activity_main");
         View view = inflater.inflate(R.layout.activity_main, container, false);
         Button pressureButton = view.findViewById(R.id.BloodPressureButton);
+
+        //getSupportActionBar().setTitle("Blood Pressure Entry");
         //return inflater.inflate(R.layout.activity_main, container, false);
 
         pressureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), bloodPressureEntry.class);
-                startActivity(intent);
+                Log.v("talia","pressureButton onClick method in Second Fragment used to go to BP page");
+                Fragment fragment = new BPFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_main_blank, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
+
+                //Log.v("talia","AddBloodPressureEntry in Second Fragment clicked");
+
+            /*Fragment selectedFragment = new BPFragment();
+                View view = inflater.inflate(R.layout.activity_glucose_entry, container, false);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container_main_blank, selectedFragment)
+                        .commit();
+            }*/
         });
+
         Button glucoseButton = view.findViewById(R.id.BloodGlucoseButton);
         glucoseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), glucoseEntry.class);
-                startActivity(intent);
+                Fragment fragment = new GFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_main_blank, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
+
         return view;
     }
 }

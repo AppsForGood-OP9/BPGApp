@@ -123,42 +123,6 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/HomeButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="@string/logButton"
-        android:onClick="goToLog"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
-        app:layout_constraintEnd_toEndOf="@+id/guideline30"
-        app:srcCompat="@drawable/home_button_foreground" />
-
-    <ImageButton
-        android:id="@+id/AddButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="0dp"
-        android:contentDescription="@string/makeEntryButton"
-        android:onClick="goToAddEntry"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/add_button_foreground" />
-
-    <ImageButton
-        android:id="@+id/BellButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="0dp"
-        android:contentDescription="@string/reminderButton"
-        android:onClick="goToReminders"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
-        app:layout_constraintStart_toStartOf="@+id/guideline70"
-        app:srcCompat="@drawable/bell_button_foreground" />
-
     <!--<TextView
         android:id="@+id/percentZoom"
         android:layout_width="wrap_content"
@@ -209,6 +173,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+        app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
         tools:listitem="@layout/reminders_list_row_main" />
 
     <Button

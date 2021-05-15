@@ -196,7 +196,7 @@
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/AddButton"
+        app:layout_constraintTop_toBottomOf="@+id/submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 <!--
@@ -272,7 +272,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:onClick="goToLog"
         android:text="@string/submit"
         app:layout_constraintStart_toStartOf="@+id/guideline70"
         app:layout_constraintTop_toBottomOf="@id/timeImage" />

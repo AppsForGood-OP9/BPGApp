@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -32,7 +33,7 @@ public class BPBlank extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_b_p_blank);
+        //setContentView(R.layout.activity_b_p_blank);
         setContentView(R.layout.activity_blood_pressure_entry);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
@@ -84,7 +85,7 @@ public class BPBlank extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Log.v("talia","Nav item is selected");
             setContentView(R.layout.activity_b_p_blank);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_bp_blank, new FirstFragment()).commit();
+            //getSupportFragmentManager().beginTransaction().replace(R.id.container_bp_blank, new FirstFragment()).commit();
             // By using switch we can easily get
             // the selected fragment
             // by using there id.
@@ -93,24 +94,29 @@ public class BPBlank extends AppCompatActivity {
             //Maybe do something here
             switch (item.getItemId()) {
                 case R.id.firstFragment:
-                    selectedFragment = new FirstFragment();
+                    //selectedFragment = new FirstFragment();
                     break;
                 case R.id.secondFragment:
-                    selectedFragment = new SecondFragment();
+                    setContentView(R.layout.activity_glucose_entry);
+                    //selectedFragment.startActivity(new Intent(getApplicationContext(), glucoseEntry.class));
+                            //(getContext(), glucoseEntry.class);
+                    //startActivity(intent);
+                    //selectedFragment = new SecondFragment();
                     break;
                 case R.id.thirdFragment:
-                    selectedFragment = new ThirdFragment();
+                    //selectedFragment = new ThirdFragment();
                     break;
             }
             // It will help to replace the
             // one fragment to other.
 
 
+            /*
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.container_bp_blank, selectedFragment)
                     .commit();
-
+*/
             return true;
 
         }
