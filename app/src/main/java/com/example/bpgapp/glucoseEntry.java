@@ -36,7 +36,7 @@ public class glucoseEntry extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glucose_entry);
         getSupportActionBar().setTitle("Glucose Entry");
-        date = findViewById(R.id.DateText2);
+        date = findViewById(R.id.DateText);
         hour = findViewById(R.id.hourEdit2);
         minute = findViewById(R.id.minuteEdit2);
 
@@ -78,7 +78,7 @@ public class glucoseEntry extends AppCompatActivity implements DatePickerDialog.
         yea =  c.get(Calendar.YEAR);
         currentDateString = mon+"/"+dayofmon+"/"+yea;
         // DateFormat.getDateInstance().format(c.getTime());
-        date = (TextView) findViewById(R.id.DateText2);
+        date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
         //Hello
     }

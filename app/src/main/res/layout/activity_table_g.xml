@@ -55,15 +55,7 @@
             android:layout_column="1"
             />
         <TextView
-            android:text="@string/systolicText"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:padding="0dp"
-            android:layout_column="1"
-            />
-        <TextView
-            android:text="@string/diastolicText"
+            android:text="@string/glucoseLevelText"
             android:textSize="20dp"
             android:textStyle="bold"
             android:gravity="center"
