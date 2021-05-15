@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".bloodPressureEntry">
-//Yiming was here
+    //Yiming was here
+
     <TextView
         android:id="@+id/bpText"
         android:layout_width="wrap_content"
@@ -85,14 +86,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
+            android:layout_marginEnd="30dp"
             android:autofillHints=""
             android:hint="@string/mmHgHintStr"
             android:inputType="numberDecimal"
             android:onClick="systolicLevelCheck"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-            app:layout_constraintTop_toTopOf="@+id/horizontalLayout"
-            android:layout_marginEnd="30dp"/>
+            app:layout_constraintTop_toTopOf="@+id/horizontalLayout" />
 
         <TextView
             android:id="@+id/forwardSlash"
@@ -119,7 +120,7 @@
             android:onClick="diastolicLevelCheck"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-            app:layout_constraintTop_toTopOf="@+id/horizontalLayout"  />
+            app:layout_constraintTop_toTopOf="@+id/horizontalLayout" />
 
     </LinearLayout>
 
@@ -133,8 +134,7 @@
         android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-        app:layout_constraintTop_toBottomOf="@id/horizontalLayout2">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@id/horizontalLayout2"></TextView>
 
     <ImageView
         android:id="@+id/calendarImage"
@@ -218,10 +218,10 @@
         android:contentDescription="@string/makeEntryButton"
         android:onClick="goToAddEntry"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline97"
         app:srcCompat="@drawable/add_button_foreground" />
 
     <ImageButton
@@ -232,8 +232,8 @@
         android:contentDescription="@string/reminderButton"
         android:onClick="goToReminders"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline70"
         app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:layout_constraintStart_toStartOf="@+id/guideline70"
         app:srcCompat="@drawable/bell_button_foreground" />
 -->
     <TextView
@@ -279,13 +279,12 @@
 
     <!--
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bp_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/submit"
-        android:id="@+id/bp_recycler_view"
-        tools:listitem="@layout/bp_list_row_main"
         android:layout_marginTop="8dp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/submit"
+        tools:listitem="@layout/bp_list_row_main" />
 -->
     <EditText
         android:id="@+id/minuteEdit"
@@ -323,7 +322,7 @@
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/hourEdit"
-        app:layout_constraintTop_toBottomOf="@+id/timeText"/>
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <Switch
         android:id="@+id/ampmSwitch"
@@ -336,8 +335,8 @@
         android:id="@+id/ampmDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/am"
         android:layout_marginTop="5dp"
+        android:text="@string/am"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/minuteEdit"
         app:layout_constraintTop_toBottomOf="@+id/timeText" />
@@ -363,6 +362,26 @@
 
     </FrameLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.19" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.64"  />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

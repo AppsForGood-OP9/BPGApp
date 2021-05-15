@@ -3,23 +3,91 @@ package com.example.bpgapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class glucoseEntry extends AppCompatActivity {
+import java.util.Calendar;
+
+public class glucoseEntry extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    int dayofmon;
+    int mon;
+    int yea;
+    TextView date;
+    String currentDateString;
+    TextView timeZone;
+    Switch timeZoneSwitch;
+    TextView hour;
+    TextView minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glucose_entry);
         getSupportActionBar().setTitle("Glucose Entry");
+        date = findViewById(R.id.DateText2);
+        hour = findViewById(R.id.hourEdit2);
+        minute = findViewById(R.id.minuteEdit2);
+
+        Button dateChanger = (Button) findViewById(R.id.dateButton2);
+        dateChanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
+        timeZone = (TextView) findViewById(R.id.ampmDisplay2);
+        timeZoneSwitch = (Switch) findViewById(R.id.ampmSwitch2);
+
+        timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(timeZoneSwitch.isChecked()){
+                    timeZone.setText("PM");
+                }
+                else{
+                    timeZone.setText("AM");
+                }
+            }
+        });
+
+
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        dayofmon = c.get(Calendar.DAY_OF_MONTH);
+        mon = c.get(Calendar.MONTH)+1;
+        yea =  c.get(Calendar.YEAR);
+        currentDateString = mon+"/"+dayofmon+"/"+yea;
+        // DateFormat.getDateInstance().format(c.getTime());
+        date = (TextView) findViewById(R.id.DateText2);
+        date.setText(currentDateString);
+        //Hello
+    }
+
+    public void showDatePickerDialog2(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
 
     public void glucoseLevelCheck(View v)  {
         EditText glucoseNum = findViewById(R.id.glucoseNum);
@@ -37,10 +105,6 @@ public class glucoseEntry extends AppCompatActivity {
         }
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();

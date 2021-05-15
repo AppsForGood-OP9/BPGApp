@@ -54,20 +54,17 @@
 
     </LinearLayout>
 
-        <EditText
-            android:id="@+id/glucoseNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:autofillHints=""
-            app:layout_constraintTop_toBottomOf="@id/horizontalLayout"
-            android:hint="@string/mmHgHintStr"
-            android:inputType="numberDecimal"
-            android:onClick="glucoseLevelCheck"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="@+id/guideline20" />
+    <EditText
+        android:id="@+id/glucoseNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/mgDLHintStr"
+        android:inputType="numberDecimal"
+        android:onClick="glucoseLevelCheck"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
+        app:layout_constraintTop_toBottomOf="@id/horizontalLayout" />
 
 
     <LinearLayout
@@ -76,93 +73,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toBottomOf="@+id/glucoseNum">
-
-        <TextView
-            android:id="@+id/DateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="@string/dateStr"
-            android:textColor="@color/black"
-            android:textSize="36sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/horizontalLayout3" />
-
-        <ImageView
-            android:id="@+id/calendarImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="0dp"
-            android:contentDescription="@string/calendarStr"
-            app:layout_constraintEnd_toEndOf="@id/horizontalLayout2"
-            app:layout_constraintStart_toStartOf="@+id/DateText"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalLayout2"
-            app:srcCompat="@drawable/calendar" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/dateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:onClick="showDatePickerDialog"
-        android:text="@string/pick_date"
-        app:layout_constraintStart_toStartOf="@id/horizontalLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/glucoseNum"/>
 
     <LinearLayout
         android:id="@+id/horizontalLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton">
-
-        <TextView
-            android:id="@+id/timeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="@string/timeStr"
-            android:textColor="@color/black"
-            android:textSize="36sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalLayout4" />
-
-        <ImageView
-            android:id="@+id/timeImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:contentDescription="@string/timeStr"
-            app:srcCompat="@drawable/time" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/timeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:onClick="showTimePickerDialog"
-        android:text="@string/pick_time"
-        app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/dateButton2"/>
+    tools:layout_editor_absoluteY="475dp" />
 
     <EditText
         android:id="@+id/notesEdit"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
         android:autofillHints=""
         android:hint="@string/notesHintStr"
         android:inputType="textPersonName"
@@ -186,11 +112,12 @@
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
         android:layout_weight="1"
         android:onClick="goToLog"
         android:text="@string/submit"
-        app:layout_constraintStart_toStartOf="@+id/guideline70"
-        app:layout_constraintTop_toBottomOf="@id/timeButton" />
+        app:layout_constraintBottom_toTopOf="@+id/notesEdit"
+        app:layout_constraintStart_toStartOf="@+id/guideline70" />
 
     <ImageButton
         android:id="@+id/HomeButton"
@@ -258,5 +185,107 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.97" />
+
+    <TextView
+        android:id="@+id/DateText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/dateStr"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="@+id/horizontalLayout3"
+        app:layout_constraintTop_toTopOf="@+id/glucoseNum"/>
+
+    <Button
+        android:id="@+id/dateButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:onClick="showDatePickerDialog2"
+        android:text="@string/pick_date"
+        app:layout_constraintStart_toStartOf="@id/DateText2"
+        app:layout_constraintTop_toBottomOf="@+id/DateText2" />
+
+    <TextView
+        android:id="@+id/timeText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/timeStr"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="@id/DateText2"
+        app:layout_constraintTop_toBottomOf="@+id/dateButton2" />
+
+    <EditText
+        android:id="@+id/minuteEdit2"
+        android:layout_width="60dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/MinuteShort"
+        android:inputType="number"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/timeColon2"
+        app:layout_constraintTop_toBottomOf="@+id/timeText2" />
+
+    <EditText
+        android:id="@+id/hourEdit2"
+        android:layout_width="45dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/HourShort"
+        android:inputType="number"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText2" />
+
+    <TextView
+        android:id="@+id/timeColon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/colon"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/hourEdit2"
+        app:layout_constraintTop_toBottomOf="@+id/timeText2" />
+
+    <Switch
+        android:id="@+id/ampmSwitch2"
+        android:layout_width="50dp"
+        android:layout_height="33dp"
+        app:layout_constraintStart_toEndOf="@+id/minuteEdit2"
+        app:layout_constraintTop_toBottomOf="@+id/ampmDisplay2" />
+
+    <TextView
+        android:id="@+id/ampmDisplay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/am"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/minuteEdit2"
+        app:layout_constraintTop_toBottomOf="@+id/timeText2" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.19" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.64"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import com.example.bpgapp.ui.main.SectionsPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,7 +47,6 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     int mon;
     int yea;
     TextView date;
-    TextView UserTime;
     TextView timeZone;
     Switch timeZoneSwitch;
     TextView hour;
@@ -115,7 +116,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
 
                 //Check condition
                 if (!sText.equals("") || !dText.equals("") || !nText.equals("")) {
-                    //When text is not empty
+                    //Whena text is not empty
                     //Initialize main data
                     bpData data = new bpData();
                     //Set text on main data
@@ -195,10 +196,6 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         //Hello
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();

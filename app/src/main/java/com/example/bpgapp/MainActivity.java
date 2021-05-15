@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         Large.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                makeEntry.setTextSize(35*(makeEntry.getTextSize())/40);
-                PressureButton.setTextSize(35*(PressureButton.getTextSize())/40);
-                GlucoseButton.setTextSize(35*(GlucoseButton.getTextSize())/40);
+                makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
                 zoom +=25;
                 PercentZoom.setText(zoom+"%");
             }
@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         Small.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                makeEntry.setTextSize(25*(makeEntry.getTextSize())/40);
-                PressureButton.setTextSize(25*(PressureButton.getTextSize())/40);
-                GlucoseButton.setTextSize(25*(GlucoseButton.getTextSize())/40);
+                makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
                 zoom -=25;
                 PercentZoom.setText(zoom+"%");
             }
