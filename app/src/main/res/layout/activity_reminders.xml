@@ -49,15 +49,14 @@
             android:id="@+id/bloodPressureToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:backgroundTint="@color/pink"
             android:text="@string/bpText"
             android:textColor="@color/black"
-
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/glucoseToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -110,15 +109,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/alertsLabel"
-        tools:layout_editor_absoluteY="291dp">
-
-        <ImageButton
-            android:id="@+id/addTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/addTimeButton"
-            app:srcCompat="@drawable/add_button_foreground" />
-    </LinearLayout>
+        tools:layout_editor_absoluteY="291dp"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -130,35 +121,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout3">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="showTimePickerDialog"
-                android:text="@string/pick_time" />
-
-            <EditText
-                android:id="@+id/timeValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:autofillHints=""
-                android:hint="@string/mmHgHintStr"
-                android:inputType="numberDecimal"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-                app:layout_constraintTop_toTopOf="@+id/horizontalLayout"
-                android:layout_marginEnd="30dp"/>
-        </LinearLayout>
-
     </LinearLayout>
 
-    <TextView
+    <ImageButton
+        android:id="@+id/HomeButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/logButton"
+        android:onClick="goToLog"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:layout_constraintEnd_toEndOf="@+id/guideline30"
+        app:srcCompat="@drawable/home_button_foreground" />
+
+    <ImageButton
+        android:id="@+id/AddButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@string/makeEntryButton"
+        android:onClick="goToAddEntry"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/add_button_foreground" />
+
+    <ImageButton
+        android:id="@+id/BellButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@string/reminderButton"
+        android:onClick="goToReminders"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline97"
+        app:layout_constraintStart_toStartOf="@+id/guideline70"
+        app:srcCompat="@drawable/bell_button_foreground" />
+
+    <!--<TextView
         android:id="@+id/percentZoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -166,7 +167,7 @@
         android:textColor="@android:color/black"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Upscale" />
+        app:layout_constraintTop_toBottomOf="" />-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline30"
@@ -193,31 +194,115 @@
         android:id="@+id/getNotified"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="400dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="96dp"
         android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reminders_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="568dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="380dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/bp_list_row_main" />
+        tools:listitem="@layout/reminders_list_row_main" />
 
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="511dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="310dp"
         android:text="save"
+        app:layout_constraintStart_toEndOf="@id/ampmSwitch"
+        app:layout_constraintTop_toTopOf="parent" />
+<!--
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="200dp"
+        android:text="@string/timeStr"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/timeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:contentDescription="@string/timeStr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/timeText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/time"
+        tools:layout_editor_absoluteY="427dp" /-->
+
+    <EditText
+        android:id="@+id/minuteEdit"
+        android:layout_width="60dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="310dp"
+        android:ems="10"
+        android:hint="@string/MinuteShort"
+        android:inputType="number"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/timeColon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/hourEdit"
+        android:layout_width="45dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginEnd="125dp"
+        android:ems="10"
+        android:hint="@string/HourShort"
+        android:inputType="number"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timeColon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="310dp"
+        android:text="@string/colon"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/hourEdit"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/ampmSwitch"
+        android:layout_width="50dp"
+        android:layout_height="33dp"
+        app:layout_constraintStart_toEndOf="@+id/minuteEdit"
+        app:layout_constraintTop_toBottomOf="@+id/ampmDisplay" />
+
+    <TextView
+        android:id="@+id/ampmDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:text="@string/am"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/minuteEdit"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

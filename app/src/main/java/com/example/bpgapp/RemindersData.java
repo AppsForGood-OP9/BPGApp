@@ -14,8 +14,8 @@ public class RemindersData implements Serializable {
     private int ID;
 
     //Create text column
-    @ColumnInfo(name = "TimeText")
-    private String TimeText;
+    @ColumnInfo(name = "time")
+    private String time;
 
     //Add more fields later
     //Generate getter and setter
@@ -28,11 +28,11 @@ public class RemindersData implements Serializable {
         this.ID = ID;
     }
 
-    public String getTimeText() {
-        return TimeText;
+    public String getTime() {
+        return time;
     }
 
-    public void setTimeText(String text) {
-        this.TimeText = text;
+    public void setTime(String text) {
+        this.time = text;
     }
 }

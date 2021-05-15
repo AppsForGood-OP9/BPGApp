@@ -19,7 +19,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.app.PendingIntent;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,8 +32,10 @@ public class reminders extends AppCompatActivity {
     //Initialize variable
     Button save;
     RecyclerView RemindersRecyclerView;
-    TextView TimeText;
-    int hours;
+    TextView timeZone;
+    Switch timeZoneSwitch;
+    TextView hour;
+    TextView minute;
     Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
@@ -49,9 +53,11 @@ public class reminders extends AppCompatActivity {
 
         //Assign Variable
         save = findViewById(R.id.save);
-        TimeText = findViewById(R.id.timeValue);
+        hour = findViewById(R.id.hourEdit);
+        minute = findViewById(R.id.minuteEdit);
         RemindersRecyclerView = findViewById(R.id.reminders_recycler_view);
-
+        timeZone = (TextView) findViewById(R.id.ampmDisplay);
+        timeZoneSwitch = (Switch) findViewById(R.id.ampmSwitch);
         //Initialize database
         RemindersDatabase = RemindersRoomDB.getInstance(this);
         //Store database value in data list
@@ -66,23 +72,37 @@ public class reminders extends AppCompatActivity {
         //Set adapter
         RemindersRecyclerView.setAdapter(RemindersAdapter);
 
+        timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(timeZoneSwitch.isChecked()){
+                    timeZone.setText("PM");
+                }
+                else{
+                    timeZone.setText("AM");
+                }
+            }
+        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("Yiming", "Save has been pressed");
                 //Get string from edit text
-                String tText = TimeText.getText().toString().trim();
+                String timeText = hour.getText() + ":" + minute.getText() + " " + timeZone.getText();
 
                 //Check condition
-                if (!TimeText.equals("")) {
+                if (!timeText.equals("")) {
+                    Log.d("Yiming", "Enters if statement");
                     //When text is not empty
                     //Initialize main data
                     RemindersData RemindersData = new RemindersData();
                     //Set text on main data
-                    RemindersData.setTimeText(TimeText.toString());
+                    RemindersData.setTime(timeText);
                     //Insert text in database
                     RemindersDatabase.RemindersDao().insert(RemindersData);
                     //Clear edit text
-                    TimeText.setText("");
+                    hour.setText("");
+                    minute.setText("");
                     //Notify when data is inserted
                     RemindersDataList.clear();
                     RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());

@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.bpgapp.ui.BPFragment;
+import com.example.bpgapp.ui.*;
+
+//import com.example.bpgapp.ui.BPFragment;
 
 import java.util.ArrayList;
 import java.util.List;

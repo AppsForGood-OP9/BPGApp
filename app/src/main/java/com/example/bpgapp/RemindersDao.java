@@ -25,8 +25,8 @@ public interface RemindersDao {
     void reset(List<RemindersData> ReminderData);
 
     //Update query
-    @Query("UPDATE Reminders_table SET TimeText = :sText WHERE ID = :sID")
-    void update(int sID, String sText);
+    @Query("UPDATE Reminders_table SET time = :timeText WHERE ID = :timeID")
+    void update(int timeID, String timeText);
 
     //Get all data query
     @Query("SELECT * FROM Reminders_table")

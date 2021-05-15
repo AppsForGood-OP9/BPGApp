@@ -116,7 +116,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
 
                 //Check condition
                 if (!sText.equals("") || !dText.equals("") || !nText.equals("")) {
-                    //Whena text is not empty
+                    //When text is not empty
                     //Initialize main data
                     bpData data = new bpData();
                     //Set text on main data

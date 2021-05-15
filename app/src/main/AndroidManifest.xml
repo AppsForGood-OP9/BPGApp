@@ -19,7 +19,7 @@
             android:name=".LogDisplay"
             android:label="@string/title_activity_log_display"
             android:theme="@style/Theme.BPGApp.NoActionBar" />
-        <activity android:name=".MainActivityBlank">
+        <activity android:name=".reminders">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".bloodPressureEntry" />
-        <activity android:name=".reminders" />
+        <!--<activity android:name=".reminders" />-->
         <activity android:name=".glucoseEntry" />
     </application>
 
