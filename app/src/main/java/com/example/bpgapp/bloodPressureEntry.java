@@ -4,12 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,16 +17,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
-import com.example.bpgapp.ui.main.SectionsPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
+
 import android.widget.Switch;
-import java.text.DateFormat;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -42,7 +35,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     TextView TimeText;
     List<bpData> dataList = new ArrayList<>();
     bpRoomDB bpDatabase;
-    bpAdapter bpAdapter;
+    BPAdapter bpAdapter;
     int dayofmon;
     int mon;
     int yea;
@@ -81,7 +74,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         timeZone = (TextView) findViewById(R.id.ampmDisplay);
         timeZoneSwitch = (Switch) findViewById(R.id.ampmSwitch);
         //Initialize adapter
-        bpAdapter = new bpAdapter(bloodPressureEntry.this, dataList);
+        bpAdapter = new BPAdapter(bloodPressureEntry.this, dataList);
 
 
         timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

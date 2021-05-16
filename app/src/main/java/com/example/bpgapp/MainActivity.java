@@ -115,12 +115,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
     public void addBloodPressureEntry(View v)  {
         Log.v("talia", "addBPEntry in Main Activity clicked");
         Intent intent = new Intent(this, BPBlank.class);
         startActivity(intent);
     }
-
+*/
     public void addGlucoseEntry(View v)  {
         Intent intent = new Intent(this, glucoseEntry.class);
         startActivity(intent);

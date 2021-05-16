@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".bloodPressureEntry">
-    //Yiming was here
 
     <TextView
         android:id="@+id/bpText"
@@ -260,12 +259,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline97"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.97" />
 
     <Button
         android:id="@+id/submit"
@@ -381,6 +374,55 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.64"  />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline97"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <ImageButton
+        android:id="@+id/ZoomInButton"
+        android:layout_width="101dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/yellow"
+        android:contentDescription="@string/glucoseButton"
+        android:scaleType="fitCenter"
+        android:tint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_zoom_in_24" />
+
+    <ImageButton
+        android:id="@+id/ZoomOutButton"
+        android:layout_width="100dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@color/yellow"
+        android:contentDescription="@string/glucoseButton"
+        android:scaleType="fitCenter"
+        android:tint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_zoom_out_24" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <TextView
+        android:id="@+id/percentZoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/StartingZoomSize"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

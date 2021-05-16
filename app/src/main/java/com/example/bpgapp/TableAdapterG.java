@@ -51,6 +51,7 @@ public class TableAdapterG extends RecyclerView.Adapter<TableAdapterG.ViewHolder
             return;
         }
 
+        /*
         holder.bpDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +67,7 @@ public class TableAdapterG extends RecyclerView.Adapter<TableAdapterG.ViewHolder
                 //notifyItemRangeChanged(position, dataList.size());
             }
         });
-
+*/
     }
 
     //@Override
@@ -76,7 +77,7 @@ public class TableAdapterG extends RecyclerView.Adapter<TableAdapterG.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView dateItem,timeItem,glucoseItem,notesItem;
-        ImageView bpDelete;
+        //ImageView bpDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -84,7 +85,7 @@ public class TableAdapterG extends RecyclerView.Adapter<TableAdapterG.ViewHolder
             timeItem = itemView.findViewById(R.id.timeItem);
             glucoseItem = itemView.findViewById(R.id.glucoseItem);
             notesItem = itemView.findViewById(R.id.notesItem);
-            bpDelete = itemView.findViewById(R.id.bp_delete);
+            //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
 
     }

@@ -4,12 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,7 +18,7 @@ public class Table extends AppCompatActivity {
 
     bpRoomDB bpDatabase;
     List<bpData> dataList = new ArrayList<>();
-    bpAdapter bpAdapter;
+    BPAdapter bpAdapter;
     String dateStr;
     String timeStr;
     String systolicStr;
@@ -59,7 +55,7 @@ public class Table extends AppCompatActivity {
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
-        bpAdapter = new bpAdapter(Table.this, dataList);
+        bpAdapter = new BPAdapter(Table.this, dataList);
 
         //Set adapter
         table_recycler_view.setAdapter(bpAdapter);

@@ -13,10 +13,9 @@ import java.util.List;
 
 public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
 
-    //Initialize variable
+    //Initialize variables
     private List<GData> gDataList;
     private Activity context;
-    private GRoomDB gDatabase;
 
     //Create constructor
     public GAdapter(Activity context, List<GData> dataList)  {
@@ -36,16 +35,16 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull GAdapter.ViewHolder holder, int position) {
-        //Initialize main data
+        //Initialize glucose data
         GData data = gDataList.get(position);
-        //Initialize database
-        gDatabase = GRoomDB.getInstance(context);
-        //Set text on text view
-        //This is where the error was
+
+        //Retrieve text from the database and set it in its respective TextView
         holder.gTimeTextView.setText(data.getTime());
         holder.gDateTextView.setText(data.getDate());
         holder.gGlucoseTextView.setText(data.getGlucoseText());
         holder.gNotesTextView.setText(data.getNotesText());
+
+        //May need to add these methods back
         /*
         holder.bpEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,28 +134,40 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
          */
     }
 
+    /**
+     * Gets the number of items in the database
+     * @return the number of items
+     */
     @Override
     public int getItemCount() {
         return gDataList.size();
     }
 
+    /**
+     * The ViewHolder class creates a RecyclerView object
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //Initialize variable
+        //Initialize variables
         TextView gDateTextView;
         TextView gTimeTextView;
         TextView gGlucoseTextView;
         TextView gNotesTextView;
         //ImageView bpEdit;
         //ImageView bpDelete;
+
+        /**
+         * The ViewHolder constructor assigns variables used in the BPAdapter class to their xml equivalents
+         * @param itemView the view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //Assign variable
+            //Assign variables
             gDateTextView = itemView.findViewById(R.id.g_date_text_view);
             gTimeTextView = itemView.findViewById(R.id.g_time_text_view);
             gGlucoseTextView = itemView.findViewById(R.id.g_glucose_text_view);
             gNotesTextView = itemView.findViewById(R.id.g_notes_text_view);
-            // bpEdit = itemView.findViewById(R.id.bp_edit);
-            // bpDelete = itemView.findViewById(R.id.bp_delete);
+            //bpEdit = itemView.findViewById(R.id.bp_edit);
+            //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
     }
 }

@@ -80,14 +80,14 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
-            ImageView bpDelete;
+            //ImageView bpDelete;
 
             dateItem = itemView.findViewById(R.id.dateItem);
             timeItem = itemView.findViewById(R.id.timeItem);
             systolicItem = itemView.findViewById(R.id.systolicItem);
             diastolicItem = itemView.findViewById(R.id.diastolicItem);
             notesItem = itemView.findViewById(R.id.notesItem);
-            bpDelete = itemView.findViewById(R.id.bp_delete);
+            //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
     }
 }

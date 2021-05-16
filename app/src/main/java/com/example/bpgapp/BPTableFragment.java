@@ -27,7 +27,7 @@ public class BPTableFragment extends Fragment {
 
     private TableAdapter adapter;
     private bpRoomDB bpDatabase;
-    private bpAdapter bpAdapter;
+    private BPAdapter bpAdapter;
     private List<bpData> dataList = new ArrayList<>();
 
     private String dateStr, timeStr;
@@ -100,7 +100,7 @@ public class BPTableFragment extends Fragment {
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
-        bpAdapter = new bpAdapter(getActivity(), dataList);
+        bpAdapter = new BPAdapter(getActivity(), dataList);
 
         //Set adapter
         table_recycler_view.setAdapter(bpAdapter);
@@ -136,7 +136,7 @@ public class BPTableFragment extends Fragment {
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
-        bpAdapter = new bpAdapter(getActivity(), dataList);
+        bpAdapter = new BPAdapter(getActivity(), dataList);
 
         //Set adapter
         table_recycler_view.setAdapter(bpAdapter);

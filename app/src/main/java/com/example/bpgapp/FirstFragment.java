@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.bpgapp.ui.*;
-
 //import com.example.bpgapp.ui.BPFragment;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class FirstFragment extends Fragment {
 
     private TableAdapter adapter;
     private bpRoomDB bpDatabase;
-    private bpAdapter bpAdapter;
+    private BPAdapter bpAdapter;
     private List<bpData> dataList = new ArrayList<>();
 
     private String dateStr, timeStr;
@@ -55,7 +53,7 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_table, container, false);
+        View view = inflater.inflate(R.layout.activity_table_b_p, container, false);
 
         table_recycler_view = view.findViewById(R.id.table_recycler_view);
 
@@ -72,7 +70,7 @@ public class FirstFragment extends Fragment {
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
-        bpAdapter = new bpAdapter(getActivity(), dataList);
+        bpAdapter = new BPAdapter(getActivity(), dataList);
 
         //Set adapter
         table_recycler_view.setAdapter(bpAdapter);
@@ -112,7 +110,7 @@ public class FirstFragment extends Fragment {
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
-        bpAdapter = new bpAdapter(getActivity(), dataList);
+        bpAdapter = new BPAdapter(getActivity(), dataList);
 
         //Set adapter
         table_recycler_view.setAdapter(bpAdapter);

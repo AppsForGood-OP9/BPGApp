@@ -31,5 +31,5 @@ public abstract class bpRoomDB extends RoomDatabase {
     }
 
     //Create Dao
-    public abstract bpDao bpDao();
+    public abstract BPDao bpDao();
 }

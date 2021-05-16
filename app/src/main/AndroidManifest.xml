@@ -11,7 +11,6 @@
         android:theme="@style/Theme.BPGApp">
         <activity android:name=".TableBP"></activity>
         <activity android:name=".TableG" />
-        <activity android:name=".BPBlank" />
         <activity android:name=".MainActivity" />
         <activity android:name=".reminders" />
         <activity android:name=".Table" />

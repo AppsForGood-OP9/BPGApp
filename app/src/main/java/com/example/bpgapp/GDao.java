@@ -38,11 +38,8 @@ public interface GDao {
     //Get all data query
     @Query("SELECT * FROM g_table")
     List<GData> getAll();
-    //Use in other classes
-    //Could loop over it because it's in the list
-    //Print it just to make sure
-    //Do select star from
 
+    //Delete all data
     @Query("DELETE FROM g_table")
     void deleteAll();
 }

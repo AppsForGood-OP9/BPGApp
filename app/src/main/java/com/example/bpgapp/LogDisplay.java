@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +32,7 @@ public class LogDisplay extends AppCompatActivity {
     List<bpData> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
     bpRoomDB bpDatabase;
-    bpAdapter bpAdapter;
+    BPAdapter bpAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +81,7 @@ public class LogDisplay extends AppCompatActivity {
         //Set layout manager
         recyclerView.setLayoutManager(linearLayoutManager);
         //Initialize adapter
-        bpAdapter = new bpAdapter(LogDisplay.this, dataList);
+        bpAdapter = new BPAdapter(LogDisplay.this, dataList);
         //Set adapter
         recyclerView.setAdapter(bpAdapter);
 

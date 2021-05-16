@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -42,6 +44,19 @@ public class ThirdFragment extends Fragment {
     TextView minute;
     Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
+
+    TextView PercentZoom;
+    ImageButton Large;
+    ImageButton Small;
+    int zoom = 100;
+    TextView makeEntry;
+    ImageButton heart;
+    ImageButton drop;
+    ImageButton home;
+    ImageButton plus;
+    ImageButton bell;
+    Button PressureButton;
+    Button GlucoseButton;
 
     List<RemindersData> RemindersDataList = new ArrayList();
     LinearLayoutManager linearLayoutManager;
@@ -98,6 +113,18 @@ public class ThirdFragment extends Fragment {
         Log.d("TARICCO","ThirdFragment - onCreateView() - inflate activity_reminders");
         View view = inflater.inflate(R.layout.activity_reminders, container, false);
         //Assign Variable
+
+        makeEntry = (TextView) view.findViewById(R.id.Prompt);
+        PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
+        Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
+        Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
+        PressureButton = (Button) view.findViewById(R.id.BloodPressureButton);
+        GlucoseButton = (Button) view.findViewById(R.id.BloodGlucoseButton);
+        heart = (ImageButton) view.findViewById(R.id.HeartSymbolButton);
+        drop = (ImageButton) view.findViewById(R.id.BloodSymbolButton);
+        home = (ImageButton) view.findViewById(R.id.HomeButton);
+        plus = (ImageButton) view.findViewById(R.id.AddButton);
+        bell = (ImageButton) view.findViewById(R.id.BellButton);
         save = view.findViewById(R.id.save);
         hour = view.findViewById(R.id.hourEdit);
         minute = view.findViewById(R.id.minuteEdit);
@@ -118,6 +145,40 @@ public class ThirdFragment extends Fragment {
         RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
         //Set adapter
         RemindersRecyclerView.setAdapter(RemindersAdapter);
+
+        Large.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
+                zoom +=25;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
+        Small.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
+                zoom -=25;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
+
+        timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(timeZoneSwitch.isChecked()){
+                    timeZone.setText("PM");
+                }
+                else{
+                    timeZone.setText("AM");
+                }
+            }
+        });
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

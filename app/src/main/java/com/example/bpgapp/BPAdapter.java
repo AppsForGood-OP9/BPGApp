@@ -1,35 +1,24 @@
 package com.example.bpgapp;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
+public class BPAdapter extends RecyclerView.Adapter<BPAdapter.ViewHolder> {
 
-    //Initialize variable
+    //Initialize variables
     private List<bpData> bpDataList;
     private Activity context;
-    private bpRoomDB bpDatabase;
 
     //Create constructor
-    public bpAdapter(Activity context, List<bpData> dataList)  {
+    public BPAdapter(Activity context, List<bpData> dataList)  {
         this.context = context;
         this.bpDataList = dataList;
         notifyDataSetChanged();
@@ -43,20 +32,20 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
                 .inflate(R.layout.bp_list_row_main, parent, false);
         return new ViewHolder(view);
     }
-//I changed something here, check if bpAdapter.ViewHolder or not
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Initialize main data
+        //Initialize blood pressure data
         bpData data = bpDataList.get(position);
-        //Initialize database
-        bpDatabase = bpRoomDB.getInstance(context);
-        //Set text on text view
-        //This is where the error was
+
+        //Retrieve text from the database and set it in its respective TextView
         holder.bpTimeTextView.setText(data.getTime());
         holder.bpDateTextView.setText(data.getDate());
         holder.bpSystolicTextView.setText(data.getSystolicText());
         holder.bpDiastolicTextView.setText(data.getDiastolicText());
         holder.bpNotesTextView.setText(data.getNotesText());
+
+        //May need to add these methods back
         /*
         holder.bpEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,13 +134,20 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
          */
     }
 
+    /**
+     * Gets the number of items in the database
+     * @return the number of items
+     */
     @Override
     public int getItemCount() {
         return bpDataList.size();
     }
 
+    /**
+     * The ViewHolder class creates a RecyclerView object
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //Initialize variable
+        //Initialize variables
         TextView bpDateTextView;
         TextView bpTimeTextView;
         TextView bpSystolicTextView;
@@ -159,20 +155,21 @@ public class bpAdapter extends RecyclerView.Adapter<bpAdapter.ViewHolder> {
         TextView bpNotesTextView;
         //ImageView bpEdit;
         //ImageView bpDelete;
+
+        /**
+         * The ViewHolder constructor assigns variables used in the BPAdapter class to their xml equivalents
+         * @param itemView the view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //Assign variable
+            //Assign variables
             bpDateTextView = itemView.findViewById(R.id.bp_date_text_view);
             bpTimeTextView = itemView.findViewById(R.id.bp_time_text_view);
             bpSystolicTextView = itemView.findViewById(R.id.bp_systolic_text_view);
             bpDiastolicTextView = itemView.findViewById(R.id.bp_diastolic_text_view);
             bpNotesTextView = itemView.findViewById(R.id.bp_notes_text_view);
-           // bpEdit = itemView.findViewById(R.id.bp_edit);
-           // bpDelete = itemView.findViewById(R.id.bp_delete);
+            //bpEdit = itemView.findViewById(R.id.bp_edit);
+            //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
     }
 }
-
-//Make a data query
-//Will give you back a list object
-//In the screen where you want the retrieval

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.bpgapp.ui.BPFragment;
 
@@ -21,6 +23,18 @@ import com.example.bpgapp.ui.BPFragment;
  * create an instance of this fragment.
  */
 public class SecondFragment extends Fragment {
+    TextView PercentZoom;
+    ImageButton Large;
+    ImageButton Small;
+    int zoom = 100;
+    TextView makeEntry;
+    ImageButton heart;
+    ImageButton drop;
+    ImageButton home;
+    ImageButton plus;
+    ImageButton bell;
+    Button PressureButton;
+    Button GlucoseButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,6 +86,39 @@ public class SecondFragment extends Fragment {
 
         //getSupportActionBar().setTitle("Blood Pressure Entry");
         //return inflater.inflate(R.layout.activity_main, container, false);
+
+        makeEntry = (TextView) view.findViewById(R.id.Prompt);
+        PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
+        Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
+        Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
+        PressureButton = (Button) view.findViewById(R.id.BloodPressureButton);
+        GlucoseButton = (Button) view.findViewById(R.id.BloodGlucoseButton);
+        heart = (ImageButton) view.findViewById(R.id.HeartSymbolButton);
+        drop = (ImageButton) view.findViewById(R.id.BloodSymbolButton);
+        home = (ImageButton) view.findViewById(R.id.HomeButton);
+        plus = (ImageButton) view.findViewById(R.id.AddButton);
+        bell = (ImageButton) view.findViewById(R.id.BellButton);
+
+        Large.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
+                zoom +=25;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
+        Small.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
+                PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
+                GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
+                zoom -=25;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
 
         pressureButton.setOnClickListener(new View.OnClickListener() {
             @Override

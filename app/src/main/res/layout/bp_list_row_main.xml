@@ -42,7 +42,6 @@
             android:layout_weight="1"
             android:id="@+id/bp_notes_text_view"
             android:textSize="20sp"/>
-
         <!--
         <ImageView
             android:layout_width="wrap_content"
