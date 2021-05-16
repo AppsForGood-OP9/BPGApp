@@ -100,6 +100,13 @@ public class reminders extends AppCompatActivity {
                     RemindersData.setTime(timeText);
                     //Insert text in database
                     RemindersDatabase.RemindersDao().insert(RemindersData);
+                    //Set alarm via Calendar and Alarm Manager
+                    Calendar c = Calendar.getInstance();
+                    c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour.toString()));
+                    c.set(Calendar.MINUTE, Integer.parseInt(minute.toString()));
+
+                    startAlarm(c);
+
                     //Clear edit text
                     hour.setText("");
                     minute.setText("");
@@ -136,7 +143,18 @@ public class reminders extends AppCompatActivity {
             }
         });
     }
-        private void addNotification () {
+
+    private void startAlarm(Calendar c) {
+        System.out.println("Alarm has been started");
+        Log.d("Yiming", "Alarm has been started");
+        AlarmManager alarmManger = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        alarmManger.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+    }
+
+    private void addNotification () {
             Log.d("Reminders", "Calling Reminders.addNotification() method");
             // Use this constructor with two input parameters for Android 26+ support, second parameter is Channel ID
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)

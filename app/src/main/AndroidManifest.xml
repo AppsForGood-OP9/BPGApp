@@ -29,6 +29,7 @@
         <activity android:name=".bloodPressureEntry" />
         <!--<activity android:name=".reminders" />-->
         <activity android:name=".glucoseEntry" />
+        <receiver android:name=".AlertReceiver"/>
     </application>
 
 </manifest>
