@@ -72,7 +72,6 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         bottomNav.setSelectedItemId(R.id.secondFragment);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-
         getSupportFragmentManager().beginTransaction().replace(R.id.container_main_blank, new SecondFragment()).commit();
 
     }
@@ -98,11 +97,12 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
             }
             // It will help to replace the
             // one fragment to other.
-
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.container_main_blank, selectedFragment)
+                    .addToBackStack(null) // Add this to support adding the fragment to a stack that the fragmentManager could "push" and "pop"
                     .commit();
+
             return true;
         }
     };
@@ -243,5 +243,28 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
             toast.setGravity(Gravity.TOP|Gravity.START, 10, 1000);
             toast.show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        FragmentManager.BackStackEntry name = (getSupportFragmentManager().getBackStackEntryAt(count - 1));
+        String simpleName = name.getName();
+        //Log.v("talia","getName: " + simpleName);
+        //Log.v("talia","count: " + count);
+        //Log.v("talia","stack entry at: " + count + " is: " + name);
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        afterBackPressed();
+        // Call parent Activity's onBackPressed() method and add other statements you need (if any)
+    }
+
+    public void afterBackPressed()  {
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        Fragment fragment = getVisibleFragment();
+        int id = fragment.getId();
+        //Log.v("talia","fragment: " + fragment);
+        //Log.v("talia","id: " + id);
+        bottomNav.setSelectedItemId(id);
     }
 }

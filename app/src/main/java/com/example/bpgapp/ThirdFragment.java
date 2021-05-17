@@ -188,10 +188,11 @@ public class ThirdFragment extends Fragment {
                 }
             }
         });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Yiming", "Save has been pressed");
+                //Log.d("Yiming", "Save has been pressed");
                 //Get string from edit text
                 String hourText = hour.getText().toString();
                 String minuteText = minute.getText().toString();
@@ -199,7 +200,8 @@ public class ThirdFragment extends Fragment {
 
                 //Check condition
                 if (!hourText.equals("") && !minuteText.equals("")) {
-                    Log.d("Yiming", "Enters Third Fragment if statement");
+                    String timeZoneText = timeZone.getText().toString();
+                    //Log.d("Yiming", "Enters Third Fragment if statement");
                     //When text is not empty
                     //Initialize main data
                     RemindersData RemindersData = new RemindersData();
@@ -209,14 +211,20 @@ public class ThirdFragment extends Fragment {
                     RemindersDatabase.RemindersDao().insert(RemindersData);
                     //Set alarm via Calendar and Alarm Manager
 
-                    if (timeZone.getText()=="PM"){
+                    if (timeZoneText.equals("PM")){
                         hours = Integer.parseInt(hourText) + 12;
                     }
-                    else {
+                    else if (timeZoneText.equals("AM") && hourText.equals("12"))  {
+                        hours = 0;
+                    }
+
+                    else if (timeZoneText.equals("AM") && !hourText.equals("12")) {
                         hours = Integer.parseInt(hourText);
                     }
+
                     Log.d("Yiming", "hours: " + hours);
-                    Log.d("Yiming", "minutes: " + String.valueOf(minute.getText()));
+                    Log.d("Yiming", "minutes: " + minuteText);
+                    Log.d("Yiming", "timeZone: " + timeZone.getText().toString());
                     Calendar c = Calendar.getInstance();
                     Log.d("Yiming", "Calendar" + c.toString());
                     c.set(Calendar.HOUR_OF_DAY, hours);
@@ -232,7 +240,7 @@ public class ThirdFragment extends Fragment {
                 //Clear edit text
                 hour.setText("");
                 minute.setText("");
-                timeZoneSwitch.setChecked(false);
+                //timeZoneSwitch.setChecked(false);
             }
         });
     return view;
@@ -252,6 +260,7 @@ public class ThirdFragment extends Fragment {
         Intent intent = new Intent(getContext(), AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 }

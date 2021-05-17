@@ -51,7 +51,6 @@ public class BPFragment extends Fragment {
     private TextView title;
     private TextView systolicTitle;
     private TextView diastolicTitle;
-    // private TextView timeZone;
     private Switch timeZoneSwitch;
     private EditText hour;
     private EditText minute;
@@ -144,49 +143,56 @@ public class BPFragment extends Fragment {
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
 
-
         Large.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            title.setTextSize(21*(title.getTextSize())/40);
-            diastolicTitle.setTextSize(21*(diastolicTitle.getTextSize())/40);
-            systolicTitle.setTextSize(21*(systolicTitle.getTextSize())/40);
-            slant.setTextSize(21*(slant.getTextSize())/40);
-            diastolicNum.setTextSize(21*(diastolicNum.getTextSize())/40);
-            systolicNum.setTextSize(21*(systolicNum.getTextSize())/40);
-            dateButton.setTextSize(21*(dateButton.getTextSize())/40);
-            date.setTextSize(21*(date.getTextSize())/40);
-            timeTitle.setTextSize(21*(timeTitle.getTextSize())/40);
-            timeColon.setTextSize(21*(timeColon.getTextSize())/40);
-            hour.setTextSize(21*(hour.getTextSize())/40);
-            minute.setTextSize(21*(minute.getTextSize())/40);
-            timeZone.setTextSize(21*(timeZone.getTextSize())/40);
-            submit.setTextSize(21*(submit.getTextSize())/40);
+            /*
+            Increases text size when plus sign magnifying button is clicked
+             */
+            @Override
+            public void onClick(View v){
+                title.setTextSize(21*(title.getTextSize())/40);
+                diastolicTitle.setTextSize(21*(diastolicTitle.getTextSize())/40);
+                systolicTitle.setTextSize(21*(systolicTitle.getTextSize())/40);
+                slant.setTextSize(21*(slant.getTextSize())/40);
+                diastolicNum.setTextSize(21*(diastolicNum.getTextSize())/40);
+                systolicNum.setTextSize(21*(systolicNum.getTextSize())/40);
+                dateButton.setTextSize(21*(dateButton.getTextSize())/40);
+                date.setTextSize(21*(date.getTextSize())/40);
+                timeTitle.setTextSize(21*(timeTitle.getTextSize())/40);
+                timeColon.setTextSize(21*(timeColon.getTextSize())/40);
+                hour.setTextSize(21*(hour.getTextSize())/40);
+                minute.setTextSize(21*(minute.getTextSize())/40);
+                timeZone.setTextSize(21*(timeZone.getTextSize())/40);
+                submit.setTextSize(21*(submit.getTextSize())/40);
 
-            zoom +=25;
-            PercentZoom.setText(zoom+"%");
-        }
+                zoom +=25;
+                PercentZoom.setText(zoom+"%");
+            }
         });
+
        Small.setOnClickListener(new View.OnClickListener(){
-       @Override
-       public void onClick(View v){
-           title.setTextSize(19*(title.getTextSize())/40);
-           diastolicTitle.setTextSize(19*(diastolicTitle.getTextSize())/40);
-           systolicTitle.setTextSize(19*(systolicTitle.getTextSize())/40);
-           slant.setTextSize(19*(slant.getTextSize())/40);
-           diastolicNum.setTextSize(19*(diastolicNum.getTextSize())/40);
-           systolicNum.setTextSize(19*(systolicNum.getTextSize())/40);
-           dateButton.setTextSize(19*(dateButton.getTextSize())/40);
-           date.setTextSize(19*(date.getTextSize())/40);
-           timeTitle.setTextSize(19*(timeTitle.getTextSize())/40);
-           timeColon.setTextSize(19*(timeColon.getTextSize())/40);
-           hour.setTextSize(19*(hour.getTextSize())/40);
-           minute.setTextSize(19*(minute.getTextSize())/40);
-           timeZone.setTextSize(19*(timeZone.getTextSize())/40);
-           submit.setTextSize(19*(submit.getTextSize())/40);
-       zoom -=25;
-       PercentZoom.setText(zoom+"%");
-       }
+           /*
+            Decreases text size when minus sign magnifying button is clicked
+             */
+           @Override
+           public void onClick(View v){
+               title.setTextSize(19*(title.getTextSize())/40);
+               diastolicTitle.setTextSize(19*(diastolicTitle.getTextSize())/40);
+               systolicTitle.setTextSize(19*(systolicTitle.getTextSize())/40);
+               slant.setTextSize(19*(slant.getTextSize())/40);
+               diastolicNum.setTextSize(19*(diastolicNum.getTextSize())/40);
+               systolicNum.setTextSize(19*(systolicNum.getTextSize())/40);
+               dateButton.setTextSize(19*(dateButton.getTextSize())/40);
+               date.setTextSize(19*(date.getTextSize())/40);
+               timeTitle.setTextSize(19*(timeTitle.getTextSize())/40);
+               timeColon.setTextSize(19*(timeColon.getTextSize())/40);
+               hour.setTextSize(19*(hour.getTextSize())/40);
+               minute.setTextSize(19*(minute.getTextSize())/40);
+               timeZone.setTextSize(19*(timeZone.getTextSize())/40);
+               submit.setTextSize(19*(submit.getTextSize())/40);
+
+               zoom -=25;
+               PercentZoom.setText(zoom+"%");
+           }
        });
 
         //Sets the time in the hour and minute EditTexts to be the current time and sets the correct TimeZoneSwitch to
