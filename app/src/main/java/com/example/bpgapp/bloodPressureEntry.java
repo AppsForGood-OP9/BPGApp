@@ -32,11 +32,11 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     EditText diastolicNum;
     EditText notes;
     Button submit;
-    TextView TimeText;
+    TextView timeText;
     List<bpData> dataList = new ArrayList<>();
     bpRoomDB bpDatabase;
     BPAdapter bpAdapter;
-    int dayofmon;
+    int dayOfMon;
     int mon;
     int yea;
     TextView date;
@@ -179,10 +179,10 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        dayofmon = c.get(Calendar.DAY_OF_MONTH);
+        dayOfMon = c.get(Calendar.DAY_OF_MONTH);
         mon = c.get(Calendar.MONTH)+1;
         yea =  c.get(Calendar.YEAR);
-        currentDateString = mon+"/"+dayofmon+"/"+yea;
+        currentDateString = mon+"/"+dayOfMon+"/"+yea;
                // DateFormat.getDateInstance().format(c.getTime());
         date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
