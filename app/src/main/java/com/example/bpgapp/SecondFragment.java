@@ -23,20 +23,20 @@ import com.example.bpgapp.ui.BPFragment;
  * create an instance of this fragment.
  */
 public class SecondFragment extends Fragment {
-    TextView PercentZoom;
-    ImageButton Large;
-    ImageButton Small;
-    int zoom = 100;
-    TextView makeEntry;
-    ImageButton heart;
-    ImageButton drop;
-    ImageButton home;
-    ImageButton plus;
-    ImageButton bell;
-    Button PressureButton;
-    ImageButton pressureImage;
-    Button glucoseButton;
-    ImageButton glucoseImage;
+    private TextView PercentZoom;
+    private ImageButton Large;
+    private ImageButton Small;
+    private int zoom = 100;
+    private TextView makeEntry;
+    private ImageButton heart;
+    private ImageButton drop;
+    private ImageButton home;
+    private ImageButton plus;
+    private ImageButton bell;
+    private Button PressureButton;
+    private ImageButton pressureImage;
+    private Button glucoseButton;
+    private ImageButton glucoseImage;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

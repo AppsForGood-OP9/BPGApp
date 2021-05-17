@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -36,33 +37,34 @@ import static androidx.core.content.ContextCompat.getSystemService;
  * create an instance of this fragment.
  */
 public class ThirdFragment extends Fragment {
-    Button save;
-    private RecyclerView RemindersRecyclerView;
-    TextView timeZone;
-    Switch timeZoneSwitch;
-    TextView hour;
-    int hours;
-    TextView minute;
-    Button notifyBtn;
+
+
+    private Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
-    TextView PercentZoom;
-    ImageButton Large;
-    ImageButton Small;
-    int zoom = 100;
-    TextView makeEntry;
-    ImageButton heart;
-    ImageButton drop;
-    ImageButton home;
-    ImageButton plus;
-    ImageButton bell;
-    Button PressureButton;
-    Button GlucoseButton;
+    private TextView PercentZoom;
+    private ImageButton Large;
+    private ImageButton Small;
+    private int zoom = 100;
+    private TextView title;
+    private Button pressureButton;
+    private Button glucoseButton;
+    private TextView dailyAlertsTitle;
+    private EditText hour;
+    private EditText minute;
+    private TextView timeZone;
+    private Button save;
 
-    List<RemindersData> RemindersDataList = new ArrayList();
-    LinearLayoutManager linearLayoutManager;
-    RemindersRoomDB RemindersDatabase;
-    RemindersAdapter RemindersAdapter;
+    private TextView makeEntry;
+    private int hours;
+    private RecyclerView RemindersRecyclerView;
+
+    private Switch timeZoneSwitch;
+
+    private List<RemindersData> RemindersDataList = new ArrayList();
+    private LinearLayoutManager linearLayoutManager;
+    private RemindersRoomDB RemindersDatabase;
+    private RemindersAdapter RemindersAdapter;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
@@ -115,23 +117,21 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_reminders, container, false);
         //Assign Variable
 
-        makeEntry = (TextView) view.findViewById(R.id.Prompt);
         PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
         Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
         Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
-        PressureButton = (Button) view.findViewById(R.id.BloodPressureButton);
-        GlucoseButton = (Button) view.findViewById(R.id.BloodGlucoseButton);
-        heart = (ImageButton) view.findViewById(R.id.HeartSymbolButton);
-        drop = (ImageButton) view.findViewById(R.id.BloodSymbolButton);
-        home = (ImageButton) view.findViewById(R.id.HomeButton);
-        plus = (ImageButton) view.findViewById(R.id.AddButton);
-        bell = (ImageButton) view.findViewById(R.id.BellButton);
+        pressureButton = (Button) view.findViewById(R.id.bloodPressureToggle);
+        glucoseButton = (Button) view.findViewById(R.id.bloodGlucoseToggle);
+        title = (TextView) view.findViewById(R.id.remindersTitle);
+        dailyAlertsTitle = (TextView) view.findViewById(R.id.alertsLabel);
         save = view.findViewById(R.id.save);
         hour = view.findViewById(R.id.hourEdit);
         minute = view.findViewById(R.id.minuteEdit);
+        timeZone = (TextView) view.findViewById(R.id.ampmDisplay);
+
+
         RemindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
         setRemindersRecyclerView();
-        timeZone = (TextView) view.findViewById(R.id.ampmDisplay);
         timeZoneSwitch = (Switch) view.findViewById(R.id.ampmSwitch);
         //Initialize database
         RemindersDatabase = RemindersRoomDB.getInstance(getContext());
@@ -150,9 +150,14 @@ public class ThirdFragment extends Fragment {
         Large.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeEntry.setTextSize(21 * (makeEntry.getTextSize()) / 40);
-                PressureButton.setTextSize(21 * (PressureButton.getTextSize()) / 40);
-                GlucoseButton.setTextSize(21 * (GlucoseButton.getTextSize()) / 40);
+                pressureButton.setTextSize(21 * (pressureButton.getTextSize()) / 40);
+                glucoseButton.setTextSize(21 * (glucoseButton.getTextSize()) / 40);
+                title.setTextSize(21 * (title.getTextSize()) / 40);
+                dailyAlertsTitle.setTextSize(21 * (dailyAlertsTitle.getTextSize()) / 40);
+                save.setTextSize(21 * (save.getTextSize()) / 40);
+                hour.setTextSize(21 * (hour.getTextSize()) / 40);
+                minute.setTextSize(21 * (minute.getTextSize()) / 40);
+                timeZone.setTextSize(21 * (timeZone.getTextSize()) / 40);
                 zoom += 25;
                 PercentZoom.setText(zoom + "%");
             }
@@ -160,9 +165,14 @@ public class ThirdFragment extends Fragment {
         Small.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeEntry.setTextSize(19 * (makeEntry.getTextSize()) / 40);
-                PressureButton.setTextSize(19 * (PressureButton.getTextSize()) / 40);
-                GlucoseButton.setTextSize(19 * (GlucoseButton.getTextSize()) / 40);
+                pressureButton.setTextSize(19 * (pressureButton.getTextSize()) / 40);
+                glucoseButton.setTextSize(19 * (glucoseButton.getTextSize()) / 40);
+                title.setTextSize(19 * (title.getTextSize()) / 40);
+                dailyAlertsTitle.setTextSize(19 * (dailyAlertsTitle.getTextSize()) / 40);
+                save.setTextSize(19 * (save.getTextSize()) / 40);
+                hour.setTextSize(19 * (hour.getTextSize()) / 40);
+                minute.setTextSize(19 * (minute.getTextSize()) / 40);
+                timeZone.setTextSize(19 * (timeZone.getTextSize()) / 40);
                 zoom -= 25;
                 PercentZoom.setText(zoom + "%");
             }

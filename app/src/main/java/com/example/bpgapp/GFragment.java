@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,11 +36,22 @@ public class GFragment extends Fragment {
     private int mon;
     private int yea;
     private TextView date;
+    private TextView title;
+    private TextView gLevelTitle;
+    private TextView timeTitle;
     private TextView timeZone;
     private Switch timeZoneSwitch;
     private TextView hour;
     private TextView minute;
+    private TextView timeColon;
     private String currentDateString;
+    private TextView PercentZoom;
+    private ImageButton Small;
+    private ImageButton Large;
+    private int zoom = 100;
+    private Button dateChanger;
+
+
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -88,12 +100,19 @@ public class GFragment extends Fragment {
         hour = view.findViewById(R.id.hourEdit2);
         minute = view.findViewById(R.id.minuteEdit2);
         date = view.findViewById(R.id.DateText);
+        timeTitle = view.findViewById(R.id.timeText2);
+        gLevelTitle = view.findViewById(R.id.glucoseText);
+        title = view.findViewById(R.id.gText);
         glucoseNum = view.findViewById(R.id.glucoseNum);
         notes = view.findViewById(R.id.notesEdit);
         submit = view.findViewById(R.id.submit);
         timeZone = view.findViewById(R.id.ampmDisplay2);
         timeZoneSwitch = view.findViewById(R.id.ampmSwitch2);
-        Button dateChanger = view.findViewById(R.id.dateButton2);
+        Small = view.findViewById(R.id.ZoomOutButton);
+        Large = view.findViewById(R.id.ZoomInButton);
+        dateChanger = view.findViewById(R.id.dateButton2);
+        PercentZoom = view.findViewById(R.id.percentZoom);
+        timeColon = view.findViewById(R.id.timeColon2);
 
         //Initialize database
         gDatabase = GRoomDB.getInstance(getContext());
@@ -110,6 +129,51 @@ public class GFragment extends Fragment {
         currentDateString = mon+"/"+dayofmon+"/"+yea;
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
+
+
+
+        Large.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                title.setTextSize(21*(title.getTextSize())/40);
+                gLevelTitle.setTextSize(21*(gLevelTitle.getTextSize())/40);
+                glucoseNum.setTextSize(21*(glucoseNum.getTextSize())/40);
+                date.setTextSize(21*(date.getTextSize())/40);
+                dateChanger.setTextSize(21*(dateChanger.getTextSize())/40);
+                timeTitle.setTextSize(21*(timeTitle.getTextSize())/40);
+                hour.setTextSize(21*(hour.getTextSize())/40);
+                minute.setTextSize(21*(minute.getTextSize())/40);
+                timeColon.setTextSize(21*(timeColon.getTextSize())/40);
+                minute.setTextSize(21*(minute.getTextSize())/40);
+                timeZone.setTextSize(21*(timeZone.getTextSize())/40);
+                submit.setTextSize(21*(submit.getTextSize())/40);
+
+                zoom +=25;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
+        Small.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                title.setTextSize(19*(title.getTextSize())/40);
+                gLevelTitle.setTextSize(19*(gLevelTitle.getTextSize())/40);
+                glucoseNum.setTextSize(19*(glucoseNum.getTextSize())/40);
+                date.setTextSize(19*(date.getTextSize())/40);
+                dateChanger.setTextSize(19*(dateChanger.getTextSize())/40);
+                timeTitle.setTextSize(19*(timeTitle.getTextSize())/40);
+                hour.setTextSize(19*(hour.getTextSize())/40);
+                minute.setTextSize(19*(minute.getTextSize())/40);
+                timeColon.setTextSize(19*(timeColon.getTextSize())/40);
+                minute.setTextSize(19*(minute.getTextSize())/40);
+                timeZone.setTextSize(19*(timeZone.getTextSize())/40);
+                submit.setTextSize(19*(submit.getTextSize())/40);
+
+                zoom -=25;
+                PercentZoom.setText(zoom+"%");
+            }
+        });
+
+
 
         //Sets the time in the hour and minute EditTexts to be the current time and sets the correct TimeZoneSwitch to
         //AM or PM

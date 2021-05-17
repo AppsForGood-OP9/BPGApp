@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class BPFragment extends Fragment {
     //Initialize variables
     private EditText systolicNum;
     private EditText diastolicNum;
+    private TextView slant;
     private EditText notes;
     private Button submit;
     private List<bpData> dataList = new ArrayList<>();
@@ -44,11 +46,23 @@ public class BPFragment extends Fragment {
     private int mon;
     private int yea;
     private TextView date;
+    private Button dateButton;
     private TextView timeZone;
+    private TextView title;
+    private TextView systolicTitle;
+    private TextView diastolicTitle;
+    // private TextView timeZone;
     private Switch timeZoneSwitch;
     private EditText hour;
     private EditText minute;
     private String currentDateString;
+    private TextView PercentZoom;
+    private TextView timeColon;
+    private ImageButton Large;
+    private ImageButton Small;
+    private int zoom = 100;
+    private TextView timeTitle;
+
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -93,16 +107,26 @@ public class BPFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_blood_pressure_entry, container, false);
 
         //Retrieve view objects from the xml
-        hour = view.findViewById(R.id.hourEdit);
-        minute = view.findViewById(R.id.minuteEdit);
-        date = view.findViewById(R.id.DateText);
-        systolicNum = view.findViewById(R.id.systolicNum);
-        diastolicNum = view.findViewById(R.id.diastolicNum);
+        hour = (EditText) view.findViewById(R.id.hourEdit);
+        minute = (EditText) view.findViewById(R.id.minuteEdit);
+        date = (TextView) view.findViewById(R.id.DateText);
+        systolicNum = (EditText) view.findViewById(R.id.systolicNum);
+        diastolicNum = (EditText) view.findViewById(R.id.diastolicNum);
         notes = view.findViewById(R.id.notesEdit);
         submit = view.findViewById(R.id.submit);
         timeZone = view.findViewById(R.id.ampmDisplay);
         timeZoneSwitch = view.findViewById(R.id.ampmSwitch);
         Button dateChanger = view.findViewById(R.id.dateButton);
+        PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
+        Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
+        Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
+        title = (TextView) view.findViewById(R.id.bpText);
+        systolicTitle = (TextView) view.findViewById(R.id.systolicText);
+        diastolicTitle = (TextView) view.findViewById(R.id.diastolicText);
+        slant = (TextView) view.findViewById(R.id.forwardSlash);
+        dateButton = (Button) view.findViewById(R.id.dateButton);
+        timeTitle = (TextView) view.findViewById(R.id.timeText);
+        timeColon = (TextView) view.findViewById(R.id.timeColon);
 
         //Initialize database
         bpDatabase = bpRoomDB.getInstance(getContext());
@@ -119,6 +143,51 @@ public class BPFragment extends Fragment {
         currentDateString = mon+"/"+dayofmon+"/"+yea;
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
+
+
+        Large.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            title.setTextSize(21*(title.getTextSize())/40);
+            diastolicTitle.setTextSize(21*(diastolicTitle.getTextSize())/40);
+            systolicTitle.setTextSize(21*(systolicTitle.getTextSize())/40);
+            slant.setTextSize(21*(slant.getTextSize())/40);
+            diastolicNum.setTextSize(21*(diastolicNum.getTextSize())/40);
+            systolicNum.setTextSize(21*(systolicNum.getTextSize())/40);
+            dateButton.setTextSize(21*(dateButton.getTextSize())/40);
+            date.setTextSize(21*(date.getTextSize())/40);
+            timeTitle.setTextSize(21*(timeTitle.getTextSize())/40);
+            timeColon.setTextSize(21*(timeColon.getTextSize())/40);
+            hour.setTextSize(21*(hour.getTextSize())/40);
+            minute.setTextSize(21*(minute.getTextSize())/40);
+            timeZone.setTextSize(21*(timeZone.getTextSize())/40);
+            submit.setTextSize(21*(submit.getTextSize())/40);
+
+            zoom +=25;
+            PercentZoom.setText(zoom+"%");
+        }
+        });
+       Small.setOnClickListener(new View.OnClickListener(){
+       @Override
+       public void onClick(View v){
+           title.setTextSize(19*(title.getTextSize())/40);
+           diastolicTitle.setTextSize(19*(diastolicTitle.getTextSize())/40);
+           systolicTitle.setTextSize(19*(systolicTitle.getTextSize())/40);
+           slant.setTextSize(19*(slant.getTextSize())/40);
+           diastolicNum.setTextSize(19*(diastolicNum.getTextSize())/40);
+           systolicNum.setTextSize(19*(systolicNum.getTextSize())/40);
+           dateButton.setTextSize(19*(dateButton.getTextSize())/40);
+           date.setTextSize(19*(date.getTextSize())/40);
+           timeTitle.setTextSize(19*(timeTitle.getTextSize())/40);
+           timeColon.setTextSize(19*(timeColon.getTextSize())/40);
+           hour.setTextSize(19*(hour.getTextSize())/40);
+           minute.setTextSize(19*(minute.getTextSize())/40);
+           timeZone.setTextSize(19*(timeZone.getTextSize())/40);
+           submit.setTextSize(19*(submit.getTextSize())/40);
+       zoom -=25;
+       PercentZoom.setText(zoom+"%");
+       }
+       });
 
         //Sets the time in the hour and minute EditTexts to be the current time and sets the correct TimeZoneSwitch to
         //AM or PM
