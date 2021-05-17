@@ -131,7 +131,8 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
         return RemindersDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{//Initialize variable
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        //Initialize variables
         TextView remindersTimeTextView;
         ImageView remindersEdit;
         ImageView remindersDelete;

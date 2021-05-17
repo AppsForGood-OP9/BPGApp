@@ -112,11 +112,11 @@ public class BPTableFragment extends Fragment {
         table_recycler_view.setAdapter(bpAdapter);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
+        //Set layout manager
         table_recycler_view.setLayoutManager(linearLayoutManager);
 
         bpData data = new bpData();
         //Set text on main data
-
         dateStr = data.getDate();
         timeStr = data.getTime();
         systolicStr = data.getSystolicText();

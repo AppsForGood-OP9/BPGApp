@@ -130,9 +130,6 @@ public class GTableFragment extends Fragment {
         Log.v("talia","time = " + timeStr);
         Log.v("talia", "glucoseStr = " + glucoseStr);
 
-        table_recycler_view = view.findViewById(R.id.table_recycler_view);
-        setTableRecyclerView();
-
         dateItem = view.findViewById(R.id.dateItem);
         timeItem = view.findViewById(R.id.timeItem);
         glucoseItem = view.findViewById(R.id.glucoseItem);

@@ -133,7 +133,7 @@
         android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="@id/horizontalLayout"
-        app:layout_constraintTop_toBottomOf="@id/horizontalLayout2"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/horizontalLayout2"/>
 
     <ImageView
         android:id="@+id/calendarImage"

@@ -14,24 +14,26 @@
 
         <TextView
             android:id="@+id/reminders_time_text_view"
-            android:layout_width="0dp"
+            android:layout_width="450dp"
+            android:layout_marginStart="20dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/reminders_edit"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@id/reminders_delete"
             android:contentDescription="@+id/reminders_edit"
             android:src="@drawable/ic_edit_button_foreground"/>
 
         <ImageView
             android:id="@+id/reminders_delete"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/reminders_row_item"
             android:contentDescription="@+id/reminders_edit"
             android:src="@drawable/ic_delete_button_foreground" />
 
