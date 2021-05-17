@@ -41,6 +41,7 @@ public class ThirdFragment extends Fragment {
     TextView timeZone;
     Switch timeZoneSwitch;
     TextView hour;
+    int hours;
     TextView minute;
     Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
@@ -110,7 +111,7 @@ public class ThirdFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
-        Log.d("TARICCO","ThirdFragment - onCreateView() - inflate activity_reminders");
+        Log.d("TARICCO", "ThirdFragment - onCreateView() - inflate activity_reminders");
         View view = inflater.inflate(R.layout.activity_reminders, container, false);
         //Assign Variable
 
@@ -146,40 +147,37 @@ public class ThirdFragment extends Fragment {
         //Set adapter
         RemindersRecyclerView.setAdapter(RemindersAdapter);
 
-        Large.setOnClickListener(new View.OnClickListener(){
+        Large.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
-                PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
-                GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
-                zoom +=25;
-                PercentZoom.setText(zoom+"%");
+            public void onClick(View v) {
+                makeEntry.setTextSize(21 * (makeEntry.getTextSize()) / 40);
+                PressureButton.setTextSize(21 * (PressureButton.getTextSize()) / 40);
+                GlucoseButton.setTextSize(21 * (GlucoseButton.getTextSize()) / 40);
+                zoom += 25;
+                PercentZoom.setText(zoom + "%");
             }
         });
-        Small.setOnClickListener(new View.OnClickListener(){
+        Small.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
-                PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
-                GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
-                zoom -=25;
-                PercentZoom.setText(zoom+"%");
+            public void onClick(View v) {
+                makeEntry.setTextSize(19 * (makeEntry.getTextSize()) / 40);
+                PressureButton.setTextSize(19 * (PressureButton.getTextSize()) / 40);
+                GlucoseButton.setTextSize(19 * (GlucoseButton.getTextSize()) / 40);
+                zoom -= 25;
+                PercentZoom.setText(zoom + "%");
             }
         });
 
         timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(timeZoneSwitch.isChecked()){
+                if (timeZoneSwitch.isChecked()) {
                     timeZone.setText("PM");
-                }
-                else{
+                } else {
                     timeZone.setText("AM");
                 }
             }
         });
-
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,10 +196,14 @@ public class ThirdFragment extends Fragment {
                     //Insert text in database
                     RemindersDatabase.RemindersDao().insert(RemindersData);
                     //Set alarm via Calendar and Alarm Manager
+                    if (timeZone.getText()=="PM"){
+                        hours = Integer.parseInt(String.valueOf(hour.getText())) + 12;
+                    }
                     Calendar c = Calendar.getInstance();
                     Log.d("Yiming", "Calendar" + c.toString());
-                    c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(String.valueOf(hour.getText())));
+                    c.set(Calendar.HOUR_OF_DAY, hours);
                     c.set(Calendar.MINUTE, Integer.parseInt((String.valueOf(minute.getText()))));
+                    c.set(Calendar.SECOND, 0);
 
                     startAlarm(c);
                     //Clear edit text
@@ -215,48 +217,15 @@ public class ThirdFragment extends Fragment {
                 }
             }
         });
-
-        //Notification Code - Create the Notification Channel, then create the Notification on button click
-        createNotificationChannel();
-        notifyBtn = view.findViewById(R.id.getNotified);
-        notifyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNotification();   // Making a separate method below for readability purposes
-                // Set the alarm to start at approximately 2:00 p.m.
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 11);
-                calendar.set(Calendar.MINUTE, 20);
-                Context context = getContext();
-
-                // With setInexactRepeating(), you have to use one of the AlarmManager interval
-                // constants--in this case, AlarmManager.INTERVAL_DAY.
-
-                //This is statement is what Talia changed, not sure if it is right
-                AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        AlarmManager.INTERVAL_DAY, alarmIntent);
-            }
-
-            private void addNotification() {
-                Log.d("Reminders", "Calling Reminders.addNotification() method");
-                // Use this constructor with two input parameters for Android 26+ support, second parameter is Channel ID
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
-                        .setSmallIcon(R.drawable.bell_button_foreground)
-                        .setContentTitle("Reminders")
-                        .setContentText("Take your measurement")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setAutoCancel(true);
-
-                // Add as notification
-                NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.notify(1, builder.build());
-            }
-        });
     return view;
     }
-
+        private void setRemindersRecyclerView () {
+            RemindersRecyclerView.setHasFixedSize(true);
+            RemindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            //Changes here, might only need two arguments for TableAdapter
+            RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
+            RemindersRecyclerView.setAdapter(RemindersAdapter);
+        }
     private void startAlarm(Calendar c) {
         Log.v("Yiming","Calendar time: " + c.getTimeInMillis());
         System.out.println("Alarm has been started");
@@ -266,52 +235,5 @@ public class ThirdFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-    }
-
-    private void addNotification () {
-        Log.d("Reminders", "Calling Reminders.addNotification() method");
-        // Use this constructor with two input parameters for Android 26+ support, second parameter is Channel ID
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
-                .setSmallIcon(R.drawable.bell_button_foreground)
-                .setContentTitle("Reminders")
-                .setContentText("Take your measurement")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true);
-
-        // Add as notification
-        NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(1, builder.build());
-    }
-
-    private void setRemindersRecyclerView() {
-        RemindersRecyclerView.setHasFixedSize(true);
-        RemindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //Changes here, might only need two arguments for TableAdapter
-        RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
-        RemindersRecyclerView.setAdapter(RemindersAdapter);
-    }
-/*
-    private List<RemindersModel> getList()  {
-        List<RemindersModel> reminders_list = new ArrayList<>();
-        reminders_list.add(new RemindersModel(time));
-        return reminders_list;
-    }
-    */
-
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "TEST CHANNEL NAME"; //getString(R.string.channel_name);
-            String description = "TEST CHANNEL DESCRIPTION";//getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 }

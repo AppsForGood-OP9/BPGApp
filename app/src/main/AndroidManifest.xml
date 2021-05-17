@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bpgapp">
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="false"
         android:icon="@mipmap/bpg_icon_small"
@@ -12,7 +13,8 @@
         <activity android:name=".TableBP"></activity>
         <activity android:name=".TableG" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".reminders" />
+        <activity android:name=".ThirdFragment"
+            tools:ignore="Instantiatable" />
         <activity android:name=".Table" />
         <activity android:name=".NavigationBar" />
         <activity
@@ -27,7 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".bloodPressureEntry" />
-        <!--<activity android:name=".reminders" />-->
         <activity android:name=".glucoseEntry" />
         <receiver android:name=".AlertReceiver"/>
     </application>

@@ -251,7 +251,7 @@ public class bloodPressureEntry extends AppCompatActivity implements DatePickerD
     }
 
     public void goToReminders(View v)  {
-        Intent intent = new Intent(this, reminders.class);
+        Intent intent = new Intent(this, ThirdFragment.class);
         startActivity(intent);
     }
 }

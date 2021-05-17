@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToReminders(View v)  {
-        Intent intent = new Intent(this, reminders.class);
+        Intent intent = new Intent(this, ThirdFragment.class);
         startActivity(intent);
     }
 }
