@@ -189,7 +189,7 @@ public class ThirdFragment extends Fragment {
 
                 //Check condition
                 if (!timeText.equals("")) {
-                    Log.d("Yiming", "Enters if statement");
+                    Log.d("Yiming", "Enters Third Fragment if statement");
                     //When text is not empty
                     //Initialize main data
                     RemindersData RemindersData = new RemindersData();
@@ -197,9 +197,17 @@ public class ThirdFragment extends Fragment {
                     RemindersData.setTime(timeText);
                     //Insert text in database
                     RemindersDatabase.RemindersDao().insert(RemindersData);
+                    //Set alarm via Calendar and Alarm Manager
+                    Calendar c = Calendar.getInstance();
+                    Log.d("Yiming", "Calendar" + c.toString());
+                    c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(String.valueOf(hour.getText())));
+                    c.set(Calendar.MINUTE, Integer.parseInt((String.valueOf(minute.getText()))));
+
+                    startAlarm(c);
                     //Clear edit text
                     hour.setText("");
                     minute.setText("");
+                    timeZoneSwitch.setChecked(false);
                     //Notify when data is inserted
                     RemindersDataList.clear();
                     RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
@@ -247,6 +255,32 @@ public class ThirdFragment extends Fragment {
             }
         });
     return view;
+    }
+
+    private void startAlarm(Calendar c) {
+        Log.v("Yiming","Calendar time: " + c.getTimeInMillis());
+        System.out.println("Alarm has been started");
+        Log.d("Yiming", "Alarm has been started");
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+    }
+
+    private void addNotification () {
+        Log.d("Reminders", "Calling Reminders.addNotification() method");
+        // Use this constructor with two input parameters for Android 26+ support, second parameter is Channel ID
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.bell_button_foreground)
+                .setContentTitle("Reminders")
+                .setContentText("Take your measurement")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(1, builder.build());
     }
 
     private void setRemindersRecyclerView() {
