@@ -21,10 +21,6 @@ public class AlertReceiver extends BroadcastReceiver{
         Log.v("Yiming","Gets into Alert Receiver");
         NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification("BPG reminder", "Remember to take your blood pressure measurement");
-        Uri alarmSound =
-                RingtoneManager. getDefaultUri (RingtoneManager. TYPE_NOTIFICATION );
-        //MediaPlayer mp = MediaPlayer. create (getApplicationContext(), alarmSound);
-        //mp.start();
         notificationHelper.getManager().notify(1, nb.build());
     }
 }
