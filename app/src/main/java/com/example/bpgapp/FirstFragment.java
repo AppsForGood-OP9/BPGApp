@@ -1,17 +1,24 @@
 package com.example.bpgapp;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,6 +47,9 @@ public class FirstFragment extends Fragment {
 
     private RecyclerView table_recycler_view;
     private LinearLayoutManager linearLayoutManager;
+
+    private Button yesButton;
+    private Button noButton;
 
     public FirstFragment() {
         // Required empty public constructor
@@ -133,7 +143,7 @@ public class FirstFragment extends Fragment {
         Button bpToggle = view.findViewById(R.id.bloodPressureToggle);
         Button gToggle = view.findViewById(R.id.glucoseToggle);
 
-        bpToggle.setOnClickListener(new View.OnClickListener() {
+        bpToggle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new BPTableFragment();
@@ -145,7 +155,7 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        gToggle.setOnClickListener(new View.OnClickListener() {
+        gToggle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new GTableFragment();
@@ -156,6 +166,66 @@ public class FirstFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        //Initialize item touch helper
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                //Create dialog
+                Dialog dialog = new Dialog(getContext());
+                //Set content view
+                dialog.setContentView(R.layout.table_dialog_update);
+                //Initialize width
+                int width = WindowManager.LayoutParams.MATCH_PARENT;
+                //Initialize height
+                int height = WindowManager.LayoutParams.WRAP_CONTENT;
+                //Set layout
+                dialog.getWindow().setLayout(width, height);
+                //Show dialog
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
+                noButton = dialog.findViewById(R.id.no_button);
+                yesButton = dialog.findViewById(R.id.yes_button);
+
+                noButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+
+                        //Notify adapter
+                        bpAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                yesButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //When item swipe
+                        //Get text from database
+                        bpData d = dataList.get(viewHolder.getAdapterPosition());
+                        //Delete text from database
+                        bpDatabase.bpDao().delete(d);
+                        //Remove item from ArrayList
+                        int position = viewHolder.getAdapterPosition();
+                        dataList.remove(position);
+
+                        //Notify when data is deleted
+                        bpAdapter.notifyItemRemoved(position);
+                        bpAdapter.notifyItemRangeChanged(position, dataList.size());
+                        //Notify adapter
+                        bpAdapter.notifyDataSetChanged();
+
+                        //Cancel dialog when delete is complete
+                        dialog.cancel();
+                    }
+                });
+            }
+        }).attachToRecyclerView(table_recycler_view);
 
         return view;
     }

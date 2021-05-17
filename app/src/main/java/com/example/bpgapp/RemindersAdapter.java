@@ -62,6 +62,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
                 notifyItemRangeChanged(position, RemindersDataList.size());
             }
         });
+
         holder.remindersEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -83,31 +83,36 @@ public class reminders extends AppCompatActivity {
                 }
             }
         });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Yiming", "Save has been pressed");
+                Log.d("Yiming", "Save has been pressed for save onClickListener");
                 //Get string from edit text
                 String timeText = hour.getText() + ":" + minute.getText() + " " + timeZone.getText();
 
                 //Check condition
                 if (!timeText.equals("")) {
-                    Log.d("Yiming", "Enters if statement");
+                    Log.d("Yiming", "Enters timeText if statement");
                     //When text is not empty
                     //Initialize main data
                     RemindersData RemindersData = new RemindersData();
                     //Set text on main data
                     RemindersData.setTime(timeText);
+                    Log.d("Yiming","time text: " + timeText);
                     //Insert text in database
                     RemindersDatabase.RemindersDao().insert(RemindersData);
                     //Set alarm via Calendar and Alarm Manager
                     Calendar c = Calendar.getInstance();
-                    c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour.toString()));
-                    c.set(Calendar.MINUTE, Integer.parseInt(minute.toString()));
+                    Log.d("Yiming", "Calendar" + c.toString());
+                    c.set(Calendar.HOUR_OF_DAY, Integer.parseInt((String) hour.getText()));
+                    c.set(Calendar.MINUTE, Integer.parseInt((String) minute.toString()));
+                    Log.d("Yiming", "Calendar" + c.toString());
 
                     startAlarm(c);
 
                     //Clear edit text
+                    Log.v("Yiming", "Clearing edit text for timeText");
                     hour.setText("");
                     minute.setText("");
                     //Notify when data is inserted

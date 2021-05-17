@@ -10,4 +10,7 @@
     <color name="blue">#C4D7F2</color>
     <color name="pink">#f0b4b9</color>
     <color name="yellow">#fcffc2</color>
+    <color name="yes_red">#FF0000</color>
+    <color name="no_blue">#0000FF</color>
+    <color name="gray">	#D3D3D3</color>
 </resources>

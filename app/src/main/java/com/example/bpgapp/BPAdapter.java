@@ -1,9 +1,11 @@
 package com.example.bpgapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

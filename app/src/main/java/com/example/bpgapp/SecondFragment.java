@@ -34,7 +34,9 @@ public class SecondFragment extends Fragment {
     ImageButton plus;
     ImageButton bell;
     Button PressureButton;
-    Button GlucoseButton;
+    ImageButton pressureImage;
+    Button glucoseButton;
+    ImageButton glucoseImage;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,7 +94,9 @@ public class SecondFragment extends Fragment {
         Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
         Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
         PressureButton = (Button) view.findViewById(R.id.BloodPressureButton);
-        GlucoseButton = (Button) view.findViewById(R.id.BloodGlucoseButton);
+        pressureImage = view.findViewById(R.id.HeartSymbolButton);
+        glucoseButton = (Button) view.findViewById(R.id.BloodGlucoseButton);
+        glucoseImage = view.findViewById(R.id.BloodSymbolButton);
         heart = (ImageButton) view.findViewById(R.id.HeartSymbolButton);
         drop = (ImageButton) view.findViewById(R.id.BloodSymbolButton);
         home = (ImageButton) view.findViewById(R.id.HomeButton);
@@ -104,7 +108,7 @@ public class SecondFragment extends Fragment {
             public void onClick(View v){
                 makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
                 PressureButton.setTextSize(21*(PressureButton.getTextSize())/40);
-                GlucoseButton.setTextSize(21*(GlucoseButton.getTextSize())/40);
+                glucoseButton.setTextSize(21*(glucoseButton.getTextSize())/40);
                 zoom +=25;
                 PercentZoom.setText(zoom+"%");
             }
@@ -114,7 +118,7 @@ public class SecondFragment extends Fragment {
             public void onClick(View v){
                 makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
                 PressureButton.setTextSize(19*(PressureButton.getTextSize())/40);
-                GlucoseButton.setTextSize(19*(GlucoseButton.getTextSize())/40);
+                glucoseButton.setTextSize(19*(glucoseButton.getTextSize())/40);
                 zoom -=25;
                 PercentZoom.setText(zoom+"%");
             }
@@ -132,19 +136,35 @@ public class SecondFragment extends Fragment {
                 fragmentTransaction.commit();
             }
 
-                //Log.v("talia","AddBloodPressureEntry in Second Fragment clicked");
-
-            /*Fragment selectedFragment = new BPFragment();
-                View view = inflater.inflate(R.layout.activity_glucose_entry, container, false);
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container_main_blank, selectedFragment)
-                        .commit();
-            }*/
         });
 
-        Button glucoseButton = view.findViewById(R.id.BloodGlucoseButton);
+        pressureImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("talia","pressureImage onClick method in Second Fragment used to go to BP page");
+                Fragment fragment = new BPFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_main_blank, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+
+        });
+
         glucoseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new GFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_main_blank, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        glucoseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new GFragment();

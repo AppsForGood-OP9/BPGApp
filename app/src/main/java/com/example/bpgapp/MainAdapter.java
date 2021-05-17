@@ -62,7 +62,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 //Create dialog
                 Dialog dialog = new Dialog(context);
                 //Set content view
-                dialog.setContentView(R.layout.dialog_update);
+                //dialog.setContentView(R.layout.dialog_update);
                 //Initialize width
                 int width = WindowManager.LayoutParams.MATCH_PARENT;
                 //Initialize height
@@ -74,11 +74,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
                 //Initialize and assign variable
                 EditText editText = dialog.findViewById(R.id.edit_text);
-                Button btUpdate = dialog.findViewById(R.id.bt_update);
+                //Button btUpdate = dialog.findViewById(R.id.bt_update);
 
                 //Set text on edit text
                 editText.setText(sText);
-
+/*
                 btUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -94,7 +94,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                         notifyDataSetChanged();
 
                     }
+
                 });
+
+ */
             }
         });
 

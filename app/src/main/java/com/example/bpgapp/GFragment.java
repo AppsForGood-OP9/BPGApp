@@ -114,16 +114,22 @@ public class GFragment extends Fragment {
         //Sets the time in the hour and minute EditTexts to be the current time and sets the correct TimeZoneSwitch to
         //AM or PM
         //Adds a 0 in front of the minute if the current minute is at least :00 and at most :09
-        String currentHour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
+        //Changes the hour from a 24-hour system to a 12-hour system
+        int currentHourInt = c.get(Calendar.HOUR_OF_DAY);
         int currentMinuteInt = (c.get(Calendar.MINUTE));
         String currentMinute = String.valueOf(currentMinuteInt);
         if (currentMinuteInt >= 0 && currentMinuteInt < 10)  {
             currentMinute = "0" + currentMinute;
         }
+        if (currentHourInt > 12)  {
+            currentHourInt = currentHourInt - 12;
+        }
+        String currentHour = String.valueOf(currentHourInt);
         hour.setText(currentHour, TextView.BufferType.EDITABLE);
         minute.setText(currentMinute,TextView.BufferType.EDITABLE);
         if (c.get(Calendar.AM_PM) == Calendar.PM) {
             timeZoneSwitch.setChecked(true);
+            timeZone.setText("PM");
         }
 
         timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -199,7 +205,11 @@ public class GFragment extends Fragment {
                     //Display a Toast that the glucose data was entered successfully
                     Toast toast = Toast.makeText(getContext(), "Glucose data entered successfully.", Toast.LENGTH_LONG);
                     toast.show();
+
+                    //Navigate back to Add Entry page
+                    getParentFragmentManager().beginTransaction().replace(R.id.container_main_blank, new SecondFragment()).commit();
                 }
+
             }
         });
         return view;

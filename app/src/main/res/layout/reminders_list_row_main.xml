@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:textSize="30sp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/reminders_edit"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -27,7 +27,7 @@
             android:contentDescription="@+id/reminders_edit"
             android:src="@drawable/ic_edit_button_foreground"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/reminders_delete"
             android:layout_width="80dp"
             android:layout_height="80dp"
