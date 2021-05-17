@@ -138,8 +138,9 @@
         android:text="@string/StartingZoomSize"
         android:textColor="@android:color/black"
         android:textSize="28sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ZoomOutButton"
+        app:layout_constraintStart_toStartOf="@+id/ZoomOutButton"
+        app:layout_constraintEnd_toEndOf="@+id/ZoomOutButton"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

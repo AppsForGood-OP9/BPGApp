@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline10h">
         <Button
             android:id="@+id/bloodPressureToggle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/pink"
@@ -28,7 +28,7 @@
             android:textSize="24sp" />
         <Button
             android:id="@+id/glucoseToggle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/blue"

@@ -183,10 +183,12 @@ public class ThirdFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("Yiming", "Save has been pressed");
                 //Get string from edit text
-                String timeText = hour.getText() + ":" + minute.getText() + " " + timeZone.getText();
+                String hourText = hour.getText().toString();
+                String minuteText = minute.getText().toString();
+                String timeText = hourText + ":" + minuteText + " " + timeZone.getText().toString();
 
                 //Check condition
-                if (!timeText.equals("")) {
+                if (!hourText.equals("") && !minuteText.equals("")) {
                     Log.d("Yiming", "Enters Third Fragment if statement");
                     //When text is not empty
                     //Initialize main data
@@ -196,25 +198,31 @@ public class ThirdFragment extends Fragment {
                     //Insert text in database
                     RemindersDatabase.RemindersDao().insert(RemindersData);
                     //Set alarm via Calendar and Alarm Manager
+
                     if (timeZone.getText()=="PM"){
-                        hours = Integer.parseInt(String.valueOf(hour.getText())) + 12;
+                        hours = Integer.parseInt(hourText) + 12;
                     }
+                    else {
+                        hours = Integer.parseInt(hourText);
+                    }
+                    Log.d("Yiming", "hours: " + hours);
+                    Log.d("Yiming", "minutes: " + String.valueOf(minute.getText()));
                     Calendar c = Calendar.getInstance();
                     Log.d("Yiming", "Calendar" + c.toString());
                     c.set(Calendar.HOUR_OF_DAY, hours);
-                    c.set(Calendar.MINUTE, Integer.parseInt((String.valueOf(minute.getText()))));
+                    c.set(Calendar.MINUTE, Integer.parseInt(minuteText));
                     c.set(Calendar.SECOND, 0);
 
                     startAlarm(c);
-                    //Clear edit text
-                    hour.setText("");
-                    minute.setText("");
-                    timeZoneSwitch.setChecked(false);
                     //Notify when data is inserted
                     RemindersDataList.clear();
                     RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
                     RemindersAdapter.notifyDataSetChanged();
                 }
+                //Clear edit text
+                hour.setText("");
+                minute.setText("");
+                timeZoneSwitch.setChecked(false);
             }
         });
     return view;

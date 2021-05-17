@@ -38,10 +38,12 @@
 
     <LinearLayout
         android:id="@+id/horizontalLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,9 +51,9 @@
 
         <Button
             android:id="@+id/bloodPressureToggle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="0dp"
             android:layout_weight="1"
             android:backgroundTint="@color/pink"
             android:text="@string/bpText"
@@ -59,9 +61,9 @@
             android:textSize="24sp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="0dp"
             android:layout_weight="1"
             android:backgroundTint="@color/blue"
             android:text="@string/glucoseButton"
@@ -110,9 +112,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="0dp"
+        app:layout_constraintStart_toStartOf="@id/guideline35"
         app:layout_constraintTop_toBottomOf="@id/alertsLabel">
 
         <EditText
@@ -200,10 +201,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.97" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reminders_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="310dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -288,7 +296,8 @@
         android:text="@string/StartingZoomSize"
         android:textColor="@android:color/black"
         android:textSize="28sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ZoomOutButton"
+        app:layout_constraintStart_toStartOf="@+id/ZoomOutButton"
+        app:layout_constraintEnd_toEndOf="@+id/ZoomOutButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
