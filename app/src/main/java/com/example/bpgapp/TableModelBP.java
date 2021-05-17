@@ -1,13 +1,13 @@
 package com.example.bpgapp;
 
-public class TableModel {
+public class TableModelBP {
     String date;
     String time;
     String systolic;
     String diastolic;
     String notes;
 
-    public TableModel(String date, String time, String systolic, String diastolic, String notes)  {
+    public TableModelBP(String date, String time, String systolic, String diastolic, String notes)  {
         this.date = date;
         this.time = time;
         this.systolic = systolic;

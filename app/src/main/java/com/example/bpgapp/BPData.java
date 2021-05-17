@@ -9,8 +9,8 @@ import java.io.Serializable;
 /*
 Define table name
  */
-@Entity(tableName = "g_table")
-public class GData implements Serializable {
+@Entity(tableName = "bp_table")
+public class BPData implements Serializable {
     /*
     Create ID column
      */
@@ -20,8 +20,11 @@ public class GData implements Serializable {
     /*
     Create text columns
      */
-    @ColumnInfo(name = "glucoseText")
-    private String glucoseText;
+    @ColumnInfo(name = "systolicText")
+    private String systolicText;
+
+    @ColumnInfo(name = "diastolicText")
+    private String diastolicText;
 
     @ColumnInfo(name = "date")
     private String date;
@@ -47,17 +50,31 @@ public class GData implements Serializable {
     }
 
     /*
-    Gets the glucose data text
+    Gets the systolic data text
      */
-    public String getGlucoseText() {
-        return glucoseText;
+    public String getSystolicText() {
+        return systolicText;
     }
 
     /*
-    Sets the glucose data text
+    Sets the systolic data text
      */
-    public void setGlucoseText(String text) {
-        this.glucoseText = text;
+    public void setSystolicText(String text) {
+        this.systolicText = text;
+    }
+
+    /*
+    Gets the diastolic data text
+     */
+    public String getDiastolicText() {
+        return diastolicText;
+    }
+
+    /*
+    Sets the diastolic data text
+     */
+    public void setDiastolicText(String text) {
+        this.diastolicText = text;
     }
 
     /*

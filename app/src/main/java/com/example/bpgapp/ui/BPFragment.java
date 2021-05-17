@@ -2,7 +2,6 @@ package com.example.bpgapp.ui;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -17,12 +16,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bpgapp.BPData;
+import com.example.bpgapp.BPRoomDB;
 import com.example.bpgapp.DatePickerFragment;
 import com.example.bpgapp.R;
 import com.example.bpgapp.BPAdapter;
 import com.example.bpgapp.SecondFragment;
-import com.example.bpgapp.bpData;
-import com.example.bpgapp.bpRoomDB;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,8 +38,8 @@ public class BPFragment extends Fragment {
     private TextView slant;
     private EditText notes;
     private Button submit;
-    private List<bpData> dataList = new ArrayList<>();
-    private bpRoomDB bpDatabase;
+    private List<BPData> dataList = new ArrayList<>();
+    private BPRoomDB bpDatabase;
     private BPAdapter bpAdapter;
     private int dayofmon;
     private int mon;
@@ -128,7 +127,7 @@ public class BPFragment extends Fragment {
         timeColon = (TextView) view.findViewById(R.id.timeColon);
 
         //Initialize database
-        bpDatabase = bpRoomDB.getInstance(getContext());
+        bpDatabase = BPRoomDB.getInstance(getContext());
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
         //Initialize adapter
@@ -261,7 +260,7 @@ public class BPFragment extends Fragment {
                 if (!sText.equals("") || !dText.equals("") || !nText.equals("")) {
                     //When text is not empty
                     //Initialize main data
-                    bpData data = new bpData();
+                    BPData data = new BPData();
 
                     //Set text for each category of data in the database
                     currentDateString = (String) date.getText();

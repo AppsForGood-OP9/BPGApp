@@ -42,12 +42,13 @@ public class PlaceholderFragment extends Fragment {
         pageViewModel.setIndex(index);
     }
 
+    /*
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_log_display, container, false);
-        final TextView textView = root.findViewById(R.id.text_view);
+        //View root = inflater.inflate(R.layout.fragment_log_display, container, false);
+        //final TextView textView = root.findViewById(R.id.text_view);
         //Not sure what is supposed to go there
         pageViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -57,4 +58,6 @@ public class PlaceholderFragment extends Fragment {
         });
         return root;
     }
+
+     */
 }

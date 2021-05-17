@@ -1,7 +1,6 @@
 package com.example.bpgapp;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -33,10 +31,10 @@ import java.util.List;
  */
 public class FirstFragment extends Fragment {
 
-    private TableAdapter adapter;
-    private bpRoomDB bpDatabase;
+    private TableAdapterBP adapter;
+    private BPRoomDB bpDatabase;
     private BPAdapter bpAdapter;
-    private List<bpData> dataList = new ArrayList<>();
+    private List<BPData> dataList = new ArrayList<>();
 
     private String dateStr, timeStr;
     private String systolicStr, diastolicStr, notesStr;
@@ -76,7 +74,7 @@ public class FirstFragment extends Fragment {
         notesItem = view.findViewById(R.id.notesItem);
         //bpDelete = findViewById(R.id.bp_delete);
 
-        bpDatabase = bpRoomDB.getInstance(getContext());
+        bpDatabase = BPRoomDB.getInstance(getContext());
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
@@ -88,7 +86,7 @@ public class FirstFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getContext());
         table_recycler_view.setLayoutManager(linearLayoutManager);
 
-        bpData data = new bpData();
+        BPData data = new BPData();
         //Set text on main data
 
         dateStr = data.getDate();
@@ -116,7 +114,7 @@ public class FirstFragment extends Fragment {
         notesItem = view.findViewById(R.id.notesItem);
         //bpDelete = findViewById(R.id.bp_delete);
 
-        bpDatabase = bpRoomDB.getInstance(getContext());
+        bpDatabase = BPRoomDB.getInstance(getContext());
         //Store database value in data list
         dataList = bpDatabase.bpDao().getAll();
 
@@ -207,7 +205,7 @@ public class FirstFragment extends Fragment {
                     public void onClick(View v) {
                         //When item swipe
                         //Get text from database
-                        bpData d = dataList.get(viewHolder.getAdapterPosition());
+                        BPData d = dataList.get(viewHolder.getAdapterPosition());
                         //Delete text from database
                         bpDatabase.bpDao().delete(d);
                         //Remove item from ArrayList
@@ -234,13 +232,13 @@ public class FirstFragment extends Fragment {
         table_recycler_view.setHasFixedSize(true);
         table_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
         //Changes here, might only need two arguments for TableAdapter
-        adapter = new TableAdapter(getContext(), getList(), dataList);
+        adapter = new TableAdapterBP(getContext(), getList(), dataList);
         table_recycler_view.setAdapter(adapter);
     }
 
-    private List<TableModel> getList()  {
-        List<TableModel> table_list = new ArrayList<>();
-        table_list.add(new TableModel(dateStr,timeStr,systolicStr,diastolicStr,notesStr));
+    private List<TableModelBP> getList()  {
+        List<TableModelBP> table_list = new ArrayList<>();
+        table_list.add(new TableModelBP(dateStr,timeStr,systolicStr,diastolicStr,notesStr));
         return table_list;
     }
 

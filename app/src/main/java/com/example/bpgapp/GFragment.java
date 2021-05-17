@@ -130,9 +130,10 @@ public class GFragment extends Fragment {
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
 
-
-
         Large.setOnClickListener(new View.OnClickListener(){
+            /*
+            Increases text size when plus sign magnifying button is clicked
+             */
             @Override
             public void onClick(View v){
                 title.setTextSize(21*(title.getTextSize())/40);
@@ -152,8 +153,12 @@ public class GFragment extends Fragment {
                 PercentZoom.setText(zoom+"%");
             }
         });
+
         Small.setOnClickListener(new View.OnClickListener(){
             @Override
+            /*
+            Decreases text size when minus sign magnifying button is clicked
+             */
             public void onClick(View v){
                 title.setTextSize(19*(title.getTextSize())/40);
                 gLevelTitle.setTextSize(19*(gLevelTitle.getTextSize())/40);
@@ -172,8 +177,6 @@ public class GFragment extends Fragment {
                 PercentZoom.setText(zoom+"%");
             }
         });
-
-
 
         //Sets the time in the hour and minute EditTexts to be the current time and sets the correct TimeZoneSwitch to
         //AM or PM

@@ -11,43 +11,63 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface BPDao {
-    //Insert query
+    /*
+    Insert query
+     */
     @Insert(onConflict = REPLACE)
-    void insert(bpData bpData);
+    void insert(BPData bpData);
 
-    //Delete query
+    /*
+    Delete query
+     */
     @Delete
-    void delete(bpData bpData);
+    void delete(BPData bpData);
 
-    //Delete all query
+    /*
+    Delete all query
+     */
     @Delete
-    void reset(List<bpData> bpData);
+    void reset(List<BPData> bpData);
 
-    //Update systolic
+    /*
+    Update systolic level data
+     */
     @Query("UPDATE bp_table SET systolicText = :sText WHERE ID = :sID")
     void updateSystolic(int sID, String sText);
 
-    //Update diastolic
+    /*
+    Update diastolic level data
+     */
     @Query("UPDATE bp_table SET diastolicText = :dText WHERE ID = :dID")
     void updateDiastolic(int dID, String dText);
 
-    //Update notes
+    /*
+    Update notes
+     */
     @Query("UPDATE bp_table SET notesText = :nText WHERE ID = :nID")
     void updateNotes(int nID, String nText);
 
-    //Update systolic and diastolic
+    /*
+    Update systolic and diastolic data
+     */
     @Query("UPDATE bp_table SET systolicText = :sText, diastolicText =:dText WHERE ID = :sID")
     void updateBoth(int sID, String sText, String dText);
 
-    //Update query with all data
+    /*
+    Update query with all data
+     */
     @Query("UPDATE bp_table SET systolicText = :sText, diastolicText =:dText, notesText =:nText WHERE ID =:sID")
     void updateAll(int sID, String sText, String dText, String nText);
 
-    //Get all data query
+    /*
+    Get all data query
+     */
     @Query("SELECT * FROM bp_table")
-    List<bpData> getAll();
+    List<BPData> getAll();
 
-    //Delete all data
+    /*
+    Delete all data
+     */
     @Query("DELETE FROM bp_table")
     void deleteAll();
 }

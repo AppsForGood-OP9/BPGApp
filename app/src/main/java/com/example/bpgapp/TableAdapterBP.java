@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdapter.ViewHolder> {
+public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHolder>{
 
     Context context;
-    private List<TableModel> table_list;
-    private List<bpData> dataList;
-    private bpRoomDB bpDatabase;
+    private List<TableModelBP> table_list;
+    private List<BPData> dataList;
+    private BPRoomDB bpDatabase;
 
-    public FirstFragmentAdapter(Context context, List<TableModel> table_list, List<bpData> dataList)  {
+    public TableAdapterBP(Context context, List<TableModelBP> table_list, List<BPData> dataList)  {
         this.context = context;
         this.table_list = table_list;
         this.dataList = dataList;
@@ -30,18 +29,17 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false);
-        return new FirstFragmentAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        bpData data = dataList.get(position);
+        BPData data = dataList.get(position);
         //Initialize database
-        bpDatabase = bpRoomDB.getInstance(context);
+        bpDatabase = BPRoomDB.getInstance(context);
 
-        /*
         if(table_list != null && table_list.size() > 0)  {
-            TableModel model = table_list.get(position);
+            TableModelBP model = table_list.get(position);
             holder.dateItem.setText(model.getDate());
             holder.timeItem.setText(model.getTime());
             holder.systolicItem.setText(model.getSystolic());
@@ -52,6 +50,7 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
             return;
         }
 
+        /*
         holder.bpDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +74,11 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
         return table_list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
+        //ImageView bpDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
-            //ImageView bpDelete;
 
             dateItem = itemView.findViewById(R.id.dateItem);
             timeItem = itemView.findViewById(R.id.timeItem);
@@ -89,5 +87,6 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
             notesItem = itemView.findViewById(R.id.notesItem);
             //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
+
     }
 }

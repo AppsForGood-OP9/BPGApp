@@ -119,11 +119,6 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
 
     }
 
-    public void addGlucoseEntry(View v)  {
-        Intent intent = new Intent(this, glucoseEntry.class);
-        startActivity(intent);
-    }
-
     /**
      * Sets the TextView above the date changer button to the selected date
      * @param view the DatePicker

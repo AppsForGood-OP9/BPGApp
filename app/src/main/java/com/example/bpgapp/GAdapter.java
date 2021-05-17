@@ -43,95 +43,6 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
         holder.gDateTextView.setText(data.getDate());
         holder.gGlucoseTextView.setText(data.getGlucoseText());
         holder.gNotesTextView.setText(data.getNotesText());
-
-        //May need to add these methods back
-        /*
-        holder.bpEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Initialize main data
-                bpData d = bpDataList.get(holder.getAdapterPosition());
-                //Get ID
-                int sID = d.getID();
-                //Get text
-                String sText = d.getSystolicText();
-                String dText = d.getDiastolicText();
-                String nText = d.getNotesText();
-
-                //Create dialog
-                Dialog dialog = new Dialog(context);
-                //Set content view
-                dialog.setContentView(R.layout.bp_dialog_update);
-                //Initialize width
-                int width = WindowManager.LayoutParams.MATCH_PARENT;
-                //Initialize height
-                int height = WindowManager.LayoutParams.WRAP_CONTENT;
-                //Set layout
-                dialog.getWindow().setLayout(width, height);
-                //Show dialog
-                dialog.show();
-
-                //Initialize and assign variable
-                EditText editSystolicText = dialog.findViewById(R.id.bp_systolic_text_view);
-                EditText editDiastolicText = dialog.findViewById(R.id.bp_diastolic_text_view);
-                EditText editNotesText = dialog.findViewById(R.id.bp_notes_text_view);
-                Button bpUpdate = dialog.findViewById(R.id.bp_update);
-
-                //Schema is decision programmed into the DAO
-
-                //Hash map to lookup table
-                //Know lower bound and upper bound
-
-                //Set text on edit text
-                editSystolicText.setText(sText);
-                //Retrieve it right away
-
-                editDiastolicText.setText(dText);
-
-                editNotesText.setText(nText);
-
-                bpUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Dismiss dialog
-                        dialog.dismiss();
-                        //Get updated text from edit text
-                        String uText = editSystolicText.getText().toString().trim();
-                        String vText = editDiastolicText.getText().toString().trim();
-                        String wText = editNotesText.getText().toString().trim();
-                        //Update text in database
-                        bpDatabase.bpDao().updateSystolic(sID,uText);
-                        bpDatabase.bpDao().updateDiastolic(sID,vText);
-                        bpDatabase.bpDao().updateNotes(sID, wText);
-                        //Maybe fix something here to update them all
-                        //Notify when data is updated
-                        bpDataList.clear();
-                        bpDataList.addAll(bpDatabase.bpDao().getAll());
-                        notifyDataSetChanged();
-
-                    }
-                });
-            }
-        });
-        */
-
-        /*
-        holder.bpDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Initialize main data
-                bpData d = bpDataList.get(holder.getAdapterPosition());
-                //Delete text from database
-                bpDatabase.bpDao().delete(d);
-                //Notify when data is deleted
-                int position = holder.getAdapterPosition();
-                bpDataList.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, bpDataList.size());
-            }
-        });
-
-         */
     }
 
     /**
@@ -152,8 +63,6 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
         TextView gTimeTextView;
         TextView gGlucoseTextView;
         TextView gNotesTextView;
-        //ImageView bpEdit;
-        //ImageView bpDelete;
 
         /**
          * The ViewHolder constructor assigns variables used in the BPAdapter class to their xml equivalents
@@ -166,8 +75,6 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
             gTimeTextView = itemView.findViewById(R.id.g_time_text_view);
             gGlucoseTextView = itemView.findViewById(R.id.g_glucose_text_view);
             gNotesTextView = itemView.findViewById(R.id.g_notes_text_view);
-            //bpEdit = itemView.findViewById(R.id.bp_edit);
-            //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
     }
 }

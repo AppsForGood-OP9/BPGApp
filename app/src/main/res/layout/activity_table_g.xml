@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Table"
     android:stretchColumns="1,2,3,4,5"
     android:layout_margin="8dp">
 
