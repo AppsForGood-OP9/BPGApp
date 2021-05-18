@@ -9,29 +9,46 @@ import java.io.Serializable;
 //Define table name
 @Entity(tableName = "Reminders_table")
 public class RemindersData implements Serializable {
-    //Create ID column
+    /**
+     * Create ID column
+     */
     @PrimaryKey(autoGenerate = true)
     private int ID;
 
-    //Create text column
+    /**
+     * Create text column
+     */
     @ColumnInfo(name = "time")
     private String time;
 
-    //Add more fields later
-    //Generate getter and setter
-
+    /**
+     * getter for ID
+     * @return
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * setter for ID
+     * @return
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     * getter for time
+     * @return
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     * setter for time
+     * @return
+     */
     public void setTime(String text) {
         this.time = text;
     }

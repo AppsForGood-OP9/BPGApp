@@ -2,7 +2,6 @@ package com.example.bpgapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,12 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,26 +34,26 @@ import java.util.List;
 
 public class MainActivityBlank extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private int dayOfMon;
-    private int mon;
-    private int yea;
-    private TextView date;
-    private TextView UserTime;
-    private TextView timeZone;
-    private Switch timeZoneSwitch;
-    private TextView hour;
-    private TextView minute;
-    private String currentDateString;
+    int dayofmon;
+    int mon;
+    int yea;
+    TextView date;
+    TextView UserTime;
+    TextView timeZone;
+    Switch timeZoneSwitch;
+    TextView hour;
+    TextView minute;
+    String currentDateString;
     //Initialize variable
-    private Button save;
-    private RecyclerView RemindersRecyclerView;
-    private Button notifyBtn;
+    Button save;
+    RecyclerView RemindersRecyclerView;
+    Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
-    private List<RemindersData> RemindersDataList = new ArrayList();
-    private LinearLayoutManager linearLayoutManager;
-    private RemindersRoomDB RemindersDatabase;
-    private RemindersAdapter RemindersAdapter;
+    List<RemindersData> RemindersDataList = new ArrayList();
+    LinearLayoutManager linearLayoutManager;
+    RemindersRoomDB RemindersDatabase;
+    RemindersAdapter RemindersAdapter;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
@@ -108,6 +102,7 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
     };
 
     public void addBloodPressureEntry(View v)  {
+        Log.v("talia","AddBloodPressureEntry in Main Activity Blank clicked");
         Fragment selectedFragment = null;
                 selectedFragment = new BPFragment();
 
@@ -131,10 +126,10 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        dayOfMon = c.get(Calendar.DAY_OF_MONTH);
+        dayofmon = c.get(Calendar.DAY_OF_MONTH);
         mon = c.get(Calendar.MONTH)+1;
         yea =  c.get(Calendar.YEAR);
-        currentDateString = mon+"/"+dayOfMon+"/"+yea;
+        currentDateString = mon+"/"+dayofmon+"/"+yea;
         DateFormat.getDateInstance().format(c.getTime());
         date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
@@ -150,15 +145,6 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
             }
         }
         return null;
-    }
-
-    /**
-     * Displays the TimePickerDialog
-     * @param v the view
-     */
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     /**
@@ -245,7 +231,9 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         int count = getSupportFragmentManager().getBackStackEntryCount();
         FragmentManager.BackStackEntry name = (getSupportFragmentManager().getBackStackEntryAt(count - 1));
         String simpleName = name.getName();
-       
+        //Log.v("talia","getName: " + simpleName);
+        //Log.v("talia","count: " + count);
+        //Log.v("talia","stack entry at: " + count + " is: " + name);
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         afterBackPressed();
         // Call parent Activity's onBackPressed() method and add other statements you need (if any)

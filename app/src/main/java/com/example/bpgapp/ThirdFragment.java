@@ -1,20 +1,15 @@
 package com.example.bpgapp;
 
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ThirdFragment#newInstance} factory method to
@@ -42,9 +35,9 @@ public class ThirdFragment extends Fragment {
     private Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
-    private TextView percentZoom;
-    private ImageButton large;
-    private ImageButton small;
+    private TextView PercentZoom;
+    private ImageButton Large;
+    private ImageButton Small;
     private int zoom = 100;
     private TextView title;
     private Button pressureButton;
@@ -57,14 +50,14 @@ public class ThirdFragment extends Fragment {
 
     private TextView makeEntry;
     private int hours;
-    private RecyclerView remindersRecyclerView;
+    private RecyclerView RemindersRecyclerView;
 
     private Switch timeZoneSwitch;
 
-    private List<RemindersData> remindersDataList = new ArrayList();
+    private List<RemindersData> RemindersDataList = new ArrayList();
     private LinearLayoutManager linearLayoutManager;
-    private RemindersRoomDB remindersDatabase;
-    private RemindersAdapter remindersAdapter;
+    private RemindersRoomDB RemindersDatabase;
+    private RemindersAdapter RemindersAdapter;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
@@ -116,9 +109,9 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_reminders, container, false);
 
         //Assign Variables
-        percentZoom = (TextView) view.findViewById(R.id.percentZoom);
-        large = (ImageButton) view.findViewById(R.id.ZoomInButton);
-        small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
+        PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
+        Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
+        Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
         pressureButton = (Button) view.findViewById(R.id.bloodPressureToggle);
         glucoseButton = (Button) view.findViewById(R.id.bloodGlucoseToggle);
         title = (TextView) view.findViewById(R.id.remindersTitle);
@@ -129,33 +122,37 @@ public class ThirdFragment extends Fragment {
         timeZone = (TextView) view.findViewById(R.id.ampmDisplay);
 
 
-        remindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
+        RemindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
         setRemindersRecyclerView();
         timeZoneSwitch = (Switch) view.findViewById(R.id.ampmSwitch);
 
         //Initialize database
-        remindersDatabase = RemindersRoomDB.getInstance(getContext());
+        RemindersDatabase = RemindersRoomDB.getInstance(getContext());
 
 
         //Store database value in data list
-        remindersDataList = (List<RemindersData>) remindersDatabase.RemindersDao().getAll();
+        RemindersDataList = (List<RemindersData>) RemindersDatabase.RemindersDao().getAll();
 
         //Initialize linear layout manager
         linearLayoutManager = new LinearLayoutManager(getContext());
 
         //Set layout manager
-        remindersRecyclerView.setLayoutManager(linearLayoutManager);
+        RemindersRecyclerView.setLayoutManager(linearLayoutManager);
 
         //Initialize adapter
-        remindersAdapter = new RemindersAdapter(getActivity(), remindersDataList);
+        RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
 
         //Set adapter
-        remindersRecyclerView.setAdapter(remindersAdapter);
+        RemindersRecyclerView.setAdapter(RemindersAdapter);
 
-        //If enlarge button is pressed
-        large.setOnClickListener(new View.OnClickListener() {
+        /**
+         * When the increase text size button is pressed
+         * increase font size on this page
+         */
+        Large.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Increase Text Size throughout the page
                 pressureButton.setTextSize(21 * (pressureButton.getTextSize()) / 40);
                 glucoseButton.setTextSize(21 * (glucoseButton.getTextSize()) / 40);
                 title.setTextSize(21 * (title.getTextSize()) / 40);
@@ -165,12 +162,18 @@ public class ThirdFragment extends Fragment {
                 minute.setTextSize(21 * (minute.getTextSize()) / 40);
                 timeZone.setTextSize(21 * (timeZone.getTextSize()) / 40);
                 zoom += 25;
-                percentZoom.setText(zoom + "%");
+                //Change Percent zoom display
+                PercentZoom.setText(zoom + "%");
             }
         });
-        small.setOnClickListener(new View.OnClickListener() {
+        /**
+         * When the decrease text size button is pressed
+         * decrease font size on this page
+         */
+        Small.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Reduce font size throughout the page
                 pressureButton.setTextSize(19 * (pressureButton.getTextSize()) / 40);
                 glucoseButton.setTextSize(19 * (glucoseButton.getTextSize()) / 40);
                 title.setTextSize(19 * (title.getTextSize()) / 40);
@@ -180,43 +183,56 @@ public class ThirdFragment extends Fragment {
                 minute.setTextSize(19 * (minute.getTextSize()) / 40);
                 timeZone.setTextSize(19 * (timeZone.getTextSize()) / 40);
                 zoom -= 25;
-                percentZoom.setText(zoom + "%");
+                //Reduce zoom percentage
+                PercentZoom.setText(zoom + "%");
             }
         });
 
+        /**
+         * When the timeZoneSwitch is changed
+         * Depending on whether or not it's checked, set timeZone text to AM or PM
+         */
         timeZoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //if it's checked on set time text to PM
                 if (timeZoneSwitch.isChecked()) {
                     timeZone.setText("PM");
-                } else {
+                }
+                //If it's not checked set time text to AM
+                else {
                     timeZone.setText("AM");
                 }
             }
         });
 
+        /**
+         * When the SAVE button is pressed
+         * store the time in room
+         * start an alarm for that time
+         */
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Log.d("Yiming", "Save has been pressed");
+
                 //Get string from edit text
                 String hourText = hour.getText().toString();
                 String minuteText = minute.getText().toString();
                 String timeText = hourText + ":" + minuteText + " " + timeZone.getText().toString();
 
-                //Check condition
+                //Check conditions to make sure the text is not empty
                 if (!hourText.equals("") && !minuteText.equals("")) {
                     String timeZoneText = timeZone.getText().toString();
-                    //Log.d("Yiming", "Enters Third Fragment if statement");
-                    //When text is not empty
-                    //Initialize main data
+                    //When text is not empty, initialize main data
                     RemindersData RemindersData = new RemindersData();
+
                     //Set text on main data
                     RemindersData.setTime(timeText);
-                    //Insert text in database
-                    remindersDatabase.RemindersDao().insert(RemindersData);
-                    //Set alarm via Calendar and Alarm Manager
 
+                    //Insert text in database
+                    RemindersDatabase.RemindersDao().insert(RemindersData);
+
+                    //Accounts for army time
                     if (timeZoneText.equals("PM")){
                         hours = Integer.parseInt(hourText) + 12;
                     }
@@ -228,45 +244,55 @@ public class ThirdFragment extends Fragment {
                         hours = Integer.parseInt(hourText);
                     }
 
-
+                    //Create a calendar object and set the time to match current time
                     Calendar c = Calendar.getInstance();
                     c.set(Calendar.HOUR_OF_DAY, hours);
                     c.set(Calendar.MINUTE, Integer.parseInt(minuteText));
                     c.set(Calendar.SECOND, 0);
 
+                    //Checks to see if the set time is before the current time. If so, it pushes back the alarm to the next day
                     if (c.getTimeInMillis() < System.currentTimeMillis()){
                         c.setTimeInMillis(c.getTimeInMillis()+24*60*60*1000);
                     }
 
+                    //Starts the alarm
                     startAlarm(c);
 
                     //Notify when data is inserted
-                    remindersDataList.clear();
-                    remindersDataList.addAll(remindersDatabase.RemindersDao().getAll());
-                    remindersAdapter.notifyDataSetChanged();
+                    RemindersDataList.clear();
+                    RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
+                    RemindersAdapter.notifyDataSetChanged();
+
                 }
                 //Clear edit text
                 hour.setText("");
                 minute.setText("");
-                //timeZoneSwitch.setChecked(false);
+
             }
         });
-    return view;
+        return view;
     }
-        private void setRemindersRecyclerView () {
-            remindersRecyclerView.setHasFixedSize(true);
-            remindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            //Changes here, might only need two arguments for TableAdapter
-            remindersAdapter = new RemindersAdapter(getActivity(), remindersDataList);
-            remindersRecyclerView.setAdapter(remindersAdapter);
-        }
+
+    /**
+     * Creates and sets up a recycler view for the reminders page
+     */
+    private void setRemindersRecyclerView () {
+        RemindersRecyclerView.setHasFixedSize(true);
+        RemindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
+        RemindersRecyclerView.setAdapter(RemindersAdapter);
+    }
+
+    /**
+     * Starts an alarm for the specific time set in a calendar object
+     * @param c the calendar object that has a set time for when the user should be notified
+     */
     private void startAlarm(Calendar c) {
-        System.out.println("Alarm has been started");
+        //Creates new alarm manager object, intent, and pending intent
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
-
-        //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),, pendingIntent);
+        //Sets an alarm manager for the determined time that repeats every day
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 }

@@ -16,9 +16,14 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 public class AlertReceiver extends BroadcastReceiver{
+    /**
+     *When the broadcast is received (meaning it's time to send the notification
+     * @param context requited info when making a notification
+     * @param intent requited info when making a notification
+     */
     @Override
     public void onReceive(Context context, Intent intent){
-        Log.v("Yiming","Gets into Alert Receiver");
+        //Creates and sends a notfication
         NotificationHelper notificationHelper = new NotificationHelper(context);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification("BPG reminder", "Remember to take your blood pressure measurement");
         notificationHelper.getManager().notify(1, nb.build());

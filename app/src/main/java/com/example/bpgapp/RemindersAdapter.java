@@ -20,17 +20,27 @@ import java.util.List;
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ViewHolder>{
 
     //Initialize variable
-    private List<RemindersData> remindersDataList;
+    private List<RemindersData> RemindersDataList;
     private Activity context;
-    private RemindersRoomDB remindersDatabase;
+    private RemindersRoomDB RemindersDatabase;
 
-    //Create constructor
+    /**
+     * Class constructor
+     * @param context
+     * @param dataList data from the reminder data
+     */
     public RemindersAdapter(Activity context, List<RemindersData> dataList)  {
         this.context = context;
-        this.remindersDataList = dataList;
+        this.RemindersDataList = dataList;
         notifyDataSetChanged();
     }
 
+    /**
+     * Overriding the parent onCreate method to bring up the reminder list row main layout
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public RemindersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,34 +50,48 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
         return new RemindersAdapter.ViewHolder(view);
     }
 
+    /**
+     * Overriding the parent onBindViewHolder to initialize and display the data
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull RemindersAdapter.ViewHolder holder, int position) {
         //Initialize main data
-        RemindersData data = remindersDataList.get(position);
+        RemindersData data = RemindersDataList.get(position);
         //Initialize database
-        remindersDatabase = RemindersRoomDB.getInstance(context);
+
+        RemindersDatabase = RemindersRoomDB.getInstance(context);
         //Set text on text view
         holder.remindersTimeTextView.setText(data.getTime());
         holder.remindersDelete.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * On click method that will change the dao and notify that the item was removed
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 //Initialize main data
-                RemindersData d = remindersDataList.get(holder.getAdapterPosition());
+                RemindersData d = RemindersDataList.get(holder.getAdapterPosition());
                 //Delete text from database
-                remindersDatabase.RemindersDao().delete(d);
+                RemindersDatabase.RemindersDao().delete(d);
                 //Notify when data is deleted
                 int position = holder.getAdapterPosition();
-                remindersDataList.remove(position);
+                RemindersDataList.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position, remindersDataList.size());
+                notifyItemRangeChanged(position, RemindersDataList.size());
             }
         });
 
+        /**
+         * If the edit button is pressed bring up a pop up where they can change the value
+         */
         holder.remindersEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Initialize main data
-                RemindersData d = remindersDataList.get(holder.getAdapterPosition());
+                RemindersData d = RemindersDataList.get(holder.getAdapterPosition());
                 //Get ID
                 int timeID = d.getID();
                 //Get text
@@ -88,21 +112,16 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
 
                 //Initialize and assign variable
                 EditText editText = dialog.findViewById(R.id.bp_edit_text);
-                if (dialog.findViewById(R.id.bp_edit_text) == null){
-                }
                 Button bpUpdate = dialog.findViewById(R.id.bp_update);
 
-                //Schema is decision programmed into the DAO
-                if (editText == null){
-                }
-                if (timeText == null){
-                }
                 //Set text on edit text
                 editText.setText(timeText);
                 //Retrieve it right away
 
-                //System.out.println("Systolic value stored: " + sText);
-
+                /**
+                 * When the update button from the dialog is pressed save the new value
+                 * return to the original view
+                 */
                 bpUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -111,10 +130,10 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
                         //Get updated text from edit text
                         String uText = editText.getText().toString().trim();
                         //Update text in database
-                        remindersDatabase.RemindersDao().update(timeID, uText);
+                        RemindersDatabase.RemindersDao().update(timeID, uText);
                         //Notify when data is updated
-                        remindersDataList.clear();
-                        remindersDataList.addAll(remindersDatabase.RemindersDao().getAll());
+                        RemindersDataList.clear();
+                        RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
                         notifyDataSetChanged();
 
                     }
@@ -122,15 +141,23 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
             }
         });
     }
-        public int getItemCount() {
-        return remindersDataList.size();
+
+    /**
+     * Returns the size of the datalist
+     * @return the number of items in the datalist
+     */
+    public int getItemCount() {
+        return RemindersDataList.size();
     }
 
+    /**
+     * Viewholder class to handle the variables
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
         //Initialize variables
-        private TextView remindersTimeTextView;
-        private ImageView remindersEdit;
-        private ImageView remindersDelete;
+        TextView remindersTimeTextView;
+        ImageView remindersEdit;
+        ImageView remindersDelete;
         //Initialize Variables
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -140,5 +167,5 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
             remindersDelete = itemView.findViewById(R.id.reminders_delete);
         }
     }
-    }
+}
 

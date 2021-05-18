@@ -13,6 +13,9 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
     @Override
+    /**
+     * When dialog is create a new activity for it
+     */
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -23,10 +26,21 @@ public class DatePickerFragment extends DialogFragment
         return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
     }
 
+    /**
+     * When date is set via the parameters below use it in the onCreateDialog
+     * @param view
+     * @param year
+     * @param month
+     * @param day
+     */
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
     }
 
+    /**
+     * Displays the datePicker for the user to use
+     * @param v
+     */
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
