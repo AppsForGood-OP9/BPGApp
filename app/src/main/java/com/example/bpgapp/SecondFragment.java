@@ -30,9 +30,6 @@ public class SecondFragment extends Fragment {
     private TextView makeEntry;
     private ImageButton heart;
     private ImageButton drop;
-    private ImageButton home;
-    private ImageButton plus;
-    private ImageButton bell;
     private Button PressureButton;
     private ImageButton pressureImage;
     private Button glucoseButton;
@@ -99,9 +96,6 @@ public class SecondFragment extends Fragment {
         glucoseImage = view.findViewById(R.id.BloodSymbolButton);
         heart = (ImageButton) view.findViewById(R.id.HeartSymbolButton);
         drop = (ImageButton) view.findViewById(R.id.BloodSymbolButton);
-        home = (ImageButton) view.findViewById(R.id.HomeButton);
-        plus = (ImageButton) view.findViewById(R.id.AddButton);
-        bell = (ImageButton) view.findViewById(R.id.BellButton);
 
         Large.setOnClickListener(new View.OnClickListener(){
             @Override

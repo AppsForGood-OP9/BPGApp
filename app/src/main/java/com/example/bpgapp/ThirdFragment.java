@@ -38,7 +38,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
  */
 public class ThirdFragment extends Fragment {
 
-
+    //Declare Data
     private Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
@@ -111,12 +111,11 @@ public class ThirdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // Inflate the layout for this fragment
-        Log.d("TARICCO", "ThirdFragment - onCreateView() - inflate activity_reminders");
-        View view = inflater.inflate(R.layout.activity_reminders, container, false);
-        //Assign Variable
 
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.activity_reminders, container, false);
+
+        //Assign Variables
         PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
         Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
         Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
@@ -133,20 +132,27 @@ public class ThirdFragment extends Fragment {
         RemindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
         setRemindersRecyclerView();
         timeZoneSwitch = (Switch) view.findViewById(R.id.ampmSwitch);
+
         //Initialize database
         RemindersDatabase = RemindersRoomDB.getInstance(getContext());
+
+
         //Store database value in data list
         RemindersDataList = (List<RemindersData>) RemindersDatabase.RemindersDao().getAll();
 
         //Initialize linear layout manager
         linearLayoutManager = new LinearLayoutManager(getContext());
+
         //Set layout manager
         RemindersRecyclerView.setLayoutManager(linearLayoutManager);
+
         //Initialize adapter
         RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
+
         //Set adapter
         RemindersRecyclerView.setAdapter(RemindersAdapter);
 
+        //If enlarge button is pressed
         Large.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,7 +237,12 @@ public class ThirdFragment extends Fragment {
                     c.set(Calendar.MINUTE, Integer.parseInt(minuteText));
                     c.set(Calendar.SECOND, 0);
 
+                    if (c.getTimeInMillis() < System.currentTimeMillis()){
+                        c.setTimeInMillis(c.getTimeInMillis()+24*60*60*1000);
+                    }
+
                     startAlarm(c);
+
                     //Notify when data is inserted
                     RemindersDataList.clear();
                     RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
