@@ -18,11 +18,10 @@ import android.widget.TextView;
 import com.example.bpgapp.ui.BPFragment;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link SecondFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * The SecondFragment class corresponds to the Add Entry page and allows the user to select adding a blood pressure or glucose entry.
  */
 public class SecondFragment extends Fragment {
+    //Initialize variables
     private TextView PercentZoom;
     private ImageButton Large;
     private ImageButton Small;
@@ -35,12 +34,10 @@ public class SecondFragment extends Fragment {
     private Button glucoseButton;
     private ImageButton glucoseImage;
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -56,7 +53,6 @@ public class SecondFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment SecondFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SecondFragment newInstance(String param1, String param2) {
         SecondFragment fragment = new SecondFragment();
         Bundle args = new Bundle();
@@ -79,13 +75,10 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("TARICCO","SecondFragment - onCreateView() - inflate activity_main");
         View view = inflater.inflate(R.layout.activity_main, container, false);
         Button pressureButton = view.findViewById(R.id.BloodPressureButton);
 
-        //getSupportActionBar().setTitle("Blood Pressure Entry");
-        //return inflater.inflate(R.layout.activity_main, container, false);
-
+        //Retrieve view objects from the xml
         makeEntry = (TextView) view.findViewById(R.id.Prompt);
         PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
         Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
@@ -98,6 +91,9 @@ public class SecondFragment extends Fragment {
         drop = (ImageButton) view.findViewById(R.id.BloodSymbolButton);
 
         Large.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Increases text size when plus sign magnifying button is clicked
+             */
             @Override
             public void onClick(View v){
                 makeEntry.setTextSize(21*(makeEntry.getTextSize())/40);
@@ -107,7 +103,11 @@ public class SecondFragment extends Fragment {
                 PercentZoom.setText(zoom+"%");
             }
         });
+
         Small.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Decreases text size when minus sign magnifying button is clicked
+             */
             @Override
             public void onClick(View v){
                 makeEntry.setTextSize(19*(makeEntry.getTextSize())/40);
@@ -119,9 +119,12 @@ public class SecondFragment extends Fragment {
         });
 
         pressureButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Navigates to the BPFragment when the blood pressure button is clicked
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
-                Log.v("talia","pressureButton onClick method in Second Fragment used to go to BP page");
                 Fragment fragment = new BPFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -133,9 +136,12 @@ public class SecondFragment extends Fragment {
         });
 
         pressureImage.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Navigates to the BPFragment when the blood pressure image is clicked
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
-                Log.v("talia","pressureImage onClick method in Second Fragment used to go to BP page");
                 Fragment fragment = new BPFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -147,6 +153,10 @@ public class SecondFragment extends Fragment {
         });
 
         glucoseButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Navigates to the GFragment when the glucose button is clicked
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
                 Fragment fragment = new GFragment();
@@ -159,6 +169,10 @@ public class SecondFragment extends Fragment {
         });
 
         glucoseImage.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Navigates to the GFragment when the glucose image is clicked
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
                 Fragment fragment = new GFragment();
@@ -169,7 +183,6 @@ public class SecondFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
         return view;
     }
 }

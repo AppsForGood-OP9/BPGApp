@@ -11,13 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * The TableAdapterG handles the adapter for the glucose table.
+ */
 public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHolder>{
-
+    //Initialize variables
     Context context;
     private List<TableModelBP> table_list;
     private List<BPData> dataList;
     private BPRoomDB bpDatabase;
 
+    /**
+     * Constructs a TableAdapterBP object
+     * @param context the context
+     * @param table_list the TableModel data list
+     * @param dataList the BPData data list
+     */
     public TableAdapterBP(Context context, List<TableModelBP> table_list, List<BPData> dataList)  {
         this.context = context;
         this.table_list = table_list;
@@ -38,6 +47,7 @@ public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHold
         //Initialize database
         bpDatabase = BPRoomDB.getInstance(context);
 
+        //Set the text for each item in the table
         if(table_list != null && table_list.size() > 0)  {
             TableModelBP model = table_list.get(position);
             holder.dateItem.setText(model.getDate());
@@ -50,30 +60,20 @@ public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHold
             return;
         }
 
-        /*
-        holder.bpDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Initialize main data
-                bpData d = dataList.get(holder.getAdapterPosition());
-                //Delete text from database
-                bpDatabase.bpDao().delete(d);
-                bpDatabase.bpDao().deleteAll();
-                //Notify when data is deleted
-                int position = holder.getAdapterPosition();
-                dataList.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, dataList.size());
-            }
-        });
-*/
     }
 
+    /**
+     * Returns the number of items in the table data list
+     * @return the number of items
+     */
     @Override
     public int getItemCount() {
         return table_list.size();
     }
 
+    /**
+     * Constructs the corresponding ViewHolder for the RecyclerView.ViewHolder
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
         //ImageView bpDelete;
@@ -85,7 +85,6 @@ public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHold
             systolicItem = itemView.findViewById(R.id.systolicItem);
             diastolicItem = itemView.findViewById(R.id.diastolicItem);
             notesItem = itemView.findViewById(R.id.notesItem);
-            //bpDelete = itemView.findViewById(R.id.bp_delete);
         }
 
     }

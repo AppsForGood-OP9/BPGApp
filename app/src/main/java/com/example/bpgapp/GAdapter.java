@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * The GAdapter class handles the adapter for the glucose recycler view.
+ */
 public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
 
     //Initialize variables

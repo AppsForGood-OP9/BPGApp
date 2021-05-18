@@ -26,36 +26,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link GTableFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * The GTableFragment class corresponds to the glucose data table and displays the user's glucose data.
  */
 public class GTableFragment extends Fragment {
-
+    //Initialize variables
     private TableAdapterG adapter;
     private GRoomDB gDatabase;
     private GAdapter gAdapter;
     private List<GData> dataList = new ArrayList<>();
-
     private String dateStr, timeStr;
     private String glucoseStr, notesStr;
-
-    //ImageView bpDelete;
     private TextView dateItem, timeItem;
     private TextView glucoseItem, notesItem;
-
     private RecyclerView table_recycler_view;
     private LinearLayoutManager linearLayoutManager;
-
     private Button yesButton;
     private Button noButton;
+    private Button bpToggle;
+    private Button gToggle;
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -71,7 +63,6 @@ public class GTableFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment GTableFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static GTableFragment newInstance(String param1, String param2) {
         GTableFragment fragment = new GTableFragment();
         Bundle args = new Bundle();
@@ -103,8 +94,8 @@ public class GTableFragment extends Fragment {
         timeItem = view.findViewById(R.id.timeItem);
         glucoseItem = view.findViewById(R.id.glucoseItem);
         notesItem = view.findViewById(R.id.notesItem);
-        //bpDelete = findViewById(R.id.bp_delete);
 
+        //Initialize database
         gDatabase = GRoomDB.getInstance(getContext());
         //Store database value in data list
         dataList = gDatabase.gDao().getAll();
@@ -118,23 +109,13 @@ public class GTableFragment extends Fragment {
         table_recycler_view.setLayoutManager(linearLayoutManager);
 
         GData data = new GData();
-        //Set text on main data
 
+        //Retrieve data from database
         dateStr = data.getDate();
         timeStr = data.getTime();
         glucoseStr = data.getGlucoseText();
         notesStr = data.getNotesText();
 
-        //Remove these when editing code
-        Log.v("talia","date = " + dateStr);
-        Log.v("talia","time = " + timeStr);
-        Log.v("talia", "glucoseStr = " + glucoseStr);
-
-        dateItem = view.findViewById(R.id.dateItem);
-        timeItem = view.findViewById(R.id.timeItem);
-        glucoseItem = view.findViewById(R.id.glucoseItem);
-        notesItem = view.findViewById(R.id.notesItem);
-        //bpDelete = findViewById(R.id.bp_delete);
 
         gDatabase = GRoomDB.getInstance(getContext());
         //Store database value in data list
@@ -158,6 +139,10 @@ public class GTableFragment extends Fragment {
         Button gToggle = view.findViewById(R.id.glucoseToggle);
 
         bpToggle.setOnClickListener(new View.OnClickListener() {
+            /**
+             * When the blood pressure toggle button is clicked, display the corresponding table fragment
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
                 Fragment fragment = new BPTableFragment();
@@ -170,6 +155,10 @@ public class GTableFragment extends Fragment {
         });
 
         gToggle.setOnClickListener(new View.OnClickListener() {
+            /**
+             * When the glucose toggle button is clicked, display the corresponding table fragment
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
                 Fragment fragment = new GTableFragment();
@@ -181,7 +170,9 @@ public class GTableFragment extends Fragment {
             }
         });
 
-        //Initialize item touch helper
+        /**
+         * The item touch helper will help to perform the delete action when a table row is swiped
+         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -189,6 +180,12 @@ public class GTableFragment extends Fragment {
             }
 
             @RequiresApi(api = Build.VERSION_CODES.P)
+            /**
+             * When the item touch helper is swiped to the right, the entry row will either delete (on yes button)
+             * or remain (on yes button)
+             * @param viewHolder the view holder
+             * @param direction the direction, right
+             */
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 //Create dialog
@@ -257,6 +254,9 @@ public class GTableFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Set table recycler view to have a fixed size and correspond to a linear layout manager and adapter
+     */
     private void setTableRecyclerView() {
         table_recycler_view.setHasFixedSize(true);
         table_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -265,6 +265,10 @@ public class GTableFragment extends Fragment {
         table_recycler_view.setAdapter(adapter);
     }
 
+    /**
+     * Gets the data list of table row entries
+     * @return the list of table data
+     */
     private List<TableModelG> getList()  {
         List<TableModelG> table_list = new ArrayList<>();
         table_list.add(new TableModelG(dateStr,timeStr,glucoseStr,notesStr));

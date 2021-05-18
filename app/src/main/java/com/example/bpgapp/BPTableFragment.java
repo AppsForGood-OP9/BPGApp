@@ -100,6 +100,7 @@ public class BPTableFragment extends Fragment {
         systolicItem = view.findViewById(R.id.systolicItem);
         diastolicItem = view.findViewById(R.id.diastolicItem);
         notesItem = view.findViewById(R.id.notesItem);
+        //bpDelete = findViewById(R.id.bp_delete);
 
         bpDatabase = BPRoomDB.getInstance(getContext());
         //Store database value in data list

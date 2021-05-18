@@ -6,7 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-//Add database entities
+/*
+Add database entities
+ */
 @Database(entities = {GData.class}, version = 1, exportSchema = false)
 public abstract class GRoomDB extends RoomDatabase {
     //Create database instance
@@ -24,11 +26,9 @@ public abstract class GRoomDB extends RoomDatabase {
                     .fallbackToDestructiveMigration()
                     .build();
         }
-        //Maybe use to help with null object issue?
-        //Return database
         return gDatabase;
     }
 
-    //Create Dao
+    //Create DAO
     public abstract GDao gDao();
 }

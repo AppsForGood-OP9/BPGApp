@@ -32,8 +32,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * The MainActivityBlank class is the container for all fragments that are involved in the navigation.
+ */
 public class MainActivityBlank extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
+    //Initialize variables
     int dayofmon;
     int mon;
     int yea;
@@ -44,12 +47,10 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
     TextView hour;
     TextView minute;
     String currentDateString;
-    //Initialize variable
     Button save;
     RecyclerView RemindersRecyclerView;
     Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
-
     List<RemindersData> RemindersDataList = new ArrayList();
     LinearLayoutManager linearLayoutManager;
     RemindersRoomDB RemindersDatabase;
@@ -72,6 +73,10 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
+        /**
+         * The navigation item selected listener will change the fragment being displayed when the corresponding navigation
+         * icon on the bottom of the screen is clicked.
+         */
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             // By using switch we can easily get
             // the selected fragment
@@ -101,8 +106,11 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         }
     };
 
+    /**
+     * Transitions to the BPFragment when clicked
+     * @param v the view
+     */
     public void addBloodPressureEntry(View v)  {
-        Log.v("talia","AddBloodPressureEntry in Main Activity Blank clicked");
         Fragment selectedFragment = null;
                 selectedFragment = new BPFragment();
 
@@ -133,18 +141,6 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         DateFormat.getDateInstance().format(c.getTime());
         date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
-    }
-
-    public Fragment getVisibleFragment(){
-        FragmentManager fragmentManager = MainActivityBlank.this.getSupportFragmentManager();
-        List<Fragment> fragments = fragmentManager.getFragments();
-        if(fragments != null){
-            for(Fragment fragment : fragments){
-                if(fragment != null && fragment.isVisible())
-                    return fragment;
-            }
-        }
-        return null;
     }
 
     /**
@@ -226,25 +222,13 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
     }
 
     @Override
+    /**
+     * Handles the back button to display the correct fragment.
+     */
     public void onBackPressed() {
         super.onBackPressed();
         int count = getSupportFragmentManager().getBackStackEntryCount();
         FragmentManager.BackStackEntry name = (getSupportFragmentManager().getBackStackEntryAt(count - 1));
         String simpleName = name.getName();
-        //Log.v("talia","getName: " + simpleName);
-        //Log.v("talia","count: " + count);
-        //Log.v("talia","stack entry at: " + count + " is: " + name);
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-        afterBackPressed();
-        // Call parent Activity's onBackPressed() method and add other statements you need (if any)
-    }
-
-    public void afterBackPressed()  {
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-        Fragment fragment = getVisibleFragment();
-        int id = fragment.getId();
-        //Log.v("talia","fragment: " + fragment);
-        //Log.v("talia","id: " + id);
-        bottomNav.setSelectedItemId(id);
     }
 }

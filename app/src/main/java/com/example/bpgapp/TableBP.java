@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * The TableBP class activates the BP Table Activity.
+ */
 public class TableBP extends AppCompatActivity {
 
     @Override

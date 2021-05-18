@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * The BPAdapter class handles the adapter for the blood pressure recycler view.
+ */
 public class BPAdapter extends RecyclerView.Adapter<BPAdapter.ViewHolder> {
 
     //Initialize variables

@@ -26,26 +26,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
+ * The FirstFragment class corresponds to the data tables and displays the user's data.
  */
 public class FirstFragment extends Fragment {
-
+    //Initialize variables
     private TableAdapterBP adapter;
     private BPRoomDB bpDatabase;
     private BPAdapter bpAdapter;
     private List<BPData> dataList = new ArrayList<>();
-
     private String dateStr, timeStr;
     private String systolicStr, diastolicStr, notesStr;
-
-    //ImageView bpDelete;
     private TextView dateItem, timeItem;
     private TextView systolicItem, diastolicItem, notesItem;
-
     private RecyclerView table_recycler_view;
     private LinearLayoutManager linearLayoutManager;
-
     private Button yesButton;
     private Button noButton;
 
@@ -72,7 +66,6 @@ public class FirstFragment extends Fragment {
         systolicItem = view.findViewById(R.id.systolicItem);
         diastolicItem = view.findViewById(R.id.diastolicItem);
         notesItem = view.findViewById(R.id.notesItem);
-        //bpDelete = findViewById(R.id.bp_delete);
 
         bpDatabase = BPRoomDB.getInstance(getContext());
         //Store database value in data list
@@ -88,21 +81,11 @@ public class FirstFragment extends Fragment {
 
         BPData data = new BPData();
         //Set text on main data
-
         dateStr = data.getDate();
         timeStr = data.getTime();
         systolicStr = data.getSystolicText();
         diastolicStr = data.getDiastolicText();
         notesStr = data.getNotesText();
-
-        //Remove these when editing code
-        Log.v("talia","date = " + dateStr);
-        Log.v("talia","time = " + timeStr);
-        Log.v("talia", "systolicStr = " + systolicStr);
-
-        // Inflate the layout for this fragment
-        Log.d("TARICCO","FirstFragment - onCreateView() - inflate activity_table");
-
 
         table_recycler_view = view.findViewById(R.id.table_recycler_view);
         setTableRecyclerView();
@@ -112,7 +95,6 @@ public class FirstFragment extends Fragment {
         systolicItem = view.findViewById(R.id.systolicItem);
         diastolicItem = view.findViewById(R.id.diastolicItem);
         notesItem = view.findViewById(R.id.notesItem);
-        //bpDelete = findViewById(R.id.bp_delete);
 
         bpDatabase = BPRoomDB.getInstance(getContext());
         //Store database value in data list
@@ -126,22 +108,20 @@ public class FirstFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getContext());
         table_recycler_view.setLayoutManager(linearLayoutManager);
 
-
         dateStr = data.getDate();
         timeStr = data.getTime();
         systolicStr = data.getSystolicText();
         diastolicStr = data.getDiastolicText();
         notesStr = data.getNotesText();
 
-        //Remove these when editing code
-        Log.v("talia","date = " + dateStr);
-        Log.v("talia","time = " + timeStr);
-        Log.v("talia", "systolicStr = " + systolicStr);
-
         Button bpToggle = view.findViewById(R.id.bloodPressureToggle);
         Button gToggle = view.findViewById(R.id.glucoseToggle);
 
         bpToggle.setOnClickListener(new OnClickListener() {
+            /**
+             * When the blood pressure toggle button is clicked, display the corresponding table fragment
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
                 Fragment fragment = new BPTableFragment();
@@ -154,6 +134,10 @@ public class FirstFragment extends Fragment {
         });
 
         gToggle.setOnClickListener(new OnClickListener() {
+            /**
+             * When the glucose toggle button is clicked, display the corresponding table fragment
+             * @param v the view
+             */
             @Override
             public void onClick(View v) {
                 Fragment fragment = new GTableFragment();
@@ -165,13 +149,21 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        //Initialize item touch helper
+        /**
+         * The item touch helper will help to perform the delete action when a table row is swiped
+         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
+            /**
+             * When the item touch helper is swiped to the right, the entry row will either delete (on yes button)
+             * or remain (on yes button)
+             * @param viewHolder the view holder
+             * @param direction the direction, right
+             */
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 //Create dialog
@@ -228,6 +220,9 @@ public class FirstFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Set table recycler view to have a fixed size and correspond to a linear layout manager and adapter
+     */
     private void setTableRecyclerView() {
         table_recycler_view.setHasFixedSize(true);
         table_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -236,6 +231,10 @@ public class FirstFragment extends Fragment {
         table_recycler_view.setAdapter(adapter);
     }
 
+    /**
+     * Gets the data list of table row entries
+     * @return the list of table data
+     */
     private List<TableModelBP> getList()  {
         List<TableModelBP> table_list = new ArrayList<>();
         table_list.add(new TableModelBP(dateStr,timeStr,systolicStr,diastolicStr,notesStr));

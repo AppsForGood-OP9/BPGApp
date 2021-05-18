@@ -131,8 +131,8 @@ public class GFragment extends Fragment {
         date.setText(currentDateString);
 
         large.setOnClickListener(new View.OnClickListener(){
-            /*
-            Increases text size when plus sign magnifying button is clicked
+            /**
+             * Increases text size when plus sign magnifying button is clicked
              */
             @Override
             public void onClick(View v){
@@ -156,8 +156,8 @@ public class GFragment extends Fragment {
 
         small.setOnClickListener(new View.OnClickListener(){
             @Override
-            /*
-            Decreases text size when minus sign magnifying button is clicked
+            /**
+             * Decreases text size when minus sign magnifying button is clicked
              */
             public void onClick(View v){
                 title.setTextSize(19*(title.getTextSize())/40);

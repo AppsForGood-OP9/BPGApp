@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * The TableG class activates the G Table Activity.
+ */
 public class TableG extends AppCompatActivity {
 
     @Override
