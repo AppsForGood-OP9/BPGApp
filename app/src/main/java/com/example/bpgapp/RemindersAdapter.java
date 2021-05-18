@@ -20,14 +20,14 @@ import java.util.List;
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ViewHolder>{
 
     //Initialize variable
-    private List<RemindersData> RemindersDataList;
+    private List<RemindersData> remindersDataList;
     private Activity context;
-    private RemindersRoomDB RemindersDatabase;
+    private RemindersRoomDB remindersDatabase;
 
     //Create constructor
     public RemindersAdapter(Activity context, List<RemindersData> dataList)  {
         this.context = context;
-        this.RemindersDataList = dataList;
+        this.remindersDataList = dataList;
         notifyDataSetChanged();
     }
 
@@ -43,32 +43,31 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
     @Override
     public void onBindViewHolder(@NonNull RemindersAdapter.ViewHolder holder, int position) {
         //Initialize main data
-        RemindersData data = RemindersDataList.get(position);
+        RemindersData data = remindersDataList.get(position);
         //Initialize database
-        RemindersDatabase = RemindersRoomDB.getInstance(context);
+        remindersDatabase = RemindersRoomDB.getInstance(context);
         //Set text on text view
         holder.remindersTimeTextView.setText(data.getTime());
         holder.remindersDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Initialize main data
-                RemindersData d = RemindersDataList.get(holder.getAdapterPosition());
+                RemindersData d = remindersDataList.get(holder.getAdapterPosition());
                 //Delete text from database
-                RemindersDatabase.RemindersDao().delete(d);
+                remindersDatabase.RemindersDao().delete(d);
                 //Notify when data is deleted
                 int position = holder.getAdapterPosition();
-                RemindersDataList.remove(position);
+                remindersDataList.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position, RemindersDataList.size());
+                notifyItemRangeChanged(position, remindersDataList.size());
             }
         });
 
         holder.remindersEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Yiming","bp Edit on click method is here");
                 //Initialize main data
-                RemindersData d = RemindersDataList.get(holder.getAdapterPosition());
+                RemindersData d = remindersDataList.get(holder.getAdapterPosition());
                 //Get ID
                 int timeID = d.getID();
                 //Get text
@@ -90,23 +89,19 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
                 //Initialize and assign variable
                 EditText editText = dialog.findViewById(R.id.bp_edit_text);
                 if (dialog.findViewById(R.id.bp_edit_text) == null){
-                    Log.d("Yiming", "reminders_edit is null");
                 }
                 Button bpUpdate = dialog.findViewById(R.id.bp_update);
 
                 //Schema is decision programmed into the DAO
                 if (editText == null){
-                    Log.d("Yiming", "editText is null");
                 }
                 if (timeText == null){
-                    Log.d("Yiming", "timeText is null");
                 }
                 //Set text on edit text
                 editText.setText(timeText);
                 //Retrieve it right away
 
                 //System.out.println("Systolic value stored: " + sText);
-                Log.d("talia", "Time value stored in RemindersAdapter: " + timeText);
 
                 bpUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,10 +111,10 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
                         //Get updated text from edit text
                         String uText = editText.getText().toString().trim();
                         //Update text in database
-                        RemindersDatabase.RemindersDao().update(timeID, uText);
+                        remindersDatabase.RemindersDao().update(timeID, uText);
                         //Notify when data is updated
-                        RemindersDataList.clear();
-                        RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
+                        remindersDataList.clear();
+                        remindersDataList.addAll(remindersDatabase.RemindersDao().getAll());
                         notifyDataSetChanged();
 
                     }
@@ -128,14 +123,14 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.View
         });
     }
         public int getItemCount() {
-        return RemindersDataList.size();
+        return remindersDataList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         //Initialize variables
-        TextView remindersTimeTextView;
-        ImageView remindersEdit;
-        ImageView remindersDelete;
+        private TextView remindersTimeTextView;
+        private ImageView remindersEdit;
+        private ImageView remindersDelete;
         //Initialize Variables
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

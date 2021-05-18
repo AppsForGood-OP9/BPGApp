@@ -41,7 +41,7 @@ public class BPFragment extends Fragment {
     private List<BPData> dataList = new ArrayList<>();
     private BPRoomDB bpDatabase;
     private BPAdapter bpAdapter;
-    private int dayofmon;
+    private int dayOfMon;
     private int mon;
     private int yea;
     private TextView date;
@@ -54,10 +54,10 @@ public class BPFragment extends Fragment {
     private EditText hour;
     private EditText minute;
     private String currentDateString;
-    private TextView PercentZoom;
+    private TextView percentZoom;
     private TextView timeColon;
-    private ImageButton Large;
-    private ImageButton Small;
+    private ImageButton large;
+    private ImageButton small;
     private int zoom = 100;
     private TextView timeTitle;
 
@@ -115,9 +115,9 @@ public class BPFragment extends Fragment {
         timeZone = view.findViewById(R.id.ampmDisplay);
         timeZoneSwitch = view.findViewById(R.id.ampmSwitch);
         Button dateChanger = view.findViewById(R.id.dateButton);
-        PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
-        Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
-        Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
+        percentZoom = (TextView) view.findViewById(R.id.percentZoom);
+        large = (ImageButton) view.findViewById(R.id.ZoomInButton);
+        small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
         title = (TextView) view.findViewById(R.id.bpText);
         systolicTitle = (TextView) view.findViewById(R.id.systolicText);
         diastolicTitle = (TextView) view.findViewById(R.id.diastolicText);
@@ -135,14 +135,14 @@ public class BPFragment extends Fragment {
 
         //Sets the TextView above the date changer button to the current date as default
         Calendar c = Calendar.getInstance();
-        dayofmon = c.get(Calendar.DAY_OF_MONTH);
+        dayOfMon = c.get(Calendar.DAY_OF_MONTH);
         mon = c.get(Calendar.MONTH)+1;
         yea =  c.get(Calendar.YEAR);
-        currentDateString = mon+"/"+dayofmon+"/"+yea;
+        currentDateString = mon+"/"+dayOfMon+"/"+yea;
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
 
-        Large.setOnClickListener(new View.OnClickListener(){
+        large.setOnClickListener(new View.OnClickListener(){
             /*
             Increases text size when plus sign magnifying button is clicked
              */
@@ -164,11 +164,11 @@ public class BPFragment extends Fragment {
                 submit.setTextSize(21*(submit.getTextSize())/40);
 
                 zoom +=25;
-                PercentZoom.setText(zoom+"%");
+                percentZoom.setText(zoom+"%");
             }
         });
 
-       Small.setOnClickListener(new View.OnClickListener(){
+       small.setOnClickListener(new View.OnClickListener(){
            /*
             Decreases text size when minus sign magnifying button is clicked
              */
@@ -190,7 +190,7 @@ public class BPFragment extends Fragment {
                submit.setTextSize(19*(submit.getTextSize())/40);
 
                zoom -=25;
-               PercentZoom.setText(zoom+"%");
+               percentZoom.setText(zoom+"%");
            }
        });
 

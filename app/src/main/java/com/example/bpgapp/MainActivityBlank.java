@@ -40,26 +40,26 @@ import java.util.List;
 
 public class MainActivityBlank extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    int dayofmon;
-    int mon;
-    int yea;
-    TextView date;
-    TextView UserTime;
-    TextView timeZone;
-    Switch timeZoneSwitch;
-    TextView hour;
-    TextView minute;
-    String currentDateString;
+    private int dayOfMon;
+    private int mon;
+    private int yea;
+    private TextView date;
+    private TextView UserTime;
+    private TextView timeZone;
+    private Switch timeZoneSwitch;
+    private TextView hour;
+    private TextView minute;
+    private String currentDateString;
     //Initialize variable
-    Button save;
-    RecyclerView RemindersRecyclerView;
-    Button notifyBtn;
+    private Button save;
+    private RecyclerView RemindersRecyclerView;
+    private Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
-    List<RemindersData> RemindersDataList = new ArrayList();
-    LinearLayoutManager linearLayoutManager;
-    RemindersRoomDB RemindersDatabase;
-    RemindersAdapter RemindersAdapter;
+    private List<RemindersData> RemindersDataList = new ArrayList();
+    private LinearLayoutManager linearLayoutManager;
+    private RemindersRoomDB RemindersDatabase;
+    private RemindersAdapter RemindersAdapter;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
@@ -108,7 +108,6 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
     };
 
     public void addBloodPressureEntry(View v)  {
-        Log.v("talia","AddBloodPressureEntry in Main Activity Blank clicked");
         Fragment selectedFragment = null;
                 selectedFragment = new BPFragment();
 
@@ -132,10 +131,10 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        dayofmon = c.get(Calendar.DAY_OF_MONTH);
+        dayOfMon = c.get(Calendar.DAY_OF_MONTH);
         mon = c.get(Calendar.MONTH)+1;
         yea =  c.get(Calendar.YEAR);
-        currentDateString = mon+"/"+dayofmon+"/"+yea;
+        currentDateString = mon+"/"+dayOfMon+"/"+yea;
         DateFormat.getDateInstance().format(c.getTime());
         date = (TextView) findViewById(R.id.DateText);
         date.setText(currentDateString);
@@ -246,9 +245,7 @@ public class MainActivityBlank extends AppCompatActivity implements DatePickerDi
         int count = getSupportFragmentManager().getBackStackEntryCount();
         FragmentManager.BackStackEntry name = (getSupportFragmentManager().getBackStackEntryAt(count - 1));
         String simpleName = name.getName();
-        //Log.v("talia","getName: " + simpleName);
-        //Log.v("talia","count: " + count);
-        //Log.v("talia","stack entry at: " + count + " is: " + name);
+       
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         afterBackPressed();
         // Call parent Activity's onBackPressed() method and add other statements you need (if any)

@@ -32,7 +32,7 @@ public class GFragment extends Fragment {
     private List<GData> dataList = new ArrayList<>();
     private GRoomDB gDatabase;
     private com.example.bpgapp.GAdapter gAdapter;
-    private int dayofmon;
+    private int dayOfMon;
     private int mon;
     private int yea;
     private TextView date;
@@ -45,9 +45,9 @@ public class GFragment extends Fragment {
     private TextView minute;
     private TextView timeColon;
     private String currentDateString;
-    private TextView PercentZoom;
-    private ImageButton Small;
-    private ImageButton Large;
+    private TextView percentZoom;
+    private ImageButton small;
+    private ImageButton large;
     private int zoom = 100;
     private Button dateChanger;
 
@@ -108,10 +108,10 @@ public class GFragment extends Fragment {
         submit = view.findViewById(R.id.submit);
         timeZone = view.findViewById(R.id.ampmDisplay2);
         timeZoneSwitch = view.findViewById(R.id.ampmSwitch2);
-        Small = view.findViewById(R.id.ZoomOutButton);
-        Large = view.findViewById(R.id.ZoomInButton);
+        small = view.findViewById(R.id.ZoomOutButton);
+        large = view.findViewById(R.id.ZoomInButton);
         dateChanger = view.findViewById(R.id.dateButton2);
-        PercentZoom = view.findViewById(R.id.percentZoom);
+        percentZoom = view.findViewById(R.id.percentZoom);
         timeColon = view.findViewById(R.id.timeColon2);
 
         //Initialize database
@@ -123,14 +123,14 @@ public class GFragment extends Fragment {
 
         //Sets the TextView above the date changer button to the current date as default
         Calendar c = Calendar.getInstance();
-        dayofmon = c.get(Calendar.DAY_OF_MONTH);
+        dayOfMon = c.get(Calendar.DAY_OF_MONTH);
         mon = c.get(Calendar.MONTH)+1;
         yea =  c.get(Calendar.YEAR);
-        currentDateString = mon+"/"+dayofmon+"/"+yea;
+        currentDateString = mon+"/"+dayOfMon+"/"+yea;
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
 
-        Large.setOnClickListener(new View.OnClickListener(){
+        large.setOnClickListener(new View.OnClickListener(){
             /*
             Increases text size when plus sign magnifying button is clicked
              */
@@ -150,11 +150,11 @@ public class GFragment extends Fragment {
                 submit.setTextSize(21*(submit.getTextSize())/40);
 
                 zoom +=25;
-                PercentZoom.setText(zoom+"%");
+                percentZoom.setText(zoom+"%");
             }
         });
 
-        Small.setOnClickListener(new View.OnClickListener(){
+        small.setOnClickListener(new View.OnClickListener(){
             @Override
             /*
             Decreases text size when minus sign magnifying button is clicked
@@ -174,7 +174,7 @@ public class GFragment extends Fragment {
                 submit.setTextSize(19*(submit.getTextSize())/40);
 
                 zoom -=25;
-                PercentZoom.setText(zoom+"%");
+                percentZoom.setText(zoom+"%");
             }
         });
 

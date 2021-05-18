@@ -42,9 +42,9 @@ public class ThirdFragment extends Fragment {
     private Button notifyBtn;
     private final String CHANNEL_ID = "Channel_ID";
 
-    private TextView PercentZoom;
-    private ImageButton Large;
-    private ImageButton Small;
+    private TextView percentZoom;
+    private ImageButton large;
+    private ImageButton small;
     private int zoom = 100;
     private TextView title;
     private Button pressureButton;
@@ -57,14 +57,14 @@ public class ThirdFragment extends Fragment {
 
     private TextView makeEntry;
     private int hours;
-    private RecyclerView RemindersRecyclerView;
+    private RecyclerView remindersRecyclerView;
 
     private Switch timeZoneSwitch;
 
-    private List<RemindersData> RemindersDataList = new ArrayList();
+    private List<RemindersData> remindersDataList = new ArrayList();
     private LinearLayoutManager linearLayoutManager;
-    private RemindersRoomDB RemindersDatabase;
-    private RemindersAdapter RemindersAdapter;
+    private RemindersRoomDB remindersDatabase;
+    private RemindersAdapter remindersAdapter;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
@@ -116,9 +116,9 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_reminders, container, false);
 
         //Assign Variables
-        PercentZoom = (TextView) view.findViewById(R.id.percentZoom);
-        Large = (ImageButton) view.findViewById(R.id.ZoomInButton);
-        Small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
+        percentZoom = (TextView) view.findViewById(R.id.percentZoom);
+        large = (ImageButton) view.findViewById(R.id.ZoomInButton);
+        small = (ImageButton) view.findViewById(R.id.ZoomOutButton);
         pressureButton = (Button) view.findViewById(R.id.bloodPressureToggle);
         glucoseButton = (Button) view.findViewById(R.id.bloodGlucoseToggle);
         title = (TextView) view.findViewById(R.id.remindersTitle);
@@ -129,31 +129,31 @@ public class ThirdFragment extends Fragment {
         timeZone = (TextView) view.findViewById(R.id.ampmDisplay);
 
 
-        RemindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
+        remindersRecyclerView = view.findViewById(R.id.reminders_recycler_view);
         setRemindersRecyclerView();
         timeZoneSwitch = (Switch) view.findViewById(R.id.ampmSwitch);
 
         //Initialize database
-        RemindersDatabase = RemindersRoomDB.getInstance(getContext());
+        remindersDatabase = RemindersRoomDB.getInstance(getContext());
 
 
         //Store database value in data list
-        RemindersDataList = (List<RemindersData>) RemindersDatabase.RemindersDao().getAll();
+        remindersDataList = (List<RemindersData>) remindersDatabase.RemindersDao().getAll();
 
         //Initialize linear layout manager
         linearLayoutManager = new LinearLayoutManager(getContext());
 
         //Set layout manager
-        RemindersRecyclerView.setLayoutManager(linearLayoutManager);
+        remindersRecyclerView.setLayoutManager(linearLayoutManager);
 
         //Initialize adapter
-        RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
+        remindersAdapter = new RemindersAdapter(getActivity(), remindersDataList);
 
         //Set adapter
-        RemindersRecyclerView.setAdapter(RemindersAdapter);
+        remindersRecyclerView.setAdapter(remindersAdapter);
 
         //If enlarge button is pressed
-        Large.setOnClickListener(new View.OnClickListener() {
+        large.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pressureButton.setTextSize(21 * (pressureButton.getTextSize()) / 40);
@@ -165,10 +165,10 @@ public class ThirdFragment extends Fragment {
                 minute.setTextSize(21 * (minute.getTextSize()) / 40);
                 timeZone.setTextSize(21 * (timeZone.getTextSize()) / 40);
                 zoom += 25;
-                PercentZoom.setText(zoom + "%");
+                percentZoom.setText(zoom + "%");
             }
         });
-        Small.setOnClickListener(new View.OnClickListener() {
+        small.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pressureButton.setTextSize(19 * (pressureButton.getTextSize()) / 40);
@@ -180,7 +180,7 @@ public class ThirdFragment extends Fragment {
                 minute.setTextSize(19 * (minute.getTextSize()) / 40);
                 timeZone.setTextSize(19 * (timeZone.getTextSize()) / 40);
                 zoom -= 25;
-                PercentZoom.setText(zoom + "%");
+                percentZoom.setText(zoom + "%");
             }
         });
 
@@ -214,7 +214,7 @@ public class ThirdFragment extends Fragment {
                     //Set text on main data
                     RemindersData.setTime(timeText);
                     //Insert text in database
-                    RemindersDatabase.RemindersDao().insert(RemindersData);
+                    remindersDatabase.RemindersDao().insert(RemindersData);
                     //Set alarm via Calendar and Alarm Manager
 
                     if (timeZoneText.equals("PM")){
@@ -228,11 +228,8 @@ public class ThirdFragment extends Fragment {
                         hours = Integer.parseInt(hourText);
                     }
 
-                    Log.d("Yiming", "hours: " + hours);
-                    Log.d("Yiming", "minutes: " + minuteText);
-                    Log.d("Yiming", "timeZone: " + timeZone.getText().toString());
+
                     Calendar c = Calendar.getInstance();
-                    Log.d("Yiming", "Calendar" + c.toString());
                     c.set(Calendar.HOUR_OF_DAY, hours);
                     c.set(Calendar.MINUTE, Integer.parseInt(minuteText));
                     c.set(Calendar.SECOND, 0);
@@ -244,9 +241,9 @@ public class ThirdFragment extends Fragment {
                     startAlarm(c);
 
                     //Notify when data is inserted
-                    RemindersDataList.clear();
-                    RemindersDataList.addAll(RemindersDatabase.RemindersDao().getAll());
-                    RemindersAdapter.notifyDataSetChanged();
+                    remindersDataList.clear();
+                    remindersDataList.addAll(remindersDatabase.RemindersDao().getAll());
+                    remindersAdapter.notifyDataSetChanged();
                 }
                 //Clear edit text
                 hour.setText("");
@@ -257,16 +254,14 @@ public class ThirdFragment extends Fragment {
     return view;
     }
         private void setRemindersRecyclerView () {
-            RemindersRecyclerView.setHasFixedSize(true);
-            RemindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            remindersRecyclerView.setHasFixedSize(true);
+            remindersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             //Changes here, might only need two arguments for TableAdapter
-            RemindersAdapter = new RemindersAdapter(getActivity(), RemindersDataList);
-            RemindersRecyclerView.setAdapter(RemindersAdapter);
+            remindersAdapter = new RemindersAdapter(getActivity(), remindersDataList);
+            remindersRecyclerView.setAdapter(remindersAdapter);
         }
     private void startAlarm(Calendar c) {
-        Log.v("Yiming","Calendar time: " + c.getTimeInMillis());
         System.out.println("Alarm has been started");
-        Log.d("Yiming", "Alarm has been started");
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);

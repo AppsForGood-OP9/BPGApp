@@ -59,10 +59,10 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Initialize variables
-        TextView gDateTextView;
-        TextView gTimeTextView;
-        TextView gGlucoseTextView;
-        TextView gNotesTextView;
+        private TextView gDateTextView;
+        private TextView gTimeTextView;
+        private TextView gGlucoseTextView;
+        private TextView gNotesTextView;
 
         /**
          * The ViewHolder constructor assigns variables used in the BPAdapter class to their xml equivalents

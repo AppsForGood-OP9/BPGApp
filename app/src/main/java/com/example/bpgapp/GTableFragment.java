@@ -154,11 +154,6 @@ public class GTableFragment extends Fragment {
         glucoseStr = data.getGlucoseText();
         notesStr = data.getNotesText();
 
-        //Remove these when editing code
-        Log.v("talia","date = " + dateStr);
-        Log.v("talia","time = " + timeStr);
-        Log.v("talia", "systolicStr = " + glucoseStr);
-
         Button bpToggle = view.findViewById(R.id.bloodPressureToggle);
         Button gToggle = view.findViewById(R.id.glucoseToggle);
 

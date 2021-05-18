@@ -1,10 +1,10 @@
 package com.example.bpgapp;
 
 public class TableModelG {
-    String date;
-    String time;
-    String glucose;
-    String notes;
+    private String date;
+    private String time;
+    private String glucose;
+    private String notes;
 
     public TableModelG(String date, String time, String glucose, String notes)  {
         this.date = date;
