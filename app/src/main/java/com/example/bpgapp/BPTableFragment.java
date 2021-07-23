@@ -34,7 +34,7 @@ public class BPTableFragment extends Fragment {
     private BPAdapter bpAdapter;
     private List<BPData> dataList = new ArrayList<>();
 
-    private String dateStr, timeStr;
+    private String dateStr, timeStr, currentDateStr;
     private String systolicStr, diastolicStr, notesStr;
 
     //ImageView bpDelete;
@@ -122,11 +122,7 @@ public class BPTableFragment extends Fragment {
         systolicStr = data.getSystolicText();
         diastolicStr = data.getDiastolicText();
         notesStr = data.getNotesText();
-
-        //Remove these when editing code
-        Log.v("talia","date = " + dateStr);
-        Log.v("talia","time = " + timeStr);
-        Log.v("talia", "systolicStr = " + systolicStr);
+        currentDateStr = data.getCurrentDate();
 
         table_recycler_view = view.findViewById(R.id.table_recycler_view);
         setTableRecyclerView();
@@ -156,11 +152,7 @@ public class BPTableFragment extends Fragment {
         systolicStr = data.getSystolicText();
         diastolicStr = data.getDiastolicText();
         notesStr = data.getNotesText();
-
-        //Remove these when editing code
-        Log.v("talia","date = " + dateStr);
-        Log.v("talia","time = " + timeStr);
-        Log.v("talia", "systolicStr = " + systolicStr);
+        currentDateStr = data.getCurrentDate();
 
         Button bpToggle = view.findViewById(R.id.bloodPressureToggle);
         Button gToggle = view.findViewById(R.id.glucoseToggle);

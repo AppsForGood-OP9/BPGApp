@@ -1,6 +1,7 @@
 package com.example.bpgapp;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,12 @@ public class GAdapter extends RecyclerView.Adapter<GAdapter.ViewHolder>{
         //Retrieve text from the database and set it in its respective TextView
         holder.gTimeTextView.setText(data.getTime());
         holder.gDateTextView.setText(data.getDate());
+
+        //Change color of date in table if the entry has been backlogged
+        if (!data.getDate().equals(data.getCurrentDate()))  {
+            holder.gDateTextView.setTextColor(Color.RED);
+        }
+
         holder.gGlucoseTextView.setText(data.getGlucoseText());
         holder.gNotesTextView.setText(data.getNotesText());
     }

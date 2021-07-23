@@ -1,6 +1,7 @@
 package com.example.bpgapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHold
             holder.systolicItem.setText(model.getSystolic());
             holder.diastolicItem.setText(model.getDiastolic());
             holder.notesItem.setText(model.getNotes());
+
         }
         else  {
             return;
@@ -75,7 +77,7 @@ public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHold
      * Constructs the corresponding ViewHolder for the RecyclerView.ViewHolder
      */
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem;
+        TextView dateItem,timeItem,systolicItem,diastolicItem,notesItem,dateListItem;
         //ImageView bpDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +87,7 @@ public class TableAdapterBP extends RecyclerView.Adapter<TableAdapterBP.ViewHold
             systolicItem = itemView.findViewById(R.id.systolicItem);
             diastolicItem = itemView.findViewById(R.id.diastolicItem);
             notesItem = itemView.findViewById(R.id.notesItem);
+            dateListItem = itemView.findViewById(R.id.bp_date_text_view);
         }
 
     }

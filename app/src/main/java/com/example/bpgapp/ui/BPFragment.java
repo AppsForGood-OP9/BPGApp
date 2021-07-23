@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,6 +143,9 @@ public class BPFragment extends Fragment {
         date = view.findViewById(R.id.DateText);
         date.setText(currentDateString);
 
+        //Stores current date in a String
+        String realDateString = currentDateString;
+
         large.setOnClickListener(new View.OnClickListener(){
             /*
             Increases text size when plus sign magnifying button is clicked
@@ -270,6 +274,7 @@ public class BPFragment extends Fragment {
                     data.setSystolicText(sText);
                     data.setDiastolicText(dText);
                     data.setNotesText(nText);
+                    data.setCurrentDate(realDateString);
 
                     //Insert text in database
                     bpDatabase.bpDao().insert(data);

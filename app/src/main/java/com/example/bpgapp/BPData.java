@@ -35,6 +35,9 @@ public class BPData implements Serializable {
     @ColumnInfo(name = "notesText")
     private String notesText;
 
+    @ColumnInfo(name = "currentDate")
+    private String currentDate;
+
     /*
     Gets the ID
      */
@@ -78,7 +81,7 @@ public class BPData implements Serializable {
     }
 
     /*
-    Gets the date
+    Gets the date set by the user
      */
     public String getDate() {
         return date;
@@ -117,6 +120,20 @@ public class BPData implements Serializable {
      */
     public void setNotesText(String text) {
         this.notesText = text;
+    }
+
+    /*
+   Gets the current date
+    */
+    public String getCurrentDate() {
+        return currentDate;
+    }
+
+    /*
+    Sets the current date
+     */
+    public void setCurrentDate(String text) {
+        this.currentDate = text;
     }
 
 }

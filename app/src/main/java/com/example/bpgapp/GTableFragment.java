@@ -237,17 +237,6 @@ public class GTableFragment extends Fragment {
                         dialog.cancel();
                     }
                 });
-
-                yesButton.addOnUnhandledKeyEventListener(new View.OnUnhandledKeyEventListener() {
-                    @Override
-                    public boolean onUnhandledKeyEvent(View v, KeyEvent event) {
-                        dialog.cancel();
-
-                        //Notify adapter
-                        gAdapter.notifyDataSetChanged();
-                        return false;
-                    }
-                });
             }
         }).attachToRecyclerView(table_recycler_view);
 

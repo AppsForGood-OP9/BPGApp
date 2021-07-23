@@ -32,6 +32,9 @@ public class GData implements Serializable {
     @ColumnInfo(name = "notesText")
     private String notesText;
 
+    @ColumnInfo(name = "currentDate")
+    private String currentDate;
+
     /*
     Gets the ID
      */
@@ -100,6 +103,20 @@ public class GData implements Serializable {
      */
     public void setNotesText(String text) {
         this.notesText = text;
+    }
+
+    /*
+   Gets the current date
+    */
+    public String getCurrentDate() {
+        return currentDate;
+    }
+
+    /*
+    Sets the current date
+     */
+    public void setCurrentDate(String text) {
+        this.currentDate = text;
     }
 
 }

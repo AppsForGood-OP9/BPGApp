@@ -34,7 +34,7 @@ public class FirstFragment extends Fragment {
     private BPRoomDB bpDatabase;
     private BPAdapter bpAdapter;
     private List<BPData> dataList = new ArrayList<>();
-    private String dateStr, timeStr;
+    private String dateStr, timeStr, currentDateStr;
     private String systolicStr, diastolicStr, notesStr;
     private TextView dateItem, timeItem;
     private TextView systolicItem, diastolicItem, notesItem;
@@ -182,6 +182,8 @@ public class FirstFragment extends Fragment {
                 noButton = dialog.findViewById(R.id.no_button);
                 yesButton = dialog.findViewById(R.id.yes_button);
 
+                //TextView dateTextView = viewHolder.(R.id.dateItem);
+
                 noButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -220,6 +222,8 @@ public class FirstFragment extends Fragment {
         return view;
     }
 
+
+
     /**
      * Set table recycler view to have a fixed size and correspond to a linear layout manager and adapter
      */
@@ -238,6 +242,7 @@ public class FirstFragment extends Fragment {
     private List<TableModelBP> getList()  {
         List<TableModelBP> table_list = new ArrayList<>();
         table_list.add(new TableModelBP(dateStr,timeStr,systolicStr,diastolicStr,notesStr));
+
         return table_list;
     }
 

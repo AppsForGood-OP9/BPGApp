@@ -129,7 +129,6 @@ public class ThirdFragment extends Fragment {
         //Initialize database
         RemindersDatabase = RemindersRoomDB.getInstance(getContext());
 
-
         //Store database value in data list
         RemindersDataList = (List<RemindersData>) RemindersDatabase.RemindersDao().getAll();
 

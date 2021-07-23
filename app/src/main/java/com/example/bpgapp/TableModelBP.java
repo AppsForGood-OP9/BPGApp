@@ -6,6 +6,7 @@ public class TableModelBP {
     private String systolic;
     private String diastolic;
     private String notes;
+    //private String currentDate;
 
     public TableModelBP(String date, String time, String systolic, String diastolic, String notes)  {
         this.date = date;
@@ -13,12 +14,18 @@ public class TableModelBP {
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.notes = notes;
+        //this.currentDate = currentDate;
     }
 
     public String getDate()  {
         return date;
     }
 
+    /*
+    public String getCurrentDate()  {
+        return currentDate;
+    }
+*/
     public String getTime()  {
         return time;
     }
@@ -34,4 +41,5 @@ public class TableModelBP {
     public String getNotes()  {
         return notes;
     }
+
 }
