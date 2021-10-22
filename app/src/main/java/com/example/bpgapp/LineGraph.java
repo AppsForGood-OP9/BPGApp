@@ -9,6 +9,7 @@ import com.jjoe64.graphview.GraphView;
 import java.util.ArrayList;
 import java.util.List;
 
+//Changes here
 public class LineGraph extends AppCompatActivity {
 
     /*

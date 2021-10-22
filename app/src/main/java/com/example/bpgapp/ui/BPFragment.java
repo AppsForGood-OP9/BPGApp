@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+//Changes here
 /**
  * The BPFragment class corresponds to the blood pressure entry page and stores the entered data: date, time,
  * systolic level, diastolic level, and notes.
