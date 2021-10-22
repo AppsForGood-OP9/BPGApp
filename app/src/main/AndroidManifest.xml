@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bpgapp">
+
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/bpg_icon_small"
@@ -10,9 +12,11 @@
         android:roundIcon="@mipmap/bpg_icon_small_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BPGApp">
-        <activity android:name=".TableBP"></activity>
+        <activity android:name=".LineGraph"></activity>
+        <activity android:name=".TableBP" />
         <activity android:name=".TableG" />
-        <activity android:name=".ThirdFragment"
+        <activity
+            android:name=".ThirdFragment"
             tools:ignore="Instantiatable" />
         <activity android:name=".MainActivityBlank">
             <intent-filter>
@@ -22,7 +26,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlertReceiver"/>
+        <receiver android:name=".AlertReceiver" />
     </application>
 
 </manifest>

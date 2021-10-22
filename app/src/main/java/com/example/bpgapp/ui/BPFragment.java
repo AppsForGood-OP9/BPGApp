@@ -1,9 +1,12 @@
 package com.example.bpgapp.ui;
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.room.RoomDatabase;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +26,8 @@ import com.example.bpgapp.DatePickerFragment;
 import com.example.bpgapp.R;
 import com.example.bpgapp.BPAdapter;
 import com.example.bpgapp.SecondFragment;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,6 +66,8 @@ public class BPFragment extends Fragment {
     private ImageButton small;
     private int zoom = 100;
     private TextView timeTitle;
+
+    private LineGraphSeries<DataPoint> dataseries = new LineGraphSeries<>(new DataPoint[0]);
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -293,6 +300,9 @@ public class BPFragment extends Fragment {
                     dataList.addAll(bpDatabase.bpDao().getAll());
                     bpAdapter.notifyDataSetChanged();
 
+                    //Added in for graph
+                    //dataseries.resetData(grabData());
+
                     //Display a Toast that the blood pressure data was entered successfully
                     Toast toast = Toast.makeText(getContext(), "Blood pressure data entered successfully.", Toast.LENGTH_LONG);
                     toast.show();
@@ -304,5 +314,30 @@ public class BPFragment extends Fragment {
         });
         return view;
     }
+
+    /*
+    private DataPoint[] grabData(){
+        BPData data = new BPData();
+
+        String [] column = {"date", "systolicText"};
+        @SuppressLint("Recycle") Cursor cursor = bpDatabase.query("bpDatabase", column);
+
+
+        DataPoint[] dataPoints = new DataPoint[dataList.size()];
+
+        for (int i = 0; i < dataList.size();i++) {
+            dataPoints[0] = new DataPoint(0, 0);
+            dataPoints[1] = new DataPoint(1, 1);
+            dataPoints[i] = new DataPoint(i, i-1);
+
+            cursor.moveToNext();
+            dataPoints[i] = new DataPoint(Double.parseDouble(cursor.getString(0)),cursor.getInt(1));
+
+        }
+
+        return dataPoints;
+    }
+
+     */
 
 }
